@@ -1,2 +1,3 @@
 # meloDJ
-something
+A simple music streaming web app
+
