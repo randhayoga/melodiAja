@@ -17,6 +17,7 @@ a {
 	color: white;
 }
 h1, h2 {
+	text-align: center;
 	font-weight: heavy;
 	font-family: rubik;
 }
@@ -26,12 +27,23 @@ h1, h2 {
 }
 
 main {
-	padding: 0px var(--x-margin);
+	padding: 0px clamp(0px, 1vw, 100px);
+	padding-top: 50px;
+}
+
+main > h2 {
+	font-size: 40px;
+	margin-bottom: 50px;
+}
+
+.contentWrapper {
 	display: grid;
 	grid-template: 1fr / repeat(auto-fit, minmax(400px, 1fr));
 }
+.contentWrapper > section {
+	margin-bottom: 50px;
+}
 
-main > section { padding: var(--y-margin) var(--y-margin); }
 
 .hero {
 	position: relative;
@@ -105,16 +117,13 @@ header .button-list {
 	gap: 10px;
 }
 
-.button-list > .button {
-	padding: 8px 15px;
-	background: rgba(var(--color-20), 1);
+a { 
+	background: rgba(var(--color-20), 1); 
+	padding: 8px 15px; 
 }
 .button:hover { filter: brightness(140%); }
 
-.logo {
-	filter: invert(100%);
-	aspect-ratio: 1;
-}
+.logo { aspect-ratio: 1; }
 
 .content {
 	display: flex;
@@ -128,13 +137,12 @@ header .button-list {
 	aspect-ratio: 1;
 }
 .content__text {
-	max-width: 80%;
+	max-width: 50%;
 	text-align: center;
 }
 .content__text > h2 { font-size: 32px; }
 
 .buttonCTA {
-	width: 20%;
 	margin: auto;
 }
 

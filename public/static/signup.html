@@ -2,9 +2,65 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title> MelodiAja: Sign Up</title>
+	<title>MelodiAja: Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="./authStyle.css">
 </head>
 <body>
+	<div id="BG">
+	</div>
+	<section class="formWrapper">
+		<div class="brand">
+			<a href="./index.html">
+				<img class="logo logo--medium flt--invert" 
+					src="https://cdn-icons-png.flaticon.com/512/3522/3522509.png" 
+					alt="MelodiAja Logo">
+			</a>
+			<h1> Create Your Account </h1>
+		</div>
+		<!--
+		<form method="post" id="registration-form" action="/"> 
+		  <div class="form-group">
+			<label for="UsernameRegistration">Username:</label>
+			<input name="username" type="text" class="form-control" id="UsernameRegistration">
+		  </div>
+		  <div class="form-group">
+			<label for="PasswordRegistration">Password:</label>
+			<input name="password" type="password" class="form-control" id="PasswordRegistration">
+		  </div>
+		  <div class="form-group">
+			<label for="ConfirmPasswordRegistration">Confirm Password:</label>
+			<input name="confpass" type="password" class="form-control" id="ConfirmPasswordRegistration">
+		  </div>
+		  <input type="submit" class="form-control" />
+		</form> -->
+
+		<form method="get" id="loginForm" action="/public/static">
+			<div class="form__entry">
+				<label for="">Email</label>
+				<input type="">
+			</div>
+			<div class="form__entry">
+				<label for="">Name</label>
+				<input type="">
+			</div>
+			<div class="form__entry">
+				<label for="">Username</label>
+				<input type="text"
+				>
+			</div>
+			<div class="form__entry">
+				<label for="">Password</label>
+				<input type="text"
+					minlength="6"
+				>
+			</div>
+			<div class="form__entry">
+				<label for="">Confirm Password</label>
+				<input type="">
+			</div>
 	
+			<input type="submit" class="button" value="Submit">
+		</form>
+	</section>
 </body>
 </html>

@@ -1,0 +1,129 @@
+:root {
+	--x-margin: clamp(20px, 4vw, 80px);
+	--y-margin: 30px;
+	--color-80: 30, 18, 38;
+	--color-20: 52, 66, 217;
+	--warn: 255, 60, 60;
+	--bg-1: 28, 7, 26;
+	--bg-2: 50, 40, 50;
+	color: white;
+	font-family: roboto;
+	font-size: clamp(14px, 2vw, 16px);
+}
+
+/* RESET */
+body, p, h1, h2, input, label, button, section, div {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	color: rgba(var(--color-20), 1);
+	filter: brightness(150%);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	padding-top: 50px;
+	position: relative;
+	opacity: 1;
+}
+
+body::before {
+	content:"";
+	position: absolute;
+	inset: 0;
+	height: 100vh;
+	width: 100vw;
+	background: linear-gradient(
+		90deg,
+		rgba(var(--color-80), 1),
+		rgba(var(--bg-1), 1)
+	);
+}
+
+#BG {
+	position: absolute;
+	inset: 0;
+	height: 100vh;
+	width: 100vw;
+	background: url(https://images.unsplash.com/photo-1615554851544-e6249b92a492?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlzdGVuaW5nJTIwdG8lMjBtdXNpY3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80);
+	background-size: cover;
+	opacity: 0.3;
+}
+
+.formWrapper {
+	border: 1px solid grey;
+	border-radius: 20px;
+	position: relative;
+	z-index: 2;
+	margin: 0px auto;
+	padding: 20px;
+	width: 400px;
+	background: rgba(var(--bg-2), 0.8);
+}
+
+.brand {
+	text-align: center;
+	margin-bottom: var(--y-margin);
+}
+
+.brand .logo {
+	margin: auto;
+	margin-bottom: 5px;
+	display: block;
+}
+
+input {
+	width: 100%;
+	border: 1px solid rgba(0, 0, 0, 0);
+	position: relative;
+	padding: 8px;
+	background: rgba(70, 60, 70, 1);
+	color: white;
+}
+
+input:invalid {
+	border: 2px solid rgba(var(--warn), 1);
+}
+
+.logo { aspect-ratio: 1; }
+	.logo--medium { width: 40px; }
+	.logo--small { width: 20px; }
+
+.flt--invert {
+	filter: invert(100%);
+}
+
+form > .button {
+	width: 100px;
+	display: block;
+	margin: auto;
+}
+.form__assist,
+.form__entry {
+	margin-bottom: 10px;
+}
+.form__entry > label {
+	font-size: 14px;
+	display: block;
+}
+.form__assist {
+	text-align: center;
+	font-size: 14px;
+	display: block;
+}
+
+.button:hover {
+	filter:brightness(150%);
+}
+
+.button {
+	border-radius: 8px;
+	background: rgba(var(--color-20, 1));
+	padding: 5px 15px;
+}
+
