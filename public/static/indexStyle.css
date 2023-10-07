@@ -5,7 +5,7 @@
 	--color-20: 52, 66, 217;
 	--bg-1: 28, 7, 26;
 	--bg-2: 23, 14, 33;
-	background: rgba(var(--bg-2), 1);
+	background: rgba(49, 34, 54, 1);
 	color: white;
 	font-family: roboto;
 	font-size: clamp(14px, 2vw, 16px);
@@ -49,7 +49,6 @@ main > h2 {
 	position: relative;
 	background: linear-gradient(90deg, rgba(var(--bg-2), 1), rgba(var(--bg-1), 1));
 	position: relative;
-	padding: 15px var(--x-margin);
 }
 
 .hero > * {
@@ -101,8 +100,21 @@ main > h2 {
 }
 
 header {
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	position: fixed;
+	padding: 10px var(--x-margin);
 	display: flex;
 	align-items: center;
+	background: rgba(0, 0, 0, 0);
+	transition: 0.5s background;
+}
+
+.navbar--withbg {
+	transition: 0.5s background;
+	background: rgba(67, 52, 72, 1);
 }
 
 header > img { width: 30px; }
