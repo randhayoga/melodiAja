@@ -37,26 +37,37 @@
 		<form method="get" id="loginForm" action="/public/static">
 			<div class="form__entry">
 				<label for="">Email</label>
-				<input type="">
+				<input type=""
+					placeholder="example@domain.com"
+				>
+				<div class="entry__warning" id="email__warning"></div>
 			</div>
 			<div class="form__entry">
 				<label for="">Name</label>
-				<input type="">
+				<input type=""
+					placeholder="Frank Jenkins"
+				>
+				<div class="entry__warning" id="name__warning"></div>
 			</div>
 			<div class="form__entry">
 				<label for="">Username</label>
 				<input type="text"
+					placeholder="Far Too Loud"
 				>
+				<div class="entry__warning" id="username__warning"></div>
 			</div>
 			<div class="form__entry">
 				<label for="">Password</label>
-				<input type="text"
+				<input type="password"
 					minlength="6"
 				>
+				<div class="entry__warning" id="password__warning"></div>
 			</div>
 			<div class="form__entry">
 				<label for="">Confirm Password</label>
-				<input type="">
+				<input type="password"
+				>
+				<div class="entry__warning" id="confirmPassword__warning"></div>
 			</div>
 	
 			<input type="submit" class="button" value="Submit">

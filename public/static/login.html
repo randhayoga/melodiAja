@@ -36,15 +36,21 @@
 
 		<form method="get" id="loginForm" action="/public/static">
 			<div class="form__entry">
-				<label for="">Username</label>
+				<label for="user__email">Email</label>
 				<input type="text"
+					id="user__email"
+					placeholder="example@domain.com"
 				>
+				<div class="entry__warning" id="email__warning"></div>
 			</div>
 			<div class="form__entry">
-				<label for="">Password</label>
-				<input type="text"
+				<label for="user__password">Password</label>
+				<input type="text" 
+					id="user__password"
 					minlength="6"
+					placeholder="Your Password"
 				>
+				<div class="entry__warning" id="password__warning"></div>
 			</div>
 	
 			<p class="form__assist">Don't have an account yet? <a href="./signup.html">Create one!</a></p>
