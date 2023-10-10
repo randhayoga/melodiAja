@@ -137,3 +137,6 @@ label::after {
 	padding: 5px 15px;
 }
 
+.entry__warning {
+	background: rgba(var(--warn), 1);
+}
