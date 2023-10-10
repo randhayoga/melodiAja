@@ -9,6 +9,7 @@
 	color: white;
 	font-family: roboto;
 	font-size: clamp(14px, 2vw, 16px);
+	scroll-behavior: smooth;
 }
 
 ul { list-style: none; }
@@ -62,7 +63,6 @@ main > h2 {
 	background-size: cover;
 }
 #heroTop h2 {
-	font-weight: 1000;
 	font-size: 60px;
 }
 
@@ -73,7 +73,6 @@ main > h2 {
 	background-position-y: 50%;
 }
 #heroBot h2 {
-	font-weight: 1000;
 	font-size: 40px;
 }
 
@@ -95,7 +94,7 @@ main > h2 {
 
 .hero__content > p { margin-bottom: 20px; }
 .hero__content > img {
-	width: 100px;
+	width: 120px;
 	margin-bottom: 10px;
 }
 
@@ -117,7 +116,7 @@ header {
 	background: rgba(67, 52, 72, 1);
 }
 
-header > img { width: 30px; }
+header .logo { height: 40px; }
 header > nav {
 	flex: 1;
 	display: flex;
@@ -129,7 +128,7 @@ header .button-list {
 	gap: 10px;
 }
 
-a { 
+.button-list > .button > a { 
 	background: rgba(var(--color-20), 1); 
 	padding: 8px 15px; 
 }

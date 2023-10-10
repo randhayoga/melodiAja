@@ -34,7 +34,7 @@ body {
 
 body::before {
 	content:"";
-	position: absolute;
+	position: fixed;
 	inset: 0;
 	height: 100vh;
 	width: 100vw;
@@ -46,11 +46,12 @@ body::before {
 }
 
 #BG {
-	position: absolute;
+	position: fixed;
 	inset: 0;
 	height: 100vh;
 	width: 100vw;
 	background: url(https://images.unsplash.com/photo-1615554851544-e6249b92a492?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGlzdGVuaW5nJTIwdG8lMjBtdXNpY3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80);
+	background-attachment: scroll;
 	background-size: cover;
 	opacity: 0.3;
 }
@@ -105,7 +106,6 @@ form > .button {
 	margin: auto;
 }
 
-
 .form__assist {margin-bottom: 8px;}
 .form__entry { margin-bottom: 15px; }
 
@@ -114,6 +114,13 @@ form > .button {
 	font-size: 14px;
 	display: block;
 }
+
+label::after {
+	content:" *"; 
+	font-weight: bold;
+	color: rgba(var(--warn), 1);
+}
+
 .form__assist {
 	text-align: center;
 	font-size: 14px;

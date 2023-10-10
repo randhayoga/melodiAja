@@ -6,13 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="./authStyle.css">
 </head>
 <body>
-	<div id="BG">
-	</div>
 	<section class="formWrapper">
+		<div id="BG">
+		</div>
 		<div class="brand">
 			<a href="./index.html">
-				<img class="logo logo--medium flt--invert" 
-					src="https://cdn-icons-png.flaticon.com/512/3522/3522509.png" 
+				<img class="logo logo--medium " 
+					src="./img/meLogo.png" 
 					alt="MelodiAja Logo">
 			</a>
 			<h1> Create Your Account </h1>
@@ -40,14 +40,17 @@
 				<input type=""
 					placeholder="example@domain.com"
 				>
-				<div class="entry__warning" id="email__warning"></div>
+				<div class="entry__warning" id="email__warning">
+				</div>
 			</div>
 			<div class="form__entry">
 				<label for="">Name</label>
 				<input type=""
 					placeholder="Frank Jenkins"
 				>
-				<div class="entry__warning" id="name__warning"></div>
+				<div class="entry__warning" id="name__warning">
+
+					</div>
 			</div>
 			<div class="form__entry">
 				<label for="">Username</label>
@@ -61,7 +64,8 @@
 				<input type="password"
 					minlength="6"
 				>
-				<div class="entry__warning" id="password__warning"></div>
+				<div class="entry__warning" id="password__warning">
+				</div>
 			</div>
 			<div class="form__entry">
 				<label for="">Confirm Password</label>
@@ -73,5 +77,7 @@
 			<input type="submit" class="button" value="Submit">
 		</form>
 	</section>
+
+	<script src="formValidator.js"></script>
 </body>
 </html>
