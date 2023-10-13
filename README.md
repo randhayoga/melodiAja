@@ -24,121 +24,64 @@ Selain memutar musik, pengguna juga dapat:
 * :speech_balloon: Menyampaikan opini melalui kolom komentar.
 * :guitar: Mengunggah musik untuk didengarkan oleh pengguna lain.
 
+<br><strong>MelodiAja</strong> dibuat oleh kelompok <strong>Teh Pucuk</strong>
 <br>Tujuan utama dibuatnya Aplikasi MelodiAja adalah untuk memenuhi tugas besar mata kuliah RPL: Implentasi dan Pengujian PL.
 
-### Dibangun Dengan
+#### MelodiAja Dibangun Dengan:
 
-* https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
+Front-End:<br>
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)<br>
+Back-End:<br>
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)<br>
+IDE:<br>
+![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)<br>
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Cara Menjalankan Secara Lokal
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Prasyarat
 
-### Prerequisites
+* Perangkat Desktop atau Laptop
+* Web Browser
+* Git (untuk download melalui terminal/cmd)
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+### Download
+#### Melaui Browser dan File Explorer
+1. Buka https://github.com/solsteace/melodiAja
+2. Klik ikon "<> Code" berwarna hijau
+3. Klik "Download ZIP"
+4. Buka folder dimana file melodiAja-main.zip yang telah didownload tersimpan
+5. Extract melodiAja-main.zip
+6. Buka folder melodiAja-main
+7. Buka folder public
+8. Buka folder static
+9. Buka index.html
+    
+#### Melalui Terminal / CMD
+1. Pastikan Anda berada folder atau directory yang diinginkan untuk menyimpan file unduhan melodiAja
+2. Clone repo:
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/solsteace/melodiAja
    ```
-3. Install NPM packages
+3. Buka directory /public/static<br>
+   Pada Windows:
    ```sh
-   npm install
+   cd .\melodiAja\public\static\
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   Pada Linux/MacOS:
+   ```sh
+   cd /melodiAja/public/static/
+   ```
+4. Buka homepage<br>
+   Pada Windows:
+   ```sh
+   .\index.html
+   ```
+   Pada Linux/MacOS:
+   ```sh
+   Open index.html
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[Next.js]: https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
-[Next-url]: https://nextjs.org/
