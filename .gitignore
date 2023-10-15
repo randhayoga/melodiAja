@@ -1,4 +1,4 @@
 node_modules/
 config.js
 bundle.js
-*.map.css
+*.css.map
