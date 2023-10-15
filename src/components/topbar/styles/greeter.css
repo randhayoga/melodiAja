@@ -1,0 +1,12 @@
+#topbar__greeter p {
+  margin: 0px;
+  padding: 0px;
+}
+#topbar__greeter > #greeter__recipient {
+  font-weight: bold;
+}
+#topbar__greeter > :not(#greeter__recipient) {
+  color: rgb(150, 150, 150);
+}
+
+/*# sourceMappingURL=greeter.css.map */

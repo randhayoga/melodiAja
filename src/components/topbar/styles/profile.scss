@@ -1,0 +1,23 @@
+$bg--deep: rgb(13, 13, 13);
+$bg--shallow: rgb(28, 28, 28);
+$bg--normal: rgb(51, 51, 51);
+$accent: rgb(63, 31, 157);
+
+#topbar__profile {
+	> .imgWrapper {
+		overflow: hidden;
+		background: $bg--normal;
+		height: 50px;
+		border-radius: 50%;
+		border: 0px solid black;
+		aspect-ratio: 1;
+	}
+
+	img {
+		font-size: 2px;
+		color: $accent;
+		aspect-ratio: 1;
+		height: inherit;
+		object-fit: cover;
+	}
+}

@@ -1,0 +1,27 @@
+$bg--deep: rgb(13, 13, 13);
+$bg--shallow: rgb(28, 28, 28);
+$bg--normal: rgb(51, 51, 51);
+$accent: rgb(63, 31, 157);
+
+$text: white;
+$x-margin: clamp(20px, 4vw, 80px);
+
+#topbar {
+	position: sticky;
+	z-index: 69418;
+	top: 0;
+	border-bottom: 2px solid $bg--normal;
+	padding: 10px $x-margin;
+	height: 50px;
+	align-items: center;
+	color: $text;
+	display: flex;
+	background: $bg--deep;
+
+	> #topbar__greeter {
+		display: block;
+		flex: 1;
+	}
+
+}
+
