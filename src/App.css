@@ -1,0 +1,23 @@
+:root {
+	box-sizing: border-box;
+	--bg--deep: 13, 13, 13;
+	--bg-bluish--lighter: rgb(53, 32, 51);
+}
+
+body {
+	background: rgba(var(--bg--deep), 1);
+	padding-bottom: 50px;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+}
+
+#audio {
+}
+
+#rootGrid {
+	display: grid;
+	grid-template: 1fr / 1fr 5fr;
+}
