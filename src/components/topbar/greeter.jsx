@@ -12,11 +12,13 @@ const greeterModel = (() => {
 
 
 const greeterView = (() => {
-	const render = (name, period) => {
+	function render(name, period) {
 		return (
 			<div id="topbar__greeter">
-				<p> Good {period}, </p>
-				<p id="greeter__recipient"> {name}! </p>
+				<div className="greeter__word">
+					<p> Good {period.periodWord}, </p>
+					<p id="greeter__recipient"> {name}! </p>
+				</div>
 			</div>
 		)
 	}
@@ -24,27 +26,41 @@ const greeterView = (() => {
 	return {render};
 })()
 
-function Greeter(props) {
+function Greeter() {
 	let model = greeterModel;
 	let view = greeterView;
 	
-	let userDetails = model.getData(props.userID);
+	let userDetails = model.getData(1);
 
 	const getTimePeriod = () => {
 		let date = new Date();
 		let currentHour = date.getHours();
+		
+		let period = (currentHour < 4 || currentHour > 17)? "moon": "sun";
+		let periodWord = "night";
+
 		if(currentHour > 4 && currentHour < 10) {
-			return "Morning";
+			periodWord = "morning";
 		} else if(currentHour < 15) {
-			return "Afternoon";
+			periodWord = "afternoon";
 		} else if(currentHour < 20) {
-			return "Evening";
-		} else {
-			return "Night";
+			periodWord = "evening";
 		}
+
+		return {
+			period: period,
+			periodWord: periodWord,
+		};
 	}
 
-	return view.render(userDetails.name, getTimePeriod());
+	const render = ({name}) => {
+		return view.render(userDetails.name, getTimePeriod());
+	}
+
+	return {render};
 }
 
-export default Greeter;
+let greeter = Greeter();
+export default {
+	render: () => greeter.render,
+};

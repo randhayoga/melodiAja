@@ -11,8 +11,7 @@
   background: rgb(13, 13, 13);
 }
 #topbar > #topbar__greeter {
-  display: block;
   flex: 1;
 }
 
-/*# sourceMappingURL=navbar.css.map */
+/*# sourceMappingURL=topbar.css.map */

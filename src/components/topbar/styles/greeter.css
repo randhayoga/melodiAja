@@ -1,11 +1,20 @@
+#topbar__greeter {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+#topbar__greeter img {
+  padding-top: 25%;
+}
 #topbar__greeter p {
   margin: 0px;
   padding: 0px;
 }
-#topbar__greeter > #greeter__recipient {
+
+.greeter__word #greeter__recipient {
   font-weight: bold;
 }
-#topbar__greeter > :not(#greeter__recipient) {
+.greeter__word > :not(#greeter__recipient) {
   color: rgb(150, 150, 150);
 }
 
