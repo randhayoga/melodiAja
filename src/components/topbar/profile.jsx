@@ -15,26 +15,34 @@ const profileModel = (() => {
 const profileView = (() => {
 	const render = (name, pfpPath) => {
 		return (
-		<div id="topbar__profile">
-			<div className="imgWrapper">
-				<img src="/defaults/defaultFemale.jpg" alt={`${name}'s PFP`}/>
+			<div id="topbar__profile">
+				<div className="imgWrapper">
+					<img src="/defaults/defaultFemale.jpg" alt={`${name}'s PFP`}/>
+				</div>
 			</div>
-		</div>
 		)
 	}
 
 	return {render};
 })()
 
-function Profile(props) {
+const Profile = (props) => {
 	let model = profileModel;
 	let view = profileView;
 	
 	let userDetails = model.getData();
-	return view.render(
-		userDetails.name, 
-		userDetails.filePath
-	);
+
+	const render = (props) => {
+		return view.render(
+			userDetails.name, 
+			userDetails.filePath
+		);
+	}
+	
+	return {render}
 }
 
-export default Profile;
+let profile = Profile();
+export default {
+	render: profile.render,
+};

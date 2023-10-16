@@ -1,19 +1,36 @@
-import Profile from "./profile.jsx"
+import profile from "./profile.jsx"
 import greeter from "./greeter.jsx"
 
 import "./styles/topbar.css"
 
-function Topbar() {
-	let Greeter = greeter.render();
+const topBarView = (() => {
+	let Greeter = greeter.render;
+	let Profile = profile.render;
 
-	return (
-	<>
-		<section id="topbar">
-			<Greeter name="Heidi"/>
-			<Profile userID="Heidi"/>
-		</section>
-	</>
-	)
+	function render() {
+		return (
+			<>
+				<section id="topbar">
+					<Greeter name="Heidi"/>
+					<Profile userID="Heidi"/>
+				</section>
+			</>
+		);
+	}
+	return {render};
+})()
+
+const Topbar = () => {
+	let view = topBarView;
+
+	const render = (props) => {
+		return view.render();
+	}
+
+	return {render};
 }
 
-export default Topbar;
+let topbar = Topbar();
+export default {
+	render: topbar.render,
+};

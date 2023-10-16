@@ -65,5 +65,5 @@ function Greeter() {
 
 let greeter = Greeter();
 export default {
-	render: () => greeter.render,
+	render: greeter.render,
 };
