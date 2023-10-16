@@ -4,6 +4,7 @@ $bg--normal: rgb(51, 51, 51);
 $text--dim: rgb(150, 150, 150);
 
 #sidebar__wrapper {
+	min-height: inherit;
 	position: relative;
 	background: $bg--shallow;
 	height: inherit;

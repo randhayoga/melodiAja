@@ -1,4 +1,5 @@
 #sidebar__wrapper {
+  min-height: inherit;
   position: relative;
   background: rgb(28, 28, 28);
   height: inherit;
