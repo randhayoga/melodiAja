@@ -15,6 +15,9 @@ const greeterView = (() => {
 	function render(name, period) {
 		return (
 			<div id="topbar__greeter">
+				<div className="imgWrapper">
+					<img src={`/icons/${period.period}.png`} alt="Current Period" />
+				</div>
 				<div className="greeter__word">
 					<p> Good {period.periodWord}, </p>
 					<p id="greeter__recipient"> {name}! </p>
