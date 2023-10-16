@@ -16,9 +16,7 @@ ReactDOM.createRoot(
 				<Sidebar />
 				<main>
 					<Topbar />
-					/* <HomePage /> */
 				</main>
 			</section>
-			/* <MusicPlayer /> */
 		</>
 )

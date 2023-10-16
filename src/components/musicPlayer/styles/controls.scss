@@ -1,0 +1,33 @@
+#mPlayer__controls {
+	display: flex;
+	gap: 12px;
+}
+
+.mPlayer__iconWrapper {
+	width: 25px;
+	aspect-ratio: 1;
+	cursor: pointer;
+	
+	> img {
+
+		aspect-ratio: 1;
+		width: 80%;
+	}
+}
+
+.flt--invert {
+	filter: invert(100%);
+}
+
+#controls__togglePlay {
+	position: relative;
+
+	> img {
+		position: absolute;
+		transition: 0.25s opacity;
+	}
+}
+
+.icon--toggleOff {
+	opacity: 0%;
+}

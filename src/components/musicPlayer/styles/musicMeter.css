@@ -1,0 +1,23 @@
+#mPlayer__musicMeter {
+  height: 50px;
+  position: fixed;
+  left: 0;
+  right: 0px;
+  bottom: 4px;
+  z-index: 20;
+  background: rgb(63, 31, 157);
+  cursor: pointer;
+}
+
+#musicMeter__progress {
+  position: fixed;
+  height: 50px;
+  width: 0%;
+  left: inherit;
+  bottom: inherit;
+  z-index: 21;
+  background: white;
+  transition: 0.2s width;
+}
+
+/*# sourceMappingURL=musicMeter.css.map */

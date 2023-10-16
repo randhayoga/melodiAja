@@ -1,0 +1,17 @@
+#musicMeter__progressPin {
+  position: fixed;
+  height: inherit;
+  left: -7px;
+  bottom: 45px;
+  border-radius: 50%;
+  border: 2px solid white;
+  padding: 3px;
+  width: 5px;
+  height: 5px;
+  aspect-ratio: 1;
+  z-index: 69421;
+  background: rgb(63, 31, 157);
+  transition: 0.2s margin-left;
+}
+
+/*# sourceMappingURL=musicMeterPin.css.map */
