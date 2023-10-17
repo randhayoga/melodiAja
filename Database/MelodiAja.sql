@@ -1,4 +1,4 @@
-use MelodiAja;
+use melodiaja;
 
 create table Pengguna (
 	ID_Pengguna int auto_increment primary key,
@@ -20,6 +20,7 @@ create table Lagu (
     File_Musik varchar(255) not null,
     Judul_Lagu varchar(255) not null,
     Genre varchar(255) not null,
+    Pencipta_Lagu varchar(255) not null,
     Nama_Artist varchar(255),
     Durasi time, 
     Jumlah_Like int,
