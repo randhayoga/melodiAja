@@ -5,13 +5,13 @@ create table pengguna (
     nama varchar(255) not null,
     email varchar(255) not null,
     kata_sandi varchar(255) not null,
-    file_img_profile varchar(255) not null
+    file_img_profile varchar(255)
 );
 
 create table album (
 	ID_album int auto_increment primary key,
     judul_album varchar(255),
-    file_img_album varchar(255) not null,
+    file_img_album varchar(255),
     tanggal_rilis date,
     ID_pengguna int, 
     foreign key (ID_pengguna) references pengguna(ID_pengguna)
@@ -20,7 +20,7 @@ create table album (
 create table lagu (
 	ID_lagu int auto_increment primary key,
     file_musik varchar(255) not null,
-    file_img_lagu varchar(255) not null,
+    file_img_lagu varchar(255),
     judul_lagu varchar(255) not null,
     genre varchar(255) not null,
     pencipta_lagu varchar(255) not null,
@@ -37,7 +37,7 @@ create table playlist (
 	ID_playlist int auto_increment primary key,
     judul_playlist varchar(255) not null,
     ID_pemilik int,
-    file_img_playlist varchar(255) not null,
+    file_img_playlist varchar(255),
     foreign key (ID_pemilik) references pengguna(ID_pengguna)
 );
 
