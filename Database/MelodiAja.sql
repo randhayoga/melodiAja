@@ -1,55 +1,60 @@
 use melodiaja;
 
-create table Pengguna (
-	ID_Pengguna int auto_increment primary key,
-    Nama varchar(255) not null,
-    Email varchar(255) not null,
-    Kata_Sandi varchar(255) not null
+create table pengguna (
+	ID_pengguna int auto_increment primary key,
+    nama varchar(255) not null,
+    email varchar(255) not null,
+    kata_sandi varchar(255) not null,
+    file_img_profile varchar(255) not null
 );
 
-create table Album (
-	ID_Album int auto_increment primary key,
-    Judul_Album varchar(255),
-    Tanggal_Rilis date,
-    ID_Pengguna int, 
-    foreign key (ID_Pengguna) references Pengguna(ID_Pengguna)
+create table album (
+	ID_album int auto_increment primary key,
+    judul_album varchar(255),
+    file_img_album varchar(255) not null,
+    tanggal_rilis date,
+    ID_pengguna int, 
+    foreign key (ID_pengguna) references pengguna(ID_pengguna)
 );
 
-create table Lagu (
-	ID_Lagu int auto_increment primary key,
-    File_Musik varchar(255) not null,
-    Judul_Lagu varchar(255) not null,
-    Genre varchar(255) not null,
-    Pencipta_Lagu varchar(255) not null,
-    Nama_Artist varchar(255),
-    Durasi time, 
-    Jumlah_Like int,
-    Jumlah_Dislike int,
-    ID_Album int, 
-    foreign key (ID_Album) references Album(ID_Album)
+create table lagu (
+	ID_lagu int auto_increment primary key,
+    file_musik varchar(255) not null,
+    file_img_lagu varchar(255) not null,
+    judul_lagu varchar(255) not null,
+    genre varchar(255) not null,
+    pencipta_lagu varchar(255) not null,
+    durasi time, 
+    jumlah_like int,
+    jumlah_dislike int,
+    ID_album int, 
+    ID_artist int,
+    foreign key (ID_album) references album(ID_album),
+    foreign key (ID_artist) references pengguna(ID_Pengguna)
 );
 
-create table Playlist (
-	ID_Playlist int auto_increment primary key,
-    Judul_Playlist varchar(255) not null,
-    ID_Pemilik int,
-    foreign key (ID_Pemilik) references Pengguna(ID_Pengguna)
+create table playlist (
+	ID_playlist int auto_increment primary key,
+    judul_playlist varchar(255) not null,
+    ID_pemilik int,
+    file_img_playlist varchar(255) not null,
+    foreign key (ID_pemilik) references pengguna(ID_pengguna)
 );
 
-create table Playlist_Item (
-	ID_Item int auto_increment primary key,
-    ID_Playlist int,
-    ID_Lagu int,
-    foreign key (ID_Playlist) references Playlist(ID_Playlist),
-    foreign key (ID_Lagu) references Lagu(ID_Lagu)
+create table playlist_item (
+	ID_item int auto_increment primary key,
+    ID_playlist int,
+    ID_lagu int,
+    foreign key (ID_playlist) references playlist(ID_playlist),
+    foreign key (ID_lagu) references lagu(ID_lagu)
 );
 
-create table Komentar (
-	ID_Komentar int auto_increment primary key,
-    Isi_Komentar text,
-    Waktu_Komentar timestamp default current_timestamp,
-    ID_Pengguna int,
-    ID_Lagu int,
-    foreign key (ID_Pengguna) references Pengguna(ID_Pengguna),
-    foreign key (ID_Lagu) references Lagu(ID_Lagu)
+create table komentar (
+	ID_komentar int auto_increment primary key,
+    isi_komentar text,
+    waktu_komentar timestamp default current_timestamp,
+    ID_pengguna int,
+    ID_lagu int,
+    foreign key (ID_pengguna) references pengguna(ID_pengguna),
+    foreign key (ID_lagu) references lagu(ID_lagu)
 );
