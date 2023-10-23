@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import topbar from "./components/topbar/topbar.jsx";
-import sidebar from "./components/sidebar/sidebar.jsx"
-import MusicPlayer from "./components/musicPlayer/musicPlayer.jsx"
+import topbar from "./components/topbar.jsx";
+import sidebar from "./components/sidebar.jsx"
+import MusicPlayer from "./components/musicPlayer.jsx"
 
 // import HomePage from "./components/homePage/homePage.jsx"
 
