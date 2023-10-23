@@ -12,7 +12,6 @@
 #musicMeter__progress {
   position: fixed;
   height: 50px;
-  width: 0%;
   left: inherit;
   bottom: inherit;
   z-index: 21;
