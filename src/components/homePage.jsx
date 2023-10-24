@@ -1,3 +1,4 @@
+import contentList from "./contentList.jsx";
 import "./styles/homePage.css"
 import {useState} from 'react';
 
@@ -5,16 +6,22 @@ const homePageModel = (() => {
 	const getMusicInfo__EX = () => {
 		return [
 			{
+				type: "music",
+				id: "blal",
 				title: "Music1",
 				artist: "Artist1",
 				coverPath: "/defaults/defaultCover0.jpg",
 			},
 			{
+				type: "music",
+				id: "blal2",
 				title: "Music2",
 				artist: "Artist2",
 				coverPath: "/defaults/defaultCover2.jpg",
 			},
 			{
+				type: "music",
+				id: "blal3",
 				title: "Music3",
 				artist: "Artist3",
 				coverPath: "/defaults/defaultCover1.jpg",
@@ -27,6 +34,7 @@ const homePageModel = (() => {
 
 function HomePage() {
 	let model = homePageModel;
+	let ContentList = contentList().render;
 
 	const [musicList, setMusicList] = useState(model.getMusicInfo__EX());
 
@@ -108,21 +116,7 @@ function HomePage() {
 			<section className="homePage__section">
 				<h2 className="section__heading">Popular</h2>
 				<div className="section__content section__content--list">
-					{
-						musicList.map((music) => {
-							return (
-								<div className="contentList__item" key={music.coverPath}>
-									<div className="item__image">
-										<img src={music.coverPath} alt="music's cover art" />
-									</div>
-									<div className="item__text">
-										<p className="item__heading"> {music.title} </p>
-										<p className="item__text"> {music.artist} </p>
-									</div>
-								</div>
-							)
-						})
-					}
+					<ContentList itemList={musicList} /> 
 				</div>
 			</section>
 		</section>
