@@ -89,11 +89,11 @@ function HomePage() {
 		<section id="homePage">
 			<section className="homePage__section">
 				<h2 className="section__heading">Best Picks</h2>
-				<ContentTiled itemList={BEST_PICKS.content} id={BEST_PICKS.id} />
+				<ContentTiled itemList={BEST_PICKS.content} id={BEST_PICKS.id} nRows={4} />
 			</section>
 			<section className="homePage__section">
 				<h2 className="section__heading">For You</h2>
-				<ContentTiled itemList={FOR_YOU.content} id={FOR_YOU.id} />
+				<ContentTiled itemList={FOR_YOU.content} id={FOR_YOU.id} nRows={3} />
 			</section>
 			<section className="homePage__section">
 				<h2 className="section__heading">Popular</h2>

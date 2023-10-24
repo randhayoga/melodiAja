@@ -1,3 +1,5 @@
+import "./styles/contentTiled.css"
+
 const contentTiledView = () => {
 	function FTTileItem(item) {
 			return (
@@ -6,16 +8,29 @@ const contentTiledView = () => {
 						<img src={item.bgPath} alt="" />
 					</div>
 					<div className="tile__text">
-						<p className="tile__subheading"> {item.subheading} </p>
-						<p className="tile__heading"> {item.heading} </p>
+						{(() => {
+							if(item.subheading === undefined) {
+								return (
+								<>
+									<p className="tile__heading"> {item.heading} </p>
+								</>
+								)
+							}
+							return (
+								<>
+									<p className="tile__subheading"> {item.subheading} </p>
+									<p className="tile__heading"> {item.heading} </p>
+								</>
+							)
+						})() }
 					</div>
 				</div>
 			)
 	}
 
-	const render = ({id, itemList}) => {
+	const render = ({nRows, id, itemList}) => {
 		return (
-			<div className="section__content section__content--tiled" id={id}>
+			<div className={`section__content section__content--tiled contentTiled--${nRows}`} id={id}>
 				{
 					itemList.map((item) => {
 						return (FTTileItem(item));
