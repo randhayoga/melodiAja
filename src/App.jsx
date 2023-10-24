@@ -25,7 +25,7 @@ const ROUTER = createBrowserRouter([
 		path: "/discover",
 		element: (
 			<>
-				<section id="rootGrid">
+				<section className="rootGrid">
 					<Sidebar />
 					<main>
 						<Topbar />
@@ -40,7 +40,7 @@ const ROUTER = createBrowserRouter([
 		path: "/user/:userID",
 		element: (
 			<>
-				<section id="rootGrid">
+				<section className="rootGrid">
 					<Sidebar />
 					<main>
 						<Topbar />
@@ -55,7 +55,7 @@ const ROUTER = createBrowserRouter([
 		path: "/search",
 		element: (
 			<>
-				<section id="rootGrid">
+				<section className="rootGrid">
 					<Sidebar />
 					<main>
 						<Topbar />

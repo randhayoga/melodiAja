@@ -4,9 +4,13 @@ import {Link} from "react-router-dom";
 const sidebarView = (() => {
 	function render() {
 		return (
-			<section id="sidebar__wrapper">
+			<section className="sidebar__wrapper" id="sidebar__wrapper">
 				<section id="sidebar">
-					<div className="sidebar__imgWrapper" id="sidebar__logo">
+					<div className="sidebar__imgWrapper" id="sidebar__logo"
+						onClick={(e) => {
+							e.currentTarget.parentNode.parentNode.classList.toggle("sidebar__wrapper--collapsed")
+						}}
+					>
 						<img className="sidebar__menuIcon" src="/img/meLogo.png" alt="Melodi Aja" />
 					</div>
 					<section className="sidebar__menuGroup">
