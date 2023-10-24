@@ -1,7 +1,7 @@
 function FTListItem(item) {
 	if(item.type === "music") {
 		return (
-			<div className="contentList__item" key={item.coverPath}>
+			<div className="contentList__item contentList__music" key={item.coverPath}>
 				<div className="item__image">
 					<img src={item.coverPath} alt="music's cover art" />
 				</div>

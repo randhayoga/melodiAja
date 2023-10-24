@@ -1,4 +1,5 @@
 import contentList from "./contentList.jsx";
+import contentTiled from "./contentTiled.jsx";
 import "./styles/homePage.css"
 import {useState} from 'react';
 
@@ -35,83 +36,64 @@ const homePageModel = (() => {
 function HomePage() {
 	let model = homePageModel;
 	let ContentList = contentList().render;
+	let ContentTiled = contentTiled().render;
 
 	const [musicList, setMusicList] = useState(model.getMusicInfo__EX());
+	const BEST_PICKS = {
+		id: "homePage__bestPicks",
+		content: [
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Study Beats",
+				subheading: "Chill",
+			},
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Morning",
+				subheading: "Jazzy",
+			},
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Rock",
+				subheading: "Alternative",
+			},
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Folk Music",
+				subheading: "Traditional",
+			},
+		]
+	}
+	const FOR_YOU = {
+		id: "homePage__forYou",
+		content: [
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "2023",
+				subheading: "New Year",
+			},
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Pop Music",
+				subheading: "Best Of",
+			},
+			{
+				bgPath: "/defaults/defaultCover1.jpg",
+				heading: "Serenity",
+				subheading: "Tranquil",
+			},
+		]
+	}
 
 	return (
 		<section id="homePage">
 			<section className="homePage__section">
 				<h2 className="section__heading">Best Picks</h2>
-				<div className="section__content section__content--tiled" id="homePage__bestPicks">
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Chill </p>
-							<p className="tile__heading"> Study Beats</p>
-						</div>
-					</div>
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Jazzy </p>
-							<p className="tile__heading"> Morning </p>
-						</div>
-					</div>
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Alternative </p>
-							<p className="tile__heading"> Rock</p>
-						</div>
-					</div>
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Traditional </p>
-							<p className="tile__heading"> Folk Music </p>
-						</div>
-					</div>
-				</div>
+				<ContentTiled itemList={BEST_PICKS.content} id={BEST_PICKS.id} />
 			</section>
 			<section className="homePage__section">
 				<h2 className="section__heading">For You</h2>
-				<div className="section__content section__content--tiled" id="homePage__forYou">
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Best Of </p>
-							<p className="tile__heading"> Pop Music </p>
-						</div>
-					</div>
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> New Year </p>
-							<p className="tile__heading"> 2023 </p>
-						</div>
-					</div>
-					<div className="contentTiled__tile">
-						<div className="tile__background">
-							<img src="/defaults/defaultCover1.jpg" alt="" />
-						</div>
-						<div className="tile__text">
-							<p className="tile__subheading"> Tranquil </p>
-							<p className="tile__heading"> Serenity </p>
-						</div>
-					</div>
-				</div>
+				<ContentTiled itemList={FOR_YOU.content} id={FOR_YOU.id} />
 			</section>
 			<section className="homePage__section">
 				<h2 className="section__heading">Popular</h2>
