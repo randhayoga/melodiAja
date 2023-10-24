@@ -23,7 +23,7 @@ body {
 }
 
 #rootGrid {
-	height: inherit;
+	height: fit-content;
 	display: grid;
 	grid-template: 1fr / 1fr 5fr;
 }
