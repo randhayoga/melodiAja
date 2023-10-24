@@ -1,0 +1,121 @@
+$bg--deep: rgb(13, 13, 13);
+$bg--shallow: rgb(28, 28, 28);
+$bg--normal: rgb(51, 51, 51);
+$accent: rgb(63, 31, 157);
+
+$text: white;
+$subheading: rgb(216, 161, 126);
+$x-margin: clamp(20px, 4vw, 80px);
+
+#userPage {
+	height: 100vh;
+	color: $text;
+	padding: 30px $x-margin;
+}
+
+#userPage__top {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding-bottom: 20px;
+	border-bottom: 2px solid $bg--normal;
+
+	> .userPage__imgWrapper {
+		background: $bg--shallow;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+
+	> .userPage__imgWrapper {
+		width: 200px;
+	}
+}
+
+#userPage__profileSect  {
+	flex: 1;
+
+	> * {
+		margin-bottom: 20px
+	}
+}
+
+
+#profileSect__profile {
+	display: grid;
+	grid-template: 1fr / 1fr 50px;
+	gap: 20px;
+}
+
+#profileSect__stats {
+	display: flex;
+	gap: 20px;
+}
+
+.stats__item {
+	padding-right: 10px;
+	border-right: 1px solid $bg--normal;
+	text-align: center;
+	font-weight: bold;
+	color: $text;
+
+	.stats__criteria { 
+		filter: brightness(50%);
+
+		&:hover {
+			filter: brightness(100%);
+		}
+	}
+
+	> .userPage__imgWrapper {
+		display: inline;
+		width: 30px;
+
+		> img {
+			width: inherit;
+		}
+	}
+}
+
+
+#profileSect__actions {
+	display: flex;
+	gap: 20px;
+
+	> button {
+		border: 0px solid black;
+		padding: 8px 15px;
+	}
+}
+
+#button--follow {
+	background: $accent; color: $text;
+}
+
+.profile__names {
+	.profile__name {
+		font-size: 28px;
+		font-weight: bold;
+	}
+	.profile__username {
+		color: white;
+		filter: brightness(50%);
+	}
+}
+
+.userPage__imgWrapper {
+	position: relative;
+	aspect-ratio: 1;
+
+	> img {
+		aspect-ratio: inherit;
+		width: inherit;
+		object-fit: cover;
+	}
+}
+
+.hover--bright {
+	&:hover {
+		filter: brightness(120%);
+	}
+}
