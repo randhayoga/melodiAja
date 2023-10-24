@@ -16,7 +16,7 @@ const sidebarView = (() => {
 							</div>
 							<p className="sidebar__menuName"> Home </p>
 						</Link>
-						<Link to="/discover" className="sidebar__menu" id="sidebar__search">
+						<Link to="/search" className="sidebar__menu" id="sidebar__search">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon" src="/icons/search.png" alt="Search icon" />
 							</div>
