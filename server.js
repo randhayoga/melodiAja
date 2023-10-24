@@ -5,17 +5,6 @@ const ROUTER = EXPRESS.Router();
 
 const PORT = 8069;
 
-const CONFIG = require("./config.js").config;
-const DBCONFIG = CONFIG.development.database;
-
-const POOL = require("mariadb").createPool({
-	host: DBCONFIG.host,
-	port: DBCONFIG.port,
-	user: DBCONFIG.user,
-	password: DBCONFIG.password,
-	database: DBCONFIG.db,
-	connectionLimit: DBCONFIG.connectionLimit,
-})
 
 function setOwnMiddlewares() {
 	APP.use(function log(req, _, next) {
