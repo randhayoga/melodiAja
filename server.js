@@ -31,8 +31,11 @@ function setOwnMiddlewares() {
 	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "icons"), {maxAge: imgTTL}));
 	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "img"), {maxAge: imgTTL}));
 
+	// Server side routes
+	ROUTER.get("/discover", (_, res) => {
+		return res.sendFile(PATH.join(__dirname, "public", "App.html")) 
+	})
 	
-	// App's Routing
 	ROUTER.get("/:user/home", (_, res) => {
 		return res.sendFile(PATH.join(__dirname, "public", "App.html")) 
 	})

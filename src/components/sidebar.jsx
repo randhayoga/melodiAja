@@ -1,4 +1,5 @@
 import "./styles/sidebar.css"
+import {Link} from "react-router-dom";
 
 const sidebarView = (() => {
 	function render() {
@@ -9,32 +10,32 @@ const sidebarView = (() => {
 						<img className="sidebar__menuIcon" src="/img/meLogo.png" alt="Melodi Aja" />
 					</div>
 					<section className="sidebar__menuGroup">
-						<div className="sidebar__menu" id="sidebar__home">
+						<Link to="/discover" className="sidebar__menu" id="sidebar__home">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon flt--invert" src="/icons/home.png" alt="Home icon" />
 							</div>
 							<p className="sidebar__menuName"> Home </p>
-						</div>
-						<div className="sidebar__menu" id="sidebar__search">
+						</Link>
+						<Link to="/discover" className="sidebar__menu" id="sidebar__search">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon" src="/icons/search.png" alt="Search icon" />
 							</div>
 							<p className="sidebar__menuName"> Search </p>
-						</div>
+						</Link>
 					</section>
 					<section className="sidebar__menuGroup">
-						<div className="sidebar__menu" id="sidebar__playlist">
+						<Link to="/myPlaylist" className="sidebar__menu" id="sidebar__playlist">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon" src="/icons/playlist.png" alt="Playlist Icon" />
 							</div>
 							<p className="sidebar__menuName"> Playlist </p>
-						</div>
-						<div className="sidebar__menu">
+						</Link>
+						<Link to="/myMusic" className="sidebar__menu">
 							<div className="sidebar__imgWrapper" id="sidebar__music">
 								<img className="sidebar__menuIcon" src="/icons/music.png" alt="Music icon" />
 							</div>
 							<p className="sidebar__menuName"> Music</p>
-						</div>
+						</Link>
 					</section>
 				</section>
 			</section>

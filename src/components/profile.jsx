@@ -1,4 +1,5 @@
 import "./styles/profile.css"
+import {Link} from "react-router-dom";
 
 const profileModel = (() => {
 	const getData = () => {
@@ -15,11 +16,13 @@ const profileModel = (() => {
 const profileView = (() => {
 	const render = (name, pfpPath) => {
 		return (
-			<div id="topbar__profile">
-				<div className="imgWrapper">
-					<img src="/defaults/defaultFemale.jpg" alt={`${name}'s PFP`}/>
+			<Link to="/user/me">
+				<div id="topbar__profile">
+						<div className="imgWrapper">
+							<img src="/defaults/defaultFemale.jpg" alt={`${name}'s PFP`}/>
+						</div>
 				</div>
-			</div>
+			</Link>
 		)
 	}
 

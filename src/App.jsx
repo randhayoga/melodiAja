@@ -16,6 +16,7 @@ import "./App.css";
 
 let Topbar = topbar.render;
 let Sidebar = sidebar.render;
+let UserPage = userPage.render;
 
 const ROUTER = createBrowserRouter([
 	{
