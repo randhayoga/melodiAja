@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 #sidebar__wrapper {
   min-height: inherit;
   position: relative;

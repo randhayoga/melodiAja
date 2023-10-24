@@ -1,0 +1,18 @@
+a {
+  text-decoration: none;
+}
+
+#searchPage {
+  color: white;
+  padding: 30px clamp(20px, 4vw, 80px);
+}
+
+.searchPage__section {
+  margin-bottom: 30px;
+}
+.searchPage__section > h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=searchPage.css.map */

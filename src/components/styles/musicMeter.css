@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 #mPlayer__musicMeter {
   height: 50px;
   position: fixed;

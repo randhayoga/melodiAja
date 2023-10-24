@@ -1,0 +1,75 @@
+@use "./globals" as *;
+
+.section__content--tiled {
+	display: grid;
+	gap: 20px;
+
+	> * {
+		border-radius: 10px;
+		background: $bg--shallow;
+	}
+}
+
+.contentTiled--4 {
+	grid-template: 1fr / repeat(auto-fit, minmax(250px, 1fr));
+	font-size: 20px;
+}
+
+.contentTiled--3 {
+	grid-template: 1fr / repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.tile__background {
+	height: 100%;
+	width: 100%;
+
+	> img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	&::after {
+		content:"";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		z-index: 1;
+		left: 0; top: 0; right: 0; bottom: 0;
+		background: rgba($accent, 0.75);
+		filter: brightness(40%);
+	}
+}
+
+
+.tile__text {
+	text-align: center;
+	font-weight: bold;
+	position: absolute;
+	z-index: 2;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+
+	> .tile__subheading {
+		color: $subheading;
+		filter: brightness(120%);
+	}
+}
+
+
+.contentTiled__tile {
+	height: 150px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 10px;
+	transition:  0.5s filter;
+
+	&:hover {
+		p { font-size: 21px; }
+		filter: brightness(150%);
+	}
+}
+
+.tile__heading, .tile__subheading {
+	transition:  0.5s font-size;
+}

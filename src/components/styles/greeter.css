@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 #topbar__greeter {
   align-items: center;
   display: flex;

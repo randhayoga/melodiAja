@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 #topbar {
   position: sticky;
   z-index: 69418;

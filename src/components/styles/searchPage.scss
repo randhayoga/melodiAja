@@ -1,0 +1,14 @@
+@use './globals' as *;
+
+#searchPage {
+	color: $text;
+	padding: $y-margin $x-margin ;
+}
+
+.searchPage__section {
+	> h2 {
+		margin-bottom: 8px;
+		font-size: 20px;
+	}
+	margin-bottom: $y-margin;
+}

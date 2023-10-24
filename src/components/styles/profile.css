@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 #topbar__profile > .imgWrapper {
   overflow: hidden;
   background: rgb(51, 51, 51);
