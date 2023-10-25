@@ -4,10 +4,10 @@
   "description": "A simple music streaming web app\r Hello",
   "main": "index.js",
   "scripts": {
-		"build": "sass src/components/styles && webpack",
-		"sass-watch": "sass --watch .",
-		"serve": "nodemon server.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+    "build": "sass src/components/styles && webpack",
+    "sass-watch": "sass --watch .",
+    "serve": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +28,7 @@
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "nodemon": "^3.0.1",
+    "sass": "^1.69.4",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4"
