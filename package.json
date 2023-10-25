@@ -4,7 +4,8 @@
   "description": "A simple music streaming web app\r Hello",
   "main": "index.js",
   "scripts": {
-	  	"sass-watch": "sass --watch .",
+		"build": "sass src/components/styles && webpack",
+		"sass-watch": "sass --watch .",
 		"serve": "nodemon server.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
   },
