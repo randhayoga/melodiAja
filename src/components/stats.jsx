@@ -1,7 +1,9 @@
+import "./styles/stats.css"
+
 const statsView = (() => {
 	function render({nFollowers, nMusics, nCollections}) {
 		return (
-			<section id="profileSect__stats">
+			<section id="profileSect__stats" className="stats">
 				<div className="stats__item">
 					<p>{nFollowers} <span className="stats__criteria"> Followers </span> </p>
 				</div>

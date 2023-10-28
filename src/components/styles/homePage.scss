@@ -13,22 +13,12 @@
 	}
 }
 
-.contentList__item {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 8px 0px;
-	border-bottom: 3px solid $bg--shallow;
-	
-	&:hover {
-		filter: brightness(150%);
-	}
+.homePage__section {
+	margin-bottom: 30px;
 
-	> .item__image {
-		border-radius: 10px;
-		background: $bg--normal;
-		height: 50px;
-		aspect-ratio: 1;
+	> .section__heading {
+		margin-bottom: 8px;
+		font-size: 20px;
 	}
 }
 
@@ -57,12 +47,3 @@
 	}
 }
 
-
-.homePage__section {
-	margin-bottom: 30px;
-
-	> .section__heading {
-		margin-bottom: 8px;
-		font-size: 20px;
-	}
-}

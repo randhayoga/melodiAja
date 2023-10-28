@@ -1,0 +1,39 @@
+@use './globals' as *;
+
+.contentList__item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 0px;
+	border-bottom: 3px solid $bg--shallow;
+	
+	&:hover {
+		filter: brightness(150%);
+	}
+
+	> .item__image {
+		border-radius: 10px;
+		background: $bg--normal;
+		height: 50px;
+		aspect-ratio: 1;
+	}
+}
+
+.contentList__collection {
+	display: grid;
+	grid-template: 1fr / 100px 1fr;
+	gap: 20px;
+
+	> .item__image {
+		border-radius: 10px;
+		background: $bg--normal;
+		height: 80px;
+		aspect-ratio: 1;
+	}
+	
+	.item__heading {
+		font-size: 20px;
+		margin-bottom: 5px;
+	}
+}
+

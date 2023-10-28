@@ -1,0 +1,31 @@
+@use './globals' as *;
+
+.stats {
+	display: flex;
+	gap: 20px;
+}
+
+.stats__item {
+	padding-right: 10px;
+	border-right: 1px solid $bg--normal;
+	text-align: center;
+	font-weight: bold;
+	color: $text;
+
+	.stats__criteria { 
+		filter: brightness(50%);
+
+		&:hover {
+			filter: brightness(100%);
+		}
+	}
+
+	> .userPage__imgWrapper {
+		display: inline;
+		width: 30px;
+
+		> img {
+			width: inherit;
+		}
+	}
+}

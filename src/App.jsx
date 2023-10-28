@@ -12,6 +12,7 @@ import MusicPlayer from "./components/musicPlayer.jsx"
 import HomePage from "./components/homePage.jsx"
 import searchPage from "./components/searchPage.jsx"
 import userPage from "./components/userPage.jsx"
+import myPlaylistPage from "./components/myPlaylistPage.jsx"
 
 import "./App.css";
 
@@ -19,6 +20,7 @@ let Topbar = topbar.render;
 let Sidebar = sidebar.render;
 let UserPage = userPage.render;
 let SearchPage = searchPage.render;
+let MyPlaylistPage = myPlaylistPage.render;
 
 const ROUTER = createBrowserRouter([
 	{
@@ -60,6 +62,21 @@ const ROUTER = createBrowserRouter([
 					<main>
 						<Topbar />
 						<SearchPage />
+					</main>
+				</section>
+				<MusicPlayer />
+			</>
+		),
+	},
+	{
+		path: "/myPlaylist",
+		element: (
+			<>
+				<section className="rootGrid">
+					<Sidebar />
+					<main>
+						<Topbar />
+						<MyPlaylistPage />
 					</main>
 				</section>
 				<MusicPlayer />
