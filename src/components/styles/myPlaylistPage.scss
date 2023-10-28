@@ -10,5 +10,19 @@
 		margin-bottom: 8px;
 		font-size: 20px;
 	}
+
 	margin-bottom: $y-margin;
+}
+
+.section__headingWrapper {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+
+	> img {
+		filter: invert(100%);
+		cursor: pointer;
+		aspect-ratio: 1;
+		height: 20px;
+	}
 }
