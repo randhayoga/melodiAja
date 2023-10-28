@@ -1,8 +1,7 @@
 const EXPRESS = require("express");
 const APP = EXPRESS();
 const PATH = require("path");
-const ROUTER = EXPRESS.Router();
-
+const ROUTES = require("./backend/router.js").ROUTES;
 const PORT = 8069;
 
 
@@ -14,10 +13,7 @@ function setOwnMiddlewares() {
 }
 
 (function main() {
-	const SHORTCUTS = {
-		public: PATH.join(__dirname, "public"),
-		staticPage: PATH.join(__dirname, "public", "static"),
-	}
+	const PUBLIC_PATH = PATH.join(__dirname, "public");
 
 	// Middlewares
 	setOwnMiddlewares();
@@ -25,20 +21,12 @@ function setOwnMiddlewares() {
 
 	// Determine where static stuff is located
 	let imgTTL = 1000 * 1
-	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public), {maxAge: imgTTL}));
-	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "static"), {maxAge: imgTTL}));
-	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "defaults"), {maxAge: imgTTL}));
-	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "icons"), {maxAge: imgTTL}));
-	APP.use(EXPRESS.static(PATH.join(SHORTCUTS.public, "img"), {maxAge: imgTTL}));
+	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH), {maxAge: imgTTL}));
+	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "static"), {maxAge: imgTTL}));
+	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "defaults"), {maxAge: imgTTL}));
+	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "icons"), {maxAge: imgTTL}));
+	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "img"), {maxAge: imgTTL}));
 
-	// Server side routes
-	ROUTER.get("/discover", (_, res) => {
-		return res.sendFile(PATH.join(__dirname, "public", "App.html")) 
-	})
-	
-	ROUTER.get("/:user/home", (_, res) => {
-		return res.sendFile(PATH.join(__dirname, "public", "App.html")) 
-	})
 
 	/*
 	ROUTER.get("/:user/:password", async (req, res) => {
@@ -51,26 +39,8 @@ function setOwnMiddlewares() {
 		res.send();
 	})
 	*/
-	ROUTER.get("/login", (_, res) => { 
-		return res.sendFile(PATH.join(__dirname, "public", "static", "login.html")) 
-	})
 
-	ROUTER.get("/signup", (_, res) => { 
-		return res.sendFile(PATH.join(__dirname, "public","static", "signup.html")) 
-	})
-
-	ROUTER.get("/", (req, res) => {
-		// If not logged in show index.html
-		return res.sendFile(PATH.join(__dirname, "public", "static", "index.html"))
-		// else show main menu
-	})
-	
-	ROUTER.get("*", (_, res) => {
-		return res.sendFile(PATH.join(__dirname, "public", "static", "error.html")) 
-	})
-
-	APP.use(ROUTER);
-
+	APP.use(ROUTES);
 	APP.listen(PORT, () => {
 		console.log(`ready to serve at localhost:${PORT}`);
 	})
