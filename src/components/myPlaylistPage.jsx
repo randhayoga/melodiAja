@@ -46,10 +46,7 @@ const myPlaylistPageView = (() => {
 					<SearchBar />
 				</div>
 				<div className="myPlaylistPage__section">
-					<div className="section__headingWrapper">
-						<h2 className="section__heading">My Playlist</h2>
-						<img className="flt--negative" src="https://cdn-icons-png.flaticon.com/512/1237/1237946.png" alt="+" />
-					</div>
+					<h2 className="section__heading">My Playlist</h2>
 					<ContentList itemList={items} />
 				</div>
 			</section>

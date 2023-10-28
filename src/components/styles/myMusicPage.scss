@@ -1,16 +1,13 @@
 @use "./globals" as *;
 
-#myPlaylistPage {
+#myMusicPage {
 	color: $text;
 	padding: $y-margin $x-margin ;
 }
 
-.myPlaylistPage__section {
+.myMusicPage__section {
 	margin-bottom: $y-margin;
 
-	.contentList__item {
-		padding: 12px 0px;
-	}
 	> h2 {
 		flex: 1;
 		margin-bottom: 8px;

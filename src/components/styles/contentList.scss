@@ -20,17 +20,24 @@
 }
 
 .contentList__collection {
+	gap: 0px;
 	display: grid;
 	grid-template: 1fr / 100px 1fr;
-	gap: 20px;
+
+	> * {
+		border-radius: 10px;
+		background: $bg--shallow;
+	}
 
 	> .item__image {
-		border-radius: 10px;
-		background: $bg--normal;
 		height: 80px;
 		aspect-ratio: 1;
 	}
 	
+	> .item__text {
+		padding: 15px;
+	}
+
 	.item__heading {
 		font-size: 20px;
 		margin-bottom: 5px;
