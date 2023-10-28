@@ -9,7 +9,10 @@
     color: white;
     font-family: roboto;
     font-size: clamp(14px, 2vw, 16px);
-    scroll-behavior: smooth;
+}
+
+body {
+	overflow: hidden;
 }
 
 h2 {
@@ -35,7 +38,7 @@ h2 {
 }
 
 #heroTop {
-    height: 600px;
+    height: 100vh;
 }
 
 #heroTop::before {
@@ -45,20 +48,6 @@ h2 {
 
 #heroTop h2 {
     font-size: 60px;
-}
-
-#heroBot {
-    height: 300px;
-}
-
-#heroBot::before {
-    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhVAt2kw13BmHe0pmNLrjv7cpYT_Up7nJnhxZGuq05OIYAXOTMbdwjf3NbrkeXcq_7mB0&usqp=CAU);
-    background-size: cover;
-    background-position-y: 50%;
-}
-
-#heroBot h2 {
-    font-size: 40px;
 }
 
 .hero::before {

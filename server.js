@@ -65,7 +65,9 @@ function setOwnMiddlewares() {
 		// else show main menu
 	})
 	
-	ROUTER.get("*", (_, res) => {return res.send("404 Not Found");} )
+	ROUTER.get("*", (_, res) => {
+		return res.sendFile(PATH.join(__dirname, "public", "static", "error.html")) 
+	})
 
 	APP.use(ROUTER);
 
