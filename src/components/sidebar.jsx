@@ -5,7 +5,30 @@ const sidebarView = (() => {
 	function render() {
 		return (
 			<section className="sidebar__wrapper" id="sidebar__wrapper">
-				<section id="sidebar">
+				<section id="sidebar" onClick={
+					(e) => {
+						let is_menu = (e.target.id != "sidebar__logo" && 
+							e.target.parentNode.id != "sidebar__logo" &&
+							!e.target.classList.contains("sidebar__menuGroup")
+						)
+
+						if(is_menu) {
+							Array.from(document.getElementsByClassName("sidebar__menu"))
+								.forEach((element) => {
+									element.classList.remove("sidebar__menu--active");
+								}
+							)
+
+							let target = e.target.parentNode;
+							if(e.target.tagName == "IMG") {
+								target = e.target.parentNode.parentNode;
+							} else if(e.target.tagName == "A") {
+								target = e.target;
+							}
+							target.classList.add("sidebar__menu--active");
+						}
+					}
+				}>
 					<div className="sidebar__imgWrapper" id="sidebar__logo"
 						onClick={(e) => {
 							e.currentTarget.parentNode.parentNode.classList.toggle("sidebar__wrapper--collapsed")
@@ -13,8 +36,8 @@ const sidebarView = (() => {
 					>
 						<img className="sidebar__menuIcon" src="/img/meLogo.png" alt="Melodi Aja" />
 					</div>
-					<section className="sidebar__menuGroup">
-						<Link to="/discover" className="sidebar__menu" id="sidebar__home">
+					<section className=" sidebar__menuGroup">
+						<Link to="/discover" className="sidebar__menu--active sidebar__menu" id="sidebar__home">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon flt--invert" src="/icons/home.png" alt="Home icon" />
 							</div>

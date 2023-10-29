@@ -57,6 +57,10 @@
 	&:hover img { width: 80% !important; }
 }
 
+.sidebar__menu--active {
+	filter: brightness(200%);
+}
+
 #sidebar__logo {
 	&:hover {
 		cursor: pointer;
