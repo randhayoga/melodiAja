@@ -50,6 +50,8 @@ IDE:<br>
 * Perangkat Desktop atau Laptop
 * Web Browser
 * Git (untuk download melalui terminal/cmd)
+* [Node.js](https://nodejs.org/en)
+* [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 ### Download
 #### Melaui Browser dan File Explorer
@@ -59,9 +61,6 @@ IDE:<br>
 4. Buka folder dimana file melodiAja-main.zip yang telah didownload tersimpan
 5. Extract melodiAja-main.zip
 6. Buka folder melodiAja-main
-7. Buka folder public
-8. Buka folder static
-9. Buka index.html
     
 #### Melalui Terminal / CMD
 1. Pastikan Anda berada folder atau directory yang diinginkan untuk menyimpan file unduhan melodiAja
@@ -72,20 +71,31 @@ IDE:<br>
 3. Buka directory /public/static<br>
    Pada Windows:
    ```sh
-   cd .\melodiAja\public\static\
+   cd .\melodiAja\
    ```
    Pada Linux/MacOS:
    ```sh
-   cd /melodiAja/public/static/
-   ```
-4. Buka homepage<br>
-   Pada Windows:
-   ```sh
-   .\index.html
-   ```
-   Pada Linux/MacOS:
-   ```sh
-   Open index.html
+   cd /melodiAja/
    ```
 
+### Menjalankan MelodiAja
+#### Proses di bawah berlaku untuk sistem operasi Windows, macOS, maupun Linux
+1. Buka terminal atau powershell pada folder melodiAja
+2. Install packages dan dependencies yang diperlukan oleh melodiAja:
+   ```sh
+   npm install
+   ```
+4. Buka satu lagi terminal atau powershell pada folder melodiAja
+5. Buat *build directory*:
+   ```sh
+   npm run build
+   ```
+6. Jalankan server.js:
+   ```sh
+   node server.js
+   ```
+7. Ketik localhost:8069 pada kotak pencarian browser Anda.
+   ```sh
+   localhost:8069
+   ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
