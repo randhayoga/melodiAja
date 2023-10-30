@@ -29,7 +29,7 @@ const sidebarView = (() => {
 						<img className="sidebar__menuIcon" src="/img/meLogo.png" alt="Melodi Aja" />
 					</div>
 					<section className=" sidebar__menuGroup">
-						<Link to="/discover" className="sidebar__menu--active sidebar__menu" id="sidebar__home">
+						<Link to="/discover" className="sidebar__menu" id="sidebar__home">
 							<div className="sidebar__imgWrapper">
 								<img className="sidebar__menuIcon flt--invert" src="/icons/home.png" alt="Home icon" />
 							</div>
