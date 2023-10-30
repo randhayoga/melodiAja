@@ -43,6 +43,7 @@
 	position: relative;
 	overflow: hidden;
 	filter: brightness(50%);
+	cursor: pointer;
 
 	> .sidebar__menuName {
 		position: absolute;
@@ -51,6 +52,10 @@
 		transition: 0.5s opacity;
 		font-weight: bold;
 		color: white;
+	}
+
+	* {
+		pointer-events: none;
 	}
 
 	&:hover { filter: brightness(200%); }
@@ -62,9 +67,7 @@
 }
 
 #sidebar__logo {
-	&:hover {
-		cursor: pointer;
-	}
+	cursor: pointer;
 	width: 40px;
 }
 

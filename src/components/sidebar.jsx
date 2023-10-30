@@ -7,10 +7,7 @@ const sidebarView = (() => {
 			<section className="sidebar__wrapper" id="sidebar__wrapper">
 				<section id="sidebar" onClick={
 					(e) => {
-						let is_menu = (e.target.id != "sidebar__logo" && 
-							e.target.parentNode.id != "sidebar__logo" &&
-							!e.target.classList.contains("sidebar__menuGroup")
-						)
+						let is_menu = e.target.classList.contains("sidebar__menu")
 
 						if(is_menu) {
 							Array.from(document.getElementsByClassName("sidebar__menu"))
@@ -18,15 +15,10 @@ const sidebarView = (() => {
 									element.classList.remove("sidebar__menu--active");
 								}
 							)
-
-							let target = e.target.parentNode;
-							if(e.target.tagName == "IMG") {
-								target = e.target.parentNode.parentNode;
-							} else if(e.target.tagName == "A") {
-								target = e.target;
-							}
-							target.classList.add("sidebar__menu--active");
+							
+							e.target.classList.add("sidebar__menu--active");
 						}
+						e.stopPropagation();
 					}
 				}>
 					<div className="sidebar__imgWrapper" id="sidebar__logo"
