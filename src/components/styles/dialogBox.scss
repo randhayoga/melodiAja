@@ -1,0 +1,32 @@
+@use "./_globals" as *;
+
+.dialog__box {
+	min-width: 200px;
+	min-height: 80px; 
+	width: fit-content;
+	padding: 20px;
+	background: $bg--normal;
+	color: white;
+	border-radius: 20px;
+	position: fixed;
+	z-index: 101;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.dialog__shade {
+	position: fixed;
+	z-index: 100;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.40);
+}
+
+.dialog__top {
+	display: flex;
+	align-items: center;
+}
+
+.dialog__name {
+	flex: 1;
+}

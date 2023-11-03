@@ -16,6 +16,7 @@ import searchPage from "./components/searchPage.jsx"
 import userPage from "./components/userPage.jsx"
 import myPlaylistPage from "./components/myPlaylistPage.jsx"
 import myMusicPage from "./components/myMusicPage.jsx"
+import dialogBox from "./components/dialogBox.jsx"
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ let UserPage = userPage.render;
 let SearchPage = searchPage.render;
 let MyPlaylistPage = myPlaylistPage.render;
 let MyMusicPage = myMusicPage.render;
+let TestBox = dialogBox("testing", "Welcome").render;
 
 const ROUTER = createBrowserRouter([
 	{
@@ -48,6 +50,16 @@ const ROUTER = createBrowserRouter([
 					</main>
 				</section>
 				<MusicPlayer />
+				<TestBox Component={
+					function() {
+						return (
+							<>
+								<h2> Let me put it in the language you can understand </h2>
+								<p> Oh so sorry, no coming here! You deliver, wrong place!</p>
+							</>
+						)
+					}
+				}/>
 			</>
 		),
 	},
