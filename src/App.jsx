@@ -43,7 +43,6 @@ const ROUTER = createBrowserRouter([
 							<Route path="/myPlaylist" element={<MyPlaylistPage />} />
 							<Route path="/myMusic" element={<MyMusicPage />} />
 							<Route path="/user" element={<UserPage />}>
-								<Route path="me" element={<UserPage />} />
 								<Route path=":id" element={<UserPage />} />
 							</Route>
 						</Routes>
