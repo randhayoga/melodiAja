@@ -25,7 +25,7 @@ const userPageView = (() => {
 		return (
 			<section id="userPage">
 				<section id="userPage__top">
-					<div className="userPage__imgWrapper">
+					<div className="userPage__imgWrapper" >
 						<img src={pfpPath} alt={`${username}'s picture`} />
 					</div>
 					<div id="userPage__profileSect">
@@ -38,7 +38,9 @@ const userPageView = (() => {
 								<img src="/icons/music.png" alt="Settings Icon" />
 							</div>
 						</div>
-						<Stats nFollowers={nFollowers} nMusics={nMusics} nCollections={nCollections} />
+						<Stats type="user" statsItems={
+							{nFollowers: nFollowers, nMusics: nMusics, nCollections:nCollections}
+						} />
 						<section id="profileSect__actions">
 							<button type="button" id="button--follow" className="hover--bright"> Follow </button>
 							<button type="button" id="button--share" className="hover--bright"> Share </button>
