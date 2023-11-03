@@ -5,7 +5,7 @@ const PUBLIC_PATH = PATH.join("..", "public");
 const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 
 (function main() {
-	["/discover", "/search", "myPlaylist", "user/:id"].forEach(
+	["/discover", "/search", "/myPlaylist", "/myMusic", "/user/:id"].forEach(
 		(path) => {
 			ROUTER.get(path, (_, res) => {
 				return res.sendFile(PATH.join(__dirname, PUBLIC_PATH, "App.html")) 
