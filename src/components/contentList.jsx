@@ -20,7 +20,6 @@ function FTListItem(item) {
 	case "artist":
 		return <></>;
 	default: // Collection
-		let viewsConverted = `${item.nViews / 1000.0}k`;
 		return (
 			<div className="contentList__item contentList__collection" key={item.coverPath}>
 				<div className="item__image">
@@ -32,7 +31,7 @@ function FTListItem(item) {
 						{
 							visibility: item.visibility,
 							nSongs: item.nSongs, 
-							nViews: viewsConverted
+							nViews: item.nViews,
 						}
 					}/>
 				</div>

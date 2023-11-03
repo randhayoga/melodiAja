@@ -1,10 +1,26 @@
 import "./styles/stats.css"
 
 const statsView = () => {
+	function normalize(num) {
+		if(num >= 1000000) {
+			return `${Number.parseFloat(
+						Math.floor(num / 1000000.0)
+					).toFixed(0)}M`;
+		} else if(num >= 1000) {
+			return `${Number.parseFloat(
+						Math.floor(num / 1000.0)
+					).toFixed(0)}k`;
+		}
+		return `${num}`
+	}
+
 	function render({type, statsItems}) {
+		let normalizedStats = Object.keys(statsItems).map(
+			(key) => normalize(statsItems[key])
+		);
 		switch(type) {
 			case "user":
-				let {nFollowers, nMusics, nCollections} = statsItems;
+				let [nFollowers, nMusics, nCollections] = normalizedStats;
 				return (
 					<section id="" className="stats stats--separated">
 						<div className="stats__item">
@@ -25,7 +41,7 @@ const statsView = () => {
 					</section>
 				)
 			default: // collection
-				let {visibility, nSongs, nViews} = statsItems;
+				let [visibility, nSongs, nViews] = normalizedStats;
 				return (
 					<section id="" className="stats stats--separated">
 						<div className="stats__item">
