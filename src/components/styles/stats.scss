@@ -2,12 +2,18 @@
 
 .stats {
 	display: flex;
+	align-items: center;
 	gap: 20px;
+}
+
+.stats--separated {
+	> .stats__item {
+		border-right: 1px solid $bg--normal;
+	}
 }
 
 .stats__item {
 	padding-right: 10px;
-	border-right: 1px solid $bg--normal;
 	text-align: center;
 	font-weight: bold;
 	color: $text;

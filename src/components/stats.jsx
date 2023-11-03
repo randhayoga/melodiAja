@@ -1,13 +1,12 @@
 import "./styles/stats.css"
 
-const statsView = (() => {
+const statsView = () => {
 	function render({type, statsItems}) {
 		switch(type) {
 			case "user":
-				console.log(statsItems)
 				let {nFollowers, nMusics, nCollections} = statsItems;
 				return (
-					<section id="profileSect__stats" className="stats">
+					<section id="" className="stats stats--separated">
 						<div className="stats__item">
 							<p>{nFollowers} <span className="stats__criteria"> Followers </span> </p>
 						</div>
@@ -19,15 +18,35 @@ const statsView = (() => {
 						</div>
 					</section>
 				)
-			default:
+			case "music":
+				let {nListens, nLikes, nDislikes, nComments} = statsItems;
+				return (
+					<section id="" className="stats">
+					</section>
+				)
+			default: // collection
+				let {visibility, nSongs, nViews} = statsItems;
+				return (
+					<section id="" className="stats stats--separated">
+						<div className="stats__item">
+							<p>{visibility} </p>
+						</div>
+						<div className="stats__item">
+							<p>{nSongs} <span className="stats__criteria"> Songs </span> </p>
+						</div>
+						<div className="stats__item">
+							<p>{nViews} <span className="stats__criteria"> Views </span> </p>
+						</div>
+					</section>
+				)
 		}
 	}
 
 	return {render}
-})()
+}
 
-function Stats() {
-	let view = statsView
+export default function Stats() {
+	let view = statsView()
 
 	const render = (props) => {
 		return view.render(props);
@@ -35,8 +54,3 @@ function Stats() {
 
 	return {render};
 }
-
-let stats = Stats();
-export default {
-	render: () => stats.render
-};

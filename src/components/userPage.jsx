@@ -19,7 +19,7 @@ const userPageModel = (() => {
 })()
 
 const userPageView = (() => {
-	let Stats = stats.render();
+	let Stats = stats().render;
 
 	function render({name, username, pfpPath, nFollowers, nMusics, nCollections}) {
 		return (

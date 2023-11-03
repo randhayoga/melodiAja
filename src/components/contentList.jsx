@@ -1,8 +1,11 @@
 import "./styles/contentList.css"
+import stats from "./stats.jsx"
 
 function FTListItem(item) {
+	let Stats = stats().render;
 
-	if(item.type === "music") {
+	switch(item.type) {
+	case "music":
 		return (
 			<div className="contentList__item contentList__music" key={item.coverPath}>
 				<div className="item__image">
@@ -14,33 +17,28 @@ function FTListItem(item) {
 				</div>
 			</div>
 		)
-	} else if(item.type === "artist") {
-
+	case "artist":
+		return <></>;
+	default: // Collection
+		let viewsConverted = `${item.nViews / 1000.0}k`;
+		return (
+			<div className="contentList__item contentList__collection" key={item.coverPath}>
+				<div className="item__image">
+					<img src={item.coverPath} alt="music's cover art" />
+				</div>
+				<div className="item__text">
+					<p className="item__heading"> {item.name} </p>
+					<Stats type="collection" statsItems={
+						{
+							visibility: item.visibility,
+							nSongs: item.nSongs, 
+							nViews: viewsConverted
+						}
+					}/>
+				</div>
+			</div>
+		)
 	}
-	
-	// Collection
-	let viewsConverted = `${item.nViews / 1000.0}k`;
-	return (
-		<div className="contentList__item contentList__collection" key={item.coverPath}>
-			<div className="item__image">
-				<img src={item.coverPath} alt="music's cover art" />
-			</div>
-			<div className="item__text">
-				<p className="item__heading"> {item.name} </p>
-				<section id="profileSect__stats" className="stats">
-					<div className="stats__item">
-						<p>{item.visibility} </p>
-					</div>
-					<div className="stats__item">
-						<p>{item.nSongs} <span className="stats__criteria"> Songs </span> </p>
-					</div>
-					<div className="stats__item">
-						<p>{viewsConverted} <span className="stats__criteria"> Views </span> </p>
-					</div>
-				</section>
-			</div>
-		</div>
-	)
 }
 
 const contentListView = () => {
