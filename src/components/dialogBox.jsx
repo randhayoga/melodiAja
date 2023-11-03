@@ -12,15 +12,16 @@ const popUpView = () => {
 						<div className="icon icon--small"
 							onClick = {() => status.set(false)}
 						>
-							<img src="/icons/music.png" alt="close icon" />
+							<div className="icon icon--small">
+								<img src="/icons/music.png" alt="close icon" />
+							</div>
 						</div>
 					</div>
 					<div className="dialog__body">
 						<Component />
 					</div>
 				</div>
-				<div className="dialog__shade" >
-				</div>
+				<div className="dialog__shade" > </div>
 			</section>
 			): <></>
 		)

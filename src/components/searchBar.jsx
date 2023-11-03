@@ -10,7 +10,7 @@ const searchBarView = () => {
 						type="text" 
 					/>
 				</form>
-				<img className="searchBar__icon" 
+				<img className="icon icon--small" 
 					src="/icons/search.png" alt="searchIcon" 
 					onClick={() => {alert("GGGG");}}
 				/>

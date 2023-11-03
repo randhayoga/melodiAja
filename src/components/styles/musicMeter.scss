@@ -4,7 +4,7 @@
 	height: 50px;
 	position: fixed;
 	left: 0; right: 0px; bottom: 4px;
-	z-index: 20;
+	z-index: 9999;
 	background: $accent;
 	cursor: pointer;
 
@@ -14,7 +14,7 @@
 	position: fixed;
 	height: 50px;
 	left: inherit; bottom: inherit;
-	z-index: 21;
+	z-index: 10000;
 	background: white;
 	transition: 0.2s width;
 }
