@@ -1,6 +1,44 @@
 import "./styles/stats.css"
 
-const statsView = () => {
+const statsView = (() => {
+	function normalize(num) {
+		if(num >= 1000000) {
+			return `${Number.parseFloat(
+						Math.floor(num / 1000000.0)
+					).toFixed(0)}M`;
+		} else if(num >= 1000) {
+			return `${Number.parseFloat(
+						Math.floor(num / 1000.0)
+					).toFixed(0)}k`;
+		}
+		return `${num}`
+	}
+
+	function render({opts, statsItems}) {
+		let normalizedStats = Object.keys(statsItems).map(
+			(key) => normalize(statsItems[key])
+		);
+
+		// How tf does this works now. It wasn't working before
+		return (
+			<section id="" className={`stats${opts["border"] == true? " stats--separated": ""}`}>
+				{
+					Object.keys(statsItems).map((key) => {
+						return (
+							<div className="stats__item" key={key}>
+								<p>{statsItems[key]} <span className="stats__criteria"> {key} </span> </p>
+							</div>
+						)
+					})
+				}
+			</section>
+		)
+	}
+
+	return {render}
+})()
+
+const statsView2 = (() => {
 	function normalize(num) {
 		if(num >= 1000000) {
 			return `${Number.parseFloat(
@@ -59,10 +97,10 @@ const statsView = () => {
 	}
 
 	return {render}
-}
+})()
 
 export default function Stats() {
-	let view = statsView()
+	let view = statsView;
 
 	const render = (props) => {
 		return view.render(props);
