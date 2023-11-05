@@ -1,7 +1,7 @@
 @use "./_globals" as *;
 
 #mPlayer__musicMeter {
-	height: 50px;
+	height: calc($musicPlayerHeight + 10px);
 	position: fixed;
 	left: 0; right: 0px; bottom: 4px;
 	z-index: 9999;
@@ -12,7 +12,7 @@
 
 #musicMeter__progress {
 	position: fixed;
-	height: 50px;
+	height: calc($musicPlayerHeight + 10px);
 	left: inherit; bottom: inherit;
 	z-index: 10000;
 	background: white;

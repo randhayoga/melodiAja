@@ -3,7 +3,7 @@
 #musicMeter__progressPin {
 	position: fixed;
 	height: inherit;
-	left: -7px; bottom: 45px;
+	left: -7px; bottom: calc($musicPlayerHeight + 5px);
 	border-radius: 50%;
 	border: 2px solid white;
 	padding: 3px;

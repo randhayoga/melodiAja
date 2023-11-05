@@ -1,15 +1,60 @@
-$bg--deep: rgb(13, 13, 13);
-$bg--shallow: rgb(28, 28, 28);
-$bg--normal: rgb(51, 51, 51);
-$accent: rgb(63, 31, 157);
+@use "./globals" as *;
 
 #mPlayer {
 	padding: 5px 30px;
-	height: 40px;
+	height: $musicPlayerHeight;
 	position: fixed;
 	left: 0; right: 0; bottom: 0;
 	z-index: 10001;
 	background: $bg--normal;
 	display: flex;
 	align-items: center;
+}
+
+.mPlayer__left {
+	flex: 2;
+}
+
+.mPlayer__middle {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	flex: 5;
+}
+
+.mPlayer__currentPlay {
+	color: $text;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	
+	&:hover {
+		cursor: pointer;
+		filter:brightness(120%);
+	}
+
+	* {
+		 pointer-events: none;
+	}
+}
+
+.mPlayer__currentPlayInfo {
+	font-size: 14px;
+
+	> .mPlayer__title { font-weight: bold; }
+	> .mPlayer__artist { color: $text--dim; }
+}
+
+.mPlayer__albumArt {
+	overflow: hidden;
+	height: 100%;
+	aspect-ratio: 1;
+	background: $bg--shallow;
+	border-radius: 5px;
+}
+
+.mPlayer__right {
+	flex: 1;
+	justify-content: flex-end;
 }
