@@ -12,7 +12,10 @@
 }
 
 .mPlayer__left {
+	color: $text;
 	flex: 2;
+	display: flex;
+	gap: 20px;
 }
 
 .mPlayer__middle {

@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import MeterPin from "./musicMeterPin.jsx"
+import MusicDuration from "./musicDuration.jsx"
 
 import "./styles/musicMeter.css"
 
@@ -24,6 +25,7 @@ const musicMeterView = (() => {
 		let newPos = position.toFixed(2);
 		setMeterWidth(`${newPos}%`);
 		MeterPin.update(newPos);
+		MusicDuration.update();
 	}
 
 	const handleClick = (elemProgress, clickPos) => {

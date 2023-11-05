@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import controls from "./controls.jsx";
 import musicMeter from "./musicMeter.jsx";
 import musicMeterPin from "./musicMeterPin.jsx";
+import musicDuration from "./musicDuration.jsx";
 
 import "./styles/musicPlayer.css";
 
@@ -28,13 +29,13 @@ const musicPlayerView = (() => {
 	let Controls = controls.render;
 	let MusicMeter = musicMeter.render();
 	let MusicMeterPin = musicMeterPin.render();
+	let MusicDuration = musicDuration.render;
 
 	const handleSongChange = () => {
 
 	}
 
 	const render = ({progressInterval, musicInfo}) => {
-		console.log(musicInfo, musicInfo.get)
 		let {title, artist, coverPath} = musicInfo.get;
 		return (
 			<>
@@ -46,6 +47,7 @@ const musicPlayerView = (() => {
 								set: progressInterval.set,
 							}}
 						/>
+						<MusicDuration/>
 					</div>
 					<div className="mPlayer__middle">
 						<section className="mPlayer__currentPlay"
@@ -124,6 +126,6 @@ export default (() => {
 		});
 	}
 
-	return {render}
+	return {render, changeSong}
 })()
 

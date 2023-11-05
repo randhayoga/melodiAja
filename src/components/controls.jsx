@@ -1,6 +1,7 @@
 import "./styles/controls.css";
 
 import MusicMeter from "./musicMeter.jsx"
+import MusicDuration from "./musicDuration.jsx"
 
 const controlsView = (() => {
 	const render = ({handlers, interval}) => {
@@ -33,7 +34,6 @@ const controlsView = (() => {
 export default (() => {
 	let view = controlsView;
 	let elemAudio = document.getElementById("audio");
-	let musicMeter = MusicMeter;
 
 	const buttonChangeMusic = (event) => {
 		if(event.currentTarget.id == "controls__previous") {
@@ -46,7 +46,10 @@ export default (() => {
 	const buttonToggleMusic = (event, prevInterval, callback) => {
 		if(elemAudio.paused) {
 			elemAudio.play();
-			callback(setInterval(musicMeter.update, 100));
+			callback(setInterval(() => {
+				MusicMeter.update();
+				MusicDuration.update();
+			}, 100));
 		} else {
 			elemAudio.pause();
 			clearInterval(prevInterval);
