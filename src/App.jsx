@@ -9,7 +9,7 @@ import {
 
 import topbar from "./components/topbar.jsx";
 import sidebar from "./components/sidebar.jsx"
-import MusicPlayer from "./components/musicPlayer.jsx"
+import musicPlayer from "./components/musicPlayer.jsx"
 
 import HomePage from "./components/homePage.jsx"
 import searchPage from "./components/searchPage.jsx"
@@ -25,6 +25,7 @@ let Sidebar = sidebar.render;
 let UserPage = userPage.render;
 let SearchPage = searchPage.render;
 let MyPlaylistPage = myPlaylistPage.render;
+let MusicPlayer = musicPlayer.render;
 let MyMusicPage = myMusicPage.render;
 let TestBox = dialogBox("testing", "Welcome").render;
 

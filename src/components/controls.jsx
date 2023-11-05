@@ -2,11 +2,37 @@ import "./styles/controls.css";
 
 import MusicMeter from "./musicMeter.jsx"
 
-function Controls() {
-	let elemAudio = document.getElementById("audio");
+const controlsView = (() => {
+	const render = ({handlers, interval}) => {
+		let {changeMusic, toggleMusic} = handlers;
+		return (
+			<>
+				<section id="mPlayer__controls">
+					<div className="mPlayer__iconWrapper" id="controls__previous" onClick={changeMusic}>
+						<img src="/icons/previous.png" alt="Previous Music" />
+					</div>
+					<div className="mPlayer__iconWrapper" id="controls__togglePlay" onClick={
+						(event) => {
+							toggleMusic(event, interval.get, interval.set);
+						}
+					}>
+						<img id="controls__play" src="/icons/play.png" alt="Play Music" />
+						<img id="controls__pause" className="icon--toggleOff" src="/icons/pause.png" alt="Pause Music" />
+					</div>
+					<div className="mPlayer__iconWrapper" id="controls__next" onClick={changeMusic}>
+						<img src="/icons/next.png" alt="Next Music" />
+					</div>
+				</section>
+			</>
+		)
+	}
 
-	let musicQueue;
-	let musicInfo;
+	return {render};
+})()
+
+export default (() => {
+	let view = controlsView;
+	let elemAudio = document.getElementById("audio");
 	let musicMeter = MusicMeter;
 
 	const buttonChangeMusic = (event) => {
@@ -33,32 +59,14 @@ function Controls() {
 	}
 
 	const render = (props) => {
-		return (
-			<>
-				<section id="mPlayer__controls">
-					<div className="mPlayer__iconWrapper" id="controls__previous" onClick={buttonChangeMusic}>
-						<img src="/icons/previous.png" alt="Previous Music" />
-					</div>
-					<div className="mPlayer__iconWrapper" id="controls__togglePlay" onClick={
-						(event) => {
-							buttonToggleMusic(event, props.interval.get, props.interval.set);
-						}
-					}>
-						<img id="controls__play" src="/icons/play.png" alt="Play Music" />
-						<img id="controls__pause" className="icon--toggleOff" src="/icons/pause.png" alt="Pause Music" />
-					</div>
-					<div className="mPlayer__iconWrapper" id="controls__next" onClick={buttonChangeMusic}>
-						<img src="/icons/next.png" alt="Next Music" />
-					</div>
-				</section>
-			</>
-		)
+		return view.render({
+			handlers: {
+				changeMusic: buttonChangeMusic,
+				toggleMusic: buttonToggleMusic,
+			},
+			...props
+		});
 	}
 
 	return {render}
-}
-
-let controls = Controls();
-export default {
-	render: () => controls.render,
-};
+})()

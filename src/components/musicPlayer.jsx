@@ -7,50 +7,65 @@ import musicMeterPin from "./musicMeterPin.jsx";
 import "./styles/musicPlayer.css";
 
 const musicPlayerModel = (() => {
-	let currentPlay = {
-		title: "",
-		artist: "",
-		duration: 0,
+	const fetchSong = () => {
+		return {};
 	}
 
-	const setMusic = (newMusic) => {
-	}
-
-	const getMusic = () => {
-		return currentPlay;
-	}
-
-	return {getMusic};
+	return {fetchSong};
 })()
 
-function musicPlayer() {
-	let Controls = controls.render();
+const musicPlayerView = (() => {
+	let Controls = controls.render;
 	let MusicMeter = musicMeter.render();
 	let MusicMeterPin = musicMeterPin.render();
 
+	const render = ({progressInterval, musicPath}) => {
+		return (
+			<>
+				<section id="mPlayer">
+					<Controls 
+						interval={{
+							get: progressInterval.get,
+							set: progressInterval.set,
+						}}
+					/>
+				</section>
+				<MusicMeter />
+				<MusicMeterPin />
+			</>
+		)
+	}
+
+	return {render};
+})()
+
+export default (() => {
 	let model = musicPlayerModel;
+	let view = musicPlayerView;
+	let elemAudio = document.getElementById("audio");
 
-	let [progressInterval, setProgressInterval] = useState(null);
-	let [musicPath, setMusicPath] = useState(model.getMusic())
+	const changeSong = () => {
+	}
 
-	return (
-		<>
-			<section id="mPlayer">
-				<Controls 
-					interval={{
-						get: progressInterval,
-						set: setProgressInterval
-					}}
-					music={{
-						get: musicPath,
-						set: setMusicPath
-					}} 
-				/>
-			</section>
-			<MusicMeter />
-			<MusicMeterPin />
-		</>
-	)
-}
+	const watch = () => {
+	}
 
-export default musicPlayer;
+	const render = () => {
+		let [progressInterval, setProgressInterval] = useState(null);
+		let [musicPath, setMusicPath] = useState(model.fetchSong())
+
+		return view.render({
+			progressInterval: {
+				get: progressInterval,
+				set: setProgressInterval,
+			},
+			musicPath: {
+				get: musicPath,
+				set: setMusicPath,
+			}
+		});
+	}
+
+	return {render}
+})()
+
