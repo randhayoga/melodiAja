@@ -27,11 +27,16 @@ function FTListItem(item) {
 				</div>
 				<div className="item__text">
 					<p className="item__heading"> {item.name} </p>
-					<Stats type="collection" statsItems={
+					<Stats opts= {
 						{
-							visibility: item.visibility,
-							nSongs: item.nSongs, 
-							nViews: item.nViews,
+							"border": true
+						}
+					}
+						statsItems={
+						{
+							"": item.visibility,
+							"Songs": item.nSongs, 
+							"Views": item.nViews,
 						}
 					}/>
 				</div>

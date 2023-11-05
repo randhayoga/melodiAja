@@ -76,9 +76,19 @@ const userPageView = (() => {
 								</div>
 							</div>
 						</div>
-						<Stats type="user" statsItems={
-							{nFollowers: nFollowers, nMusics: nMusics, nCollections:nCollections}
-						} />
+						<Stats opts= {
+								{
+									"border": true,
+								}
+							}
+							statsItems={
+								{
+								"Followers": nFollowers, 
+								"Musics": nMusics, 
+								"Collections": nCollections
+								}
+							} 
+						/>
 						<section id="profileSect__actions">
 							<button type="button" id="button--follow" className="hover--bright"> Follow </button>
 							<button type="button" id="button--share" className="hover--bright"> Share </button>

@@ -3,7 +3,6 @@ import {useState} from "react";
 
 const popUpView = () => {
 	const render = (status, {id, heading}, {Component}) => {
-		console.log(Component)
 		return ( status.get == true? (
 			<section id={`${id}Dialog`}>
 				<div className="dialog__box">
