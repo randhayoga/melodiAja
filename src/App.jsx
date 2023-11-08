@@ -10,13 +10,14 @@ import {
 import topbar from "./components/topbar.jsx";
 import sidebar from "./components/sidebar.jsx"
 import musicPlayer from "./components/musicPlayer.jsx"
+import dialogBox from "./components/dialogBox.jsx"
 
 import HomePage from "./components/homePage.jsx"
 import searchPage from "./components/searchPage.jsx"
 import userPage from "./components/userPage.jsx"
 import myPlaylistPage from "./components/myPlaylistPage.jsx"
 import myMusicPage from "./components/myMusicPage.jsx"
-import dialogBox from "./components/dialogBox.jsx"
+import musicInfoPage from "./components/musicInfoPage.jsx"
 
 import "./App.css";
 
@@ -27,6 +28,7 @@ let SearchPage = searchPage.render;
 let MyPlaylistPage = myPlaylistPage.render;
 let MusicPlayer = musicPlayer.render;
 let MyMusicPage = myMusicPage.render;
+let MusicInfoPage = musicInfoPage.render;
 let TestBox = dialogBox("testing", "Welcome").render;
 
 const ROUTER = createBrowserRouter([
@@ -51,6 +53,7 @@ const ROUTER = createBrowserRouter([
 						</Routes>
 					</main>
 				</section>
+				<MusicInfoPage />
 				<MusicPlayer />
 				<TestBox Component={
 					function() {

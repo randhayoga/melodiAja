@@ -1,0 +1,80 @@
+@use './globals' as *;
+
+.musicInfoPage {
+	z-index: 100;
+	position: fixed;
+	top: 0;
+	height: 100vh;
+	transform: translateY(0%);
+	transition: 0.8s transform;
+}
+
+.musicInfoPage--hidden {
+	transition: 0.8s transform;
+	transform: translateY(100%);
+}
+
+.musicInfoPage__wrapper {
+	padding: $y-margin $x-margin;
+	height: 100%;
+	position: relative;
+}
+
+.musicInfoPage__background {
+	overflow: hidden;
+	background: $bg--deep;
+	position: absolute;
+	inset: 0;
+	z-index: 101;
+
+	> img {
+		width: 100%;
+		height: 100%;
+		filter: blur(30px);
+
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 102;
+		background: rgba($bg--deep, 0.6);
+	}
+}
+
+.musicInfoPage__content {
+	color: white;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 40px;
+	position: relative;
+	z-index: 102;
+}
+
+.musicInfoPage__musicCover {
+	aspect-ratio: 1;
+	width: 100%;
+	border: 1px solid white;
+}
+
+.musicInfoPage__musicInfo {
+	min-width: 240px;
+	max-width: 300px;
+	flex: 2;
+}
+
+.musicInfoPage__comments {
+	min-width: 400px;
+	flex: 3;
+}
+
+.musicInfoPage__stats {
+	display: flex;
+	gap: 20px;
+}
+
+.musicInfoPage__statsItem {
+	display: flex;
+	gap: 10px;
+}
