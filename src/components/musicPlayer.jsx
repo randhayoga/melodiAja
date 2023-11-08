@@ -4,8 +4,10 @@ import controls from "./controls.jsx";
 import musicMeter from "./musicMeter.jsx";
 import musicMeterPin from "./musicMeterPin.jsx";
 import musicDuration from "./musicDuration.jsx";
+import MusicInfoPage from "./musicInfoPage.jsx";
 
 import "./styles/musicPlayer.css";
+import musicInfoPage from "./musicInfoPage.jsx";
 
 const musicPlayerModel = (() => {
 	const fetchSong = () => {
@@ -14,11 +16,13 @@ const musicPlayerModel = (() => {
 
 	const fetchSongInfo = async(id, setter) => {
 		useEffect(() => {
-			setter({
-				title: "Elysium (Part 1)",
-				artist: "We are All Astronauts",
-				coverPath: "/defaults/defaultCover1.jpg",
-			})
+			setInterval(() => {
+				setter({
+					title: "Elysium (Part 1)",
+					artist: "We are All Astronauts",
+					coverPath: "/defaults/defaultCover1.jpg",
+				})
+			}, 1000)
 		}, [])
 	}
 
@@ -51,7 +55,10 @@ const musicPlayerView = (() => {
 					</div>
 					<div className="mPlayer__middle">
 						<section className="mPlayer__currentPlay"
-							onClick = {(e) => {console.log(e.currentTarget)}}
+							onClick = {(e) => {
+								console.log(e.currentTarget)
+								MusicInfoPage.toggle();
+							}}
 						>
 							<img src={coverPath} 
 								alt={`${title} album art`} 
@@ -64,7 +71,6 @@ const musicPlayerView = (() => {
 						</section>
 					</div>
 					<div className="mPlayer__right">
-						<p> BJIR </p>
 					</div>
 				</section>
 				<MusicMeter />
@@ -79,10 +85,11 @@ const musicPlayerView = (() => {
 export default (() => {
 	let model = musicPlayerModel;
 	let view = musicPlayerView;
+	let musicInfo, setMusicInfo;
 	let elemAudio = document.getElementById("audio");
-	let musicQueue = null;
 
 	const changeSong = (direction) => {
+		MusicInfoPage.update(musicInfo);
 		if(direction === "next") {
 		} else {
 		}
@@ -105,10 +112,10 @@ export default (() => {
 
 	const render = () => {
 		let [progressInterval, setProgressInterval] = useState(null);
-		let [musicInfo, setMusicInfo] = useState(
+		[musicInfo, setMusicInfo] = useState(
 			{
-				title: "has",
-				artist: "sal",
+				title: "...",
+				artist: "...",
 				coverPath: "",
 			}
 		);

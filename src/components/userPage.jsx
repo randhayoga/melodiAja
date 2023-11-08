@@ -9,14 +9,17 @@ const userPageModel = (() => {
 
 		useEffect(() => {
 			if(id == "me") {
-				setter( {
-					name: "Heidi Bournevilla",
-					username: "heidinOne",
-					pfpPath: "/defaults/defaultFemale.jpg",
-					nFollowers: 200,
-					nMusics: 10,
-					nCollections: 5000, // Album + playlist
-				})
+				setTimeout( () => {
+					setter( {
+						name: "Heidi Bournevilla",
+						username: "heidinOne",
+						pfpPath: "/defaults/defaultFemale.jpg",
+						nFollowers: 200,
+						nMusics: 10,
+						nCollections: 5000, // Album + playlist
+					})
+				}, 1000
+				)
 			} else {
 				fetch(`https://reqres.in/api/users/${id}`)
 					.then((response) => {
@@ -40,8 +43,8 @@ const userPageModel = (() => {
 						console.log(err);
 						setter({
 							name: "User Fetching Error",
-							username: "???",
-							pfpPath: "",
+							username: "userFetchError",
+							pfpPath: "img/user.png",
 							nFollowers: -1,
 							nMusics: -1,
 							nCollections: -1, // Album + playlist
@@ -110,7 +113,7 @@ function UserPage() {
 		const [currentUser, setCurrentUser] = useState({
 			name: "", 
 			username: "", 
-			pfpPath: "", 
+			pfpPath: "/img/Load_gif2.gif", 
 			nFollowers: 0, 
 			nMusics: 0, 
 			nCollections: 0
