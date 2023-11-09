@@ -39,7 +39,6 @@ const ROUTER = createBrowserRouter([
 				<section className="rootGrid">
 					<Sidebar />
 					<main onClick = {(e) => {
-						console.log(musicPlayer.changeSong("next"))
 					}} >
 						<Topbar />
 						<Routes>

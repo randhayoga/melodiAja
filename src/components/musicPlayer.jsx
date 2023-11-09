@@ -56,7 +56,6 @@ const musicPlayerView = (() => {
 					<div className="mPlayer__middle">
 						<section className="mPlayer__currentPlay"
 							onClick = {(e) => {
-								console.log(e.currentTarget)
 								MusicInfoPage.toggle();
 							}}
 						>
