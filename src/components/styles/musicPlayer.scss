@@ -44,7 +44,6 @@
 
 .mPlayer__currentPlayInfo {
 	font-size: 14px;
-
 	> .mPlayer__title { font-weight: bold; }
 	> .mPlayer__artist { color: $text--dim; }
 }
@@ -60,4 +59,10 @@
 .mPlayer__right {
 	flex: 1;
 	justify-content: flex-end;
+}
+
+@media (max-width: 1000px) {
+	.mPlayer__position {
+		display: none;
+	}
 }
