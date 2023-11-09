@@ -50,9 +50,9 @@ function FTListItem(item) {
 					}
 						statsItems={
 						{
-							"": item.visibility,
-							"Songs": item.nSongs, 
-							"Views": item.nViews,
+							"": [item.visibility],
+							"Songs": [item.nSongs], 
+							"Views": [item.nViews],
 						}
 					}/>
 				</div>

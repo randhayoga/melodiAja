@@ -86,9 +86,9 @@ const userPageView = (() => {
 							}
 							statsItems={
 								{
-								"Followers": nFollowers, 
-								"Musics": nMusics, 
-								"Collections": nCollections
+								"Followers": [nFollowers], 
+								"Musics": [nMusics], 
+								"Collections": [nCollections]
 								}
 							} 
 						/>

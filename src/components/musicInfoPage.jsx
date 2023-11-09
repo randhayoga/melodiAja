@@ -60,10 +60,10 @@ const musicInfoView = (() => {
 									} 
 									statsItems={
 									{
-										"Play": ["icons/play.png", 1000000], 
-										"Like": ["icons/filledLike.png", 111221], 
-										"Dislike": ["icons/filledDislike.png", 100], 
-										"Comments": ["icons/comment.png", 3421], 
+										"Play": ["/icons/play.png", 1000000], 
+										"Like": ["/icons/filledLike.png", 111221], 
+										"Dislike": ["/icons/filledDislike.png", 100], 
+										"Comments": ["/icons/comment.png", 3421], 
 									}
 								}/>
 								<div className="musicInfo__artist">

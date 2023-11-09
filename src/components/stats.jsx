@@ -20,7 +20,7 @@ const statsView = (() => {
 			<section id="" className={`stats${opts["border"] == true? " stats--separated": ""}`}>
 				{
 					Object.keys(statsItems).map((key) => {
-						if(statsItems[key].length !== undefined) {
+						if(statsItems[key].length === 2) {
 							return ( 
 								<div className="stats__item" key={key}>
 									<span className="stats__criteria"> 
