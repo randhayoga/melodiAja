@@ -1,7 +1,7 @@
-import "./styles/dialogBox.css"
+import "./styles/modal.css"
 import {useState} from "react";
 
-const popUpView = () => {
+const modalView = () => {
 	const render = (status, {id, heading}, {Component}) => {
 		return ( status.get == true? (
 			<section id={`${id}Dialog`}>
@@ -29,11 +29,11 @@ const popUpView = () => {
 	return {render};
 }
 
-export default function popUp(popUpID, popUpName) {
-	let view = popUpView();
+export default function modal(modalID, modalName) {
+	let view = modalView();
 	let props = {
-		id: popUpID,
-		heading: popUpName,
+		id: modalID,
+		heading: modalName,
 	};
 
 	const render = (content) => {

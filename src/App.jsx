@@ -10,7 +10,7 @@ import {
 import topbar from "./components/topbar.jsx";
 import sidebar from "./components/sidebar.jsx"
 import musicPlayer from "./components/musicPlayer.jsx"
-import dialogBox from "./components/dialogBox.jsx"
+import modal from "./components/modal.jsx"
 
 import HomePage from "./components/homePage.jsx"
 import searchPage from "./components/searchPage.jsx"
@@ -29,7 +29,7 @@ let MyPlaylistPage = myPlaylistPage.render;
 let MusicPlayer = musicPlayer.render;
 let MyMusicPage = myMusicPage.render;
 let MusicInfoPage = musicInfoPage.render;
-let TestBox = dialogBox("testing", "Welcome").render;
+let TestBox = modal("testing", "Welcome").render;
 
 const ROUTER = createBrowserRouter([
 	{
