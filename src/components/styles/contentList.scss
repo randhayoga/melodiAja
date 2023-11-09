@@ -17,12 +17,16 @@
 		height: 50px;
 		aspect-ratio: 1;
 	}
+
+	.item__heading {
+		font-weight: bold;
+	}
 }
 
 .contentList__collection {
-	gap: 0px;
 	display: grid;
 	grid-template: 1fr / 100px 1fr;
+	gap: 0px;
 
 	> * {
 		border-radius: 10px;
@@ -44,3 +48,28 @@
 	}
 }
 
+
+.contentList__comment {
+	display: grid;
+	grid-template: 1fr / 50px 1fr;
+	gap: 20px;
+	border-bottom: 1px solid $text--dim;
+
+	&:hover {
+		filter: brightness(100%);
+	}
+
+	> .item__text {
+		> .item__text--top {
+			font-weight: bold;
+			display: flex;
+		}
+	}
+
+	.item__heading {
+		font-size: 1rem;
+		flex: 1;
+	}
+
+
+}

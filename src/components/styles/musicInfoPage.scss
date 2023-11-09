@@ -3,7 +3,7 @@
 .musicInfoPage {
 	z-index: 100;
 	position: fixed;
-	top: 0;
+	inset: 0;
 	height: 100vh;
 	transform: translateY(0%);
 	transition: 0.8s transform;
@@ -15,8 +15,10 @@
 }
 
 .musicInfoPage__wrapper {
+	box-sizing: border-box;
 	padding: $y-margin $x-margin;
-	height: 100%;
+	padding-bottom: calc($musicPlayerHeight + 20px);
+	height: inherit;
 	position: relative;
 }
 
@@ -39,7 +41,7 @@
 		position: absolute;
 		inset: 0;
 		z-index: 102;
-		background: rgba($bg--deep, 0.6);
+		background: rgba($bg--deep, 0.7);
 	}
 }
 
@@ -50,6 +52,11 @@
 	gap: 40px;
 	position: relative;
 	z-index: 102;
+	height: 100%;
+	width: auto;
+	padding-right: 10px;
+	box-sizing: border-box;
+	overflow: auto;
 }
 
 .musicInfoPage__musicCover {
