@@ -49,7 +49,7 @@
 	color: white;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 40px;
+	gap: 20px;
 	position: relative;
 	z-index: 102;
 	height: 100%;
@@ -57,31 +57,78 @@
 	padding-right: 10px;
 	box-sizing: border-box;
 	overflow: auto;
+
 }
 
-.musicInfoPage__musicCover {
+.musicInfoPage__musicInfo {
+	position: relative;
+	max-width: 400px;
+	flex: 2;
+
+}
+
+.musicInfo__wrapper {
+	width: 100%;
+	height: fit-content;
+	position: sticky;
+	top: 0;
+
+	> .stats  {
+		> * {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+	}
+
+	> * {
+		padding: 5px 0px;
+	}
+}
+
+.musicInfo__musicImg {
 	aspect-ratio: 1;
+	max-width: 300px;
 	width: 100%;
 	border: 1px solid white;
 }
 
-.musicInfoPage__musicInfo {
-	min-width: 240px;
-	max-width: 300px;
-	flex: 2;
-}
-
-.musicInfoPage__comments {
+.musicInfo__comments {
 	min-width: 400px;
 	flex: 3;
 }
 
-.musicInfoPage__stats {
+.musicInfo__stats {
 	display: flex;
 	gap: 20px;
 }
 
-.musicInfoPage__statsItem {
+.musicInfo__statsItem {
 	display: flex;
 	gap: 10px;
+}
+
+.musicInfo__songTitle {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.musicInfo__artist {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	> img {
+		border-radius: 50%;
+		width: 40px;
+		aspect-ratio: 1;
+		background: $bg--deep;
+	}
+}
+
+.musicInfo__artistInfo {
+	> .stats {
+		flex-wrap: wrap;
+		font-size: 14px;
+	}
 }

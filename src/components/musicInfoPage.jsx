@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
-import Stats from "./stats.jsx"
 import "./styles/musicInfoPage.css"
+import stats from "./stats.jsx"
 import comments from './comments.jsx';
 
 const musicInfoModel = (() => {
@@ -19,9 +19,12 @@ const musicInfoModel = (() => {
 			coverPath: "/defaults/defaultCover0.jpg",
 		}
 	}
+
 })()
 
 const musicInfoView = (() => {
+	let ArtistStats = stats().render;
+	let MusicStats = stats().render;
 	let Comments = comments.render;
 
 	const toggle = () => {
@@ -42,39 +45,49 @@ const musicInfoView = (() => {
 					</div>
 					<div className="musicInfoPage__content">
 						<div className="musicInfoPage__musicInfo">
-							<img className="musicInfoPage__musicCover" 
-								src="/defaults/defaultCover1.jpg" 
-							alt="" />
-							<div className="musicInfoPage__info">
-								<div>
-									<p className="musicInfoPage__songTitle"> Elysium (Part I)</p>
-									<p className="musicInfoPage__albumName"> - </p>
+							<div className="musicInfo__wrapper">
+								<img className="musicInfo__musicImg" 
+									src="/defaults/defaultCover1.jpg" 
+								alt="" />
+								<div className="musicInfo__info">
+									<p className="musicInfo__songTitle"> And Thus, We Cast Asunder </p>
+									<p className="musicInfo__albumName"> (No Album) </p>
 								</div>
-							</div>
-							<div className="musicInfoPage__stats">
-								<div className="musicInfoPage__statsItem">
-									<img src="/icons/filledLike.png" 
-										className="icon icon--small" alt="Like" />
-									<p> 100 </p>
-								</div>
-								<div className="musicInfoPage__statsItem">
-									<img src="/icons/filledDislike.png" 
-										className="icon icon--small" alt="Dislike" />
-									<p> 100 </p>
-								</div>
-								<div className="musicInfoPage__statsItem">
-									<img src="/icons/comment.png" 
-										className="icon icon--small" alt="Comments" />
-									<p> 100 </p>
-								</div>
-							</div>
-							<div className="musicInfoPage__artist">
-								<img className="musicInfoPage__artistCover" src="" alt="" />
-								<div className="musicInfoPage__artistInfo">
+								<MusicStats opts= {
+										{
+											"border": false,
+										}
+									} 
+									statsItems={
+									{
+										"Play": ["icons/play.png", 1000000], 
+										"Like": ["icons/filledLike.png", 111221], 
+										"Dislike": ["icons/filledDislike.png", 100], 
+										"Comments": ["icons/comment.png", 3421], 
+									}
+								}/>
+								<div className="musicInfo__artist">
+									<img className="musicInfo__artistImg" src="" alt="" />
+									<div className="musicInfo__artistInfo">
+										<p className="musicInfo__artistName"> 
+											Eliran Ben Ishai
+										</p>
+										<ArtistStats opts= {
+												{
+													"border": true,
+												}
+											} 
+											statsItems={
+											{
+												"Followers": 121221, 
+												"Musics": 324131, 
+											}
+										}/>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div className="musicInfoPage__comments">
+						<div className="musicInfo__comments">
 							<h3> Comments </h3>
 							<Comments id={1} />
 						</div>
