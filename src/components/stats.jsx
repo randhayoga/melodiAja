@@ -15,10 +15,6 @@ const statsView = (() => {
 	}
 
 	function render({opts, statsItems}) {
-		let normalizedStats = Object.keys(statsItems).map(
-			(key) => normalize(statsItems[key])
-		);
-
 		// How tf does this works now. It wasn't working before
 		return (
 			<section id="" className={`stats${opts["border"] == true? " stats--separated": ""}`}>
@@ -26,7 +22,7 @@ const statsView = (() => {
 					Object.keys(statsItems).map((key) => {
 						return (
 							<div className="stats__item" key={key}>
-								<p>{statsItems[key]} <span className="stats__criteria"> {key} </span> </p>
+								<p>{normalize(statsItems[key])} <span className="stats__criteria"> {key} </span> </p>
 							</div>
 						)
 					})
