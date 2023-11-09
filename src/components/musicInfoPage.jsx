@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import Stats from "./stats.jsx"
 import "./styles/musicInfoPage.css"
+import comments from './comments.jsx';
 
 const musicInfoModel = (() => {
 	const fetchMusicInfo = async(id, setter) => {
@@ -21,6 +22,8 @@ const musicInfoModel = (() => {
 })()
 
 const musicInfoView = (() => {
+	let Comments = comments.render;
+
 	const toggle = () => {
 		document.getElementById("musicInfoPage")
 			.classList.toggle("musicInfoPage--hidden");
@@ -72,10 +75,8 @@ const musicInfoView = (() => {
 							</div>
 						</div>
 						<div className="musicInfoPage__comments">
-							<h3>bjir</h3>
-							<p>
-							Sit obcaecati dignissimos illo alias itaque accusamus. Unde adipisci quia impedit sint laborum veritatis temporibus eligendi eveniet labore? Quam quo nemo adipisci provident velit Magni iure cum non aut expedita? Similique ipsum laborum debitis pariatur asperiores nulla. Minima voluptatum sapiente ipsum nobis excepturi. Officia quaerat quas placeat veritatis laborum illo. Voluptatibus quaerat illo necessitatibus repellendus totam Aspernatur odit voluptatem quia consequuntur amet sequi animi magni dolorem Voluptate in laboriosam perferendis incidunt excepturi! Cupiditate dolor sed recusandae quibusdam ad? Quo natus iure obcaecati eligendi laborum Deserunt quia dolores quod iste placeat autem? Rem expedita voluptates soluta officiis mollitia Dicta voluptatum quos in ipsa mollitia? Eius laudantium harum numquam accusamus et? Dolore a iste et dignissimos inventore. Voluptatum temporibus aperiam quod quibusdam.
-							</p>
+							<h3> Comments </h3>
+							<Comments id={1} />
 						</div>
 					</div>
 				</div>

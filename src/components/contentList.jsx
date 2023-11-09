@@ -13,10 +13,26 @@ function FTListItem(item) {
 				</div>
 				<div className="item__text">
 					<p className="item__heading"> {item.title} </p>
-					<p className="item__text"> {item.artist} </p>
+					<p className=""> {item.artist} </p>
 				</div>
 			</div>
 		)
+	case "comment":
+		return (
+			<div className="contentList__item contentList__comment" key={`${item.username}${item.commentTime}`}>
+				<div className="item__image">
+					<img src={item.coverPath} 
+						alt={`${item.username} pfp`} />
+				</div>
+				<div className="item__text">
+					<div className="item__text--top">
+						<p className="item__heading"> {`@${item.username}`} </p>
+						<p> {item.commentTime} </p>
+					</div>
+					<p className=""> {item.comment} </p>
+				</div>
+			</div> 
+		);
 	case "artist":
 		return <></>;
 	default: // Collection
