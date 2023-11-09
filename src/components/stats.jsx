@@ -20,6 +20,17 @@ const statsView = (() => {
 			<section id="" className={`stats${opts["border"] == true? " stats--separated": ""}`}>
 				{
 					Object.keys(statsItems).map((key) => {
+						if(statsItems[key].length !== undefined) {
+							return ( 
+								<div className="stats__item" key={key}>
+									<span className="stats__criteria"> 
+										<img src={statsItems[key][0]} alt="" />
+									</span>
+									<p>{normalize(statsItems[key][1])}  </p>
+								</div>
+							)
+						}
+
 						return (
 							<div className="stats__item" key={key}>
 								<p>{normalize(statsItems[key])} <span className="stats__criteria"> {key} </span> </p>
@@ -29,67 +40,6 @@ const statsView = (() => {
 				}
 			</section>
 		)
-	}
-
-	return {render}
-})()
-
-const statsView2 = (() => {
-	function normalize(num) {
-		if(num >= 1000000) {
-			return `${Number.parseFloat(
-						Math.floor(num / 1000000.0)
-					).toFixed(0)}M`;
-		} else if(num >= 1000) {
-			return `${Number.parseFloat(
-						Math.floor(num / 1000.0)
-					).toFixed(0)}k`;
-		}
-		return `${num}`
-	}
-
-	function render({type, statsItems}) {
-		let normalizedStats = Object.keys(statsItems).map(
-			(key) => normalize(statsItems[key])
-		);
-		switch(type) {
-			case "user":
-				let [nFollowers, nMusics, nCollections] = normalizedStats;
-				return (
-					<section id="" className="stats stats--separated">
-						<div className="stats__item">
-							<p>{nFollowers} <span className="stats__criteria"> Followers </span> </p>
-						</div>
-						<div className="stats__item">
-							<p>{nMusics} <span className="stats__criteria"> Musics </span> </p>
-						</div>
-						<div className="stats__item">
-							<p>{nCollections} <span className="stats__criteria"> Collections </span> </p>
-						</div>
-					</section>
-				)
-			case "music":
-				let {nListens, nLikes, nDislikes, nComments} = statsItems;
-				return (
-					<section id="" className="stats">
-					</section>
-				)
-			default: // collection
-				let [visibility, nSongs, nViews] = normalizedStats;
-				return (
-					<section id="" className="stats stats--separated">
-						<div className="stats__item">
-							<p>{visibility} </p>
-						</div>
-						<div className="stats__item">
-							<p>{nSongs} <span className="stats__criteria"> Songs </span> </p>
-						</div>
-						<div className="stats__item">
-							<p>{nViews} <span className="stats__criteria"> Views </span> </p>
-						</div>
-					</section>
-				)
-		}
 	}
 
 	return {render}

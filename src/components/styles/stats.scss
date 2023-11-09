@@ -21,6 +21,11 @@
 	.stats__criteria { 
 		filter: brightness(50%);
 
+		> img {
+			width: 20px;
+			aspect-ratio: 1;
+		}
+
 		&:hover {
 			filter: brightness(100%);
 		}
@@ -35,3 +40,4 @@
 		}
 	}
 }
+
