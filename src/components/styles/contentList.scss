@@ -53,7 +53,13 @@
 	display: grid;
 	grid-template: 1fr / 50px 1fr;
 	gap: 20px;
-	border-bottom: 1px solid $text--dim;
+	border-bottom: 0px solid $text--dim;
+
+	> .item__image {
+		aspect-ratio: 1;
+		border-radius: 50%;
+		overflow: hidden;
+	}
 
 	&:hover {
 		filter: brightness(100%);
@@ -70,6 +76,4 @@
 		font-size: 1rem;
 		flex: 1;
 	}
-
-
 }
