@@ -73,11 +73,18 @@ const userPageView = (() => {
 								<p className="profile__name"> {name} </p>
 								<p className="profile__username"> {`@${username}`} </p>
 							</div>
-							<div className="profile__settings">
-								<div className="icon icon--small">
-									<img src="/icons/music.png" alt="Settings Icon" />
-								</div>
-							</div>
+							{(() => {
+								let {id} = useParams();
+								if(id === "me") {
+									return (
+										<div className="profile__settings">
+											<div className="icon icon--small">
+												<img src="/icons/setting.png" alt="Settings Icon" />
+											</div>
+										</div>
+									)
+								}
+							})()}
 						</div>
 						<Stats opts= {
 								{
