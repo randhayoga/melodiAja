@@ -17,24 +17,8 @@
 			</a>
 			<h1> Create Your Account </h1>
 		</div>
-		<!--
-		<form method="post" id="registration-form" action="/"> 
-		  <div class="form-group">
-			<label for="UsernameRegistration">Username:</label>
-			<input name="username" type="text" class="form-control" id="UsernameRegistration">
-		  </div>
-		  <div class="form-group">
-			<label for="PasswordRegistration">Password:</label>
-			<input name="password" type="password" class="form-control" id="PasswordRegistration">
-		  </div>
-		  <div class="form-group">
-			<label for="ConfirmPasswordRegistration">Confirm Password:</label>
-			<input name="confpass" type="password" class="form-control" id="ConfirmPasswordRegistration">
-		  </div>
-		  <input type="submit" class="form-control" />
-		</form> -->
 
-		<form method="get" id="loginForm" action="/public/static">
+		<form method="post" id="signupForm" action="/auth/signup">
 			<div class="form__entry">
 				<label for="">Email</label>
 				<input type=""
@@ -74,10 +58,8 @@
 				<div class="entry__warning" id="confirmPassword__warning"></div>
 			</div>
 	
-			<input type="submit" class="button" value="Submit">
+			<button type="submit" class="button"> Submit </button>
 		</form>
 	</section>
-
-	<script src="formValidator.js"></script>
 </body>
 </html>
