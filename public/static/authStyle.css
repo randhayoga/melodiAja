@@ -89,10 +89,6 @@ input {
 	color: white;
 }
 
-input:invalid {
-	border: 2px solid rgba(var(--warn), 1);
-}
-
 .logo { aspect-ratio: 1; }
 	.logo--medium { width: 40px; }
 	.logo--small { width: 20px; }

@@ -20,27 +20,78 @@
 
 		<form method="post" id="loginForm" action="/auth/login">
 			<div class="form__entry">
-				<label for="user__email">Email</label>
+				<label for="user__email">username</label>
 				<input type="text"
-					id="user__email"
-					placeholder="example@domain.com"
+					required
+					id="user__username"
+					placeholder="frankJenkins"
 				>
-				<div class="entry__warning" id="email__warning"></div>
+				<div class="entry__warning" id="warning__username"></div>
 			</div>
 			<div class="form__entry">
 				<label for="user__password">Password</label>
-				<input type="text" 
+				<input type="password" 
+					required
 					id="user__password"
-					minlength="6"
 					placeholder="Your Password"
 				>
-				<div class="entry__warning" id="password__warning"></div>
+				<div class="entry__warning" id="warning__password"></div>
 			</div>
 	
 			<p class="form__assist">Don't have an account yet? <a href="./signup.html">Create one!</a></p>
 			<p class="form__assist">Forgot you password? <a href="#">Reset it!</a></p>
-			<button type="submit" class="button"> Submit </button>
+			<button type="submit" class="button" id="loginForm__submit"> Submit </button>
 		</form>
 	</section>
+
+	<script>
+		let form = document.getElementById("loginForm")
+		let button = document.getElementById("loginForm__submit")
+		button.addEventListener("click", async(e) => {
+			e.preventDefault();
+
+			let formIsValid = true;
+
+			// Check if it's fulfilled
+			["username", "password"].forEach((entry) => {
+				let elem = document.getElementById(`user__${entry}`)
+				let warningElem = document.getElementById(`warning__${entry}`);
+
+				warningElem.textContent = ""
+				if(elem.validity.valueMissing) {
+					warningElem.textContent = "Please fill out this field"
+				}
+
+				formIsValid = formIsValid && !elem.validity.valueMissing;
+			})
+
+			let response;
+			if(formIsValid) {
+				response = await fetch("/auth/login",
+					{
+					method: "post"
+					}
+				).then((res) => {
+					if(res.ok) {
+						window.location.replace(res.url);
+						return 0;
+					}
+					throw new Error();
+				}).catch((err) => {
+					console.log(err);
+					return -1;
+				});
+			}
+			
+			if(response != 0) {
+				switch(response) {
+					case -1:
+						let warningElem = document.getElementById("loginWarning__password");
+						warningElem.textContent = "Something is wrong on our end. Please try again later!"
+						break;
+				}
+			}
+		})
+	</script>
 </body>
 </html>
