@@ -3,6 +3,7 @@ const APP = EXPRESS();
 const PATH = require("path");
 const ROUTES = require("./backend/router.js").ROUTES;
 const PORT = 8069;
+const BODY_PARSER = require("body-parser")
 
 
 function setOwnMiddlewares() {
@@ -14,10 +15,11 @@ function setOwnMiddlewares() {
 
 (function main() {
 	const PUBLIC_PATH = PATH.join(__dirname, "public");
-
+	//
 	// Middlewares
 	setOwnMiddlewares();
-	APP.use(EXPRESS.urlencoded({extended: false}));
+	APP.use(BODY_PARSER.json());
+	APP.use(BODY_PARSER.urlencoded({extended: false}))
 
 	// Determine where static stuff is located
 	let imgTTL = 1000 * 1
