@@ -3,6 +3,7 @@ $bg--deep: rgb(13, 13, 13);
 $bg--shallow: rgb(28, 28, 28);
 $bg--normal: rgb(51, 51, 51);
 $text--dim: rgb(150, 150, 150);
+$warn: rgb(255, 60, 60);
 $text: white;
 
 $subheading: rgb(216, 161, 126);
@@ -19,6 +20,7 @@ a {
 	aspect-ratio: 1;
 	filter: brightness(70%);
 	transition: 0.25s filter;
+	transform: rotate(0turn);
 	
 	> img {
 		aspect-ratio: 1;
@@ -34,3 +36,16 @@ a {
 
 .icon--small { width: 20px; }
 .icon--normal { width: 30px; }
+
+.filter--blackToWhite {
+	filter: invert(100%);
+
+	&:hover {
+		filter: brightness(0%) invert(100%);
+	}
+}
+
+.rotate--180 {
+	transform: rotate(0.5turn);
+	transition: 0.5s transform;
+}

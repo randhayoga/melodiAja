@@ -1,0 +1,48 @@
+@use './globals' as *;
+
+.commentField {
+	margin: 10px 0px;
+}
+
+.commentForm {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+
+	> input {
+		border: 1px solid $text--dim;
+		border-radius: 5px;
+		flex: 1;
+		box-sizing: border-box;
+		padding: 5px 10px;
+		color: $text;
+		background: $bg--shallow;
+		height: 40px;
+	}
+
+	> button {
+		padding: 5px 10px;
+	}
+}
+
+#comment__info {
+	display: none;
+	background: rgba(0, 0, 0, 0);
+	height: 20px;
+
+	> * {
+		font-weight: bold;
+		display: none;
+		background: rgba(0, 0, 0, 0.4);
+		padding: 5px;
+		height: inherit;
+	}
+}
+
+#comment__warning {
+	border: 3px solid $warn;
+}
+
+#comment__notification {
+	border: 3px solid rgb(0, 225, 0);
+}
