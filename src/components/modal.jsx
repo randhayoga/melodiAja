@@ -8,10 +8,10 @@ const modalView = () => {
 				<div className="dialog__box">
 					<div className="dialog__top">
 						<h3 className="dialog__name"> {heading} </h3>
-						<div className="icon icon--small"
+						<div
 							onClick = {() => status.set(false)}
 						>
-							<div className="icon icon--small">
+							<div className="icon icon--tiny">
 								<img src="/icons/close_x.png" alt="close icon" />
 							</div>
 						</div>
