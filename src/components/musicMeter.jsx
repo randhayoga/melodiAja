@@ -20,6 +20,12 @@ const musicMeterView = (() => {
 		)
 	}
 
+	const reset = () => {
+		setMeterWidth("0%");
+		MeterPin.update(0);
+		MusicDuration.update();
+	}
+
 	const synchronize = () => {
 		let position = (elemAudio.currentTime / elemAudio.duration)*100;
 		let newPos = position.toFixed(2);
@@ -37,7 +43,7 @@ const musicMeterView = (() => {
 		synchronize();
 	}
 
-	return {synchronize, getElem, handleClick};
+	return {synchronize, getElem, handleClick, reset};
 })()
 
 function MusicMeter() {
@@ -66,11 +72,16 @@ function MusicMeter() {
 		view.synchronize();
 	}
 
-	return {render, update}
+	const reset = () => {
+		view.reset();
+	}
+
+	return {render, update, reset}
 }
 
 let musicMeter = MusicMeter();
 export default {
 	render: () => musicMeter.render,
 	update: musicMeter.update,
+	reset: musicMeter.reset,
 };
