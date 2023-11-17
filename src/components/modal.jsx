@@ -12,7 +12,7 @@ const modalView = () => {
 							onClick = {() => status.set(false)}
 						>
 							<div className="icon icon--small">
-								<img src="/icons/music.png" alt="close icon" />
+								<img src="/icons/close_x.png" alt="close icon" />
 							</div>
 						</div>
 					</div>

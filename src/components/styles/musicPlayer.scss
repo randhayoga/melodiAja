@@ -57,8 +57,16 @@
 }
 
 .mPlayer__right {
+	position: relative;
 	flex: 1;
+	display: flex;
+	gap: 20px;
 	justify-content: flex-end;
+	align-items: center;
+
+	> .icon {
+		transition: 0.5s transform;
+	}
 }
 
 @media (max-width: 1000px) {
