@@ -5,6 +5,21 @@ function FTListItem(item) {
 	let Stats = stats().render;
 
 	switch(item.type) {
+	case "queueMusic":
+		return (
+			<div className="contentList__item contentList__music musicQueue__item" 
+				key={item.imgPath}
+				data-song-id={item.id}
+			>
+				<div className="item__image">
+					<img src={item.imgPath} alt="music's cover art" />
+				</div>
+				<div className="item__text">
+					<p className="item__heading"> {item.title} </p>
+					<p className=""> {item.artist} </p>
+				</div>
+			</div>
+		)
 	case "music":
 		return (
 			<div className="contentList__item contentList__music" key={item.coverPath}>
@@ -62,9 +77,9 @@ function FTListItem(item) {
 }
 
 const contentListView = () => {
-	const render = ({itemList}) => {
+	const render = ({itemList, id, className}) => {
 		return (
-			<div className="section__content section__content--list">
+			<div className={`section__content section__content--list${" " + className}`} id={id}>
 				{
 					itemList.map((item) => {
 						return (FTListItem(item));
