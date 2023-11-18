@@ -86,8 +86,8 @@
 			if(response != 0) {
 				switch(response) {
 					case -1:
-						let warningElem = document.getElementById("loginWarning__password");
-						warningElem.textContent = "Something is wrong on our end. Please try again later!"
+						let warningElem = document.getElementById("warning__password");
+						warningElem.textContent = "Failed to establish connection to server"
 						break;
 				}
 			}
