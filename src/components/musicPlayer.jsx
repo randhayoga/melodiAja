@@ -5,9 +5,9 @@ import musicMeter from "./musicMeter.jsx";
 import musicMeterPin from "./musicMeterPin.jsx";
 import musicDuration from "./musicDuration.jsx";
 import MusicInfoPage from "./musicInfoPage.jsx";
+import MusicQueue from "./musicQueue.jsx";
 
 import "./styles/musicPlayer.css";
-import musicInfoPage from "./musicInfoPage.jsx";
 
 const musicPlayerModel = (() => {
 	const fetchSong = () => {
@@ -35,11 +35,7 @@ const musicPlayerView = (() => {
 	let MusicMeterPin = musicMeterPin.render();
 	let MusicDuration = musicDuration.render;
 
-	const handleSongChange = () => {
-
-	}
-
-	const render = ({progressInterval, musicInfo}) => {
+	const render = ({progressInterval, musicInfo, changeMusic}) => {
 		let {title, artist, coverPath} = musicInfo.get;
 		return (
 			<>
@@ -49,6 +45,16 @@ const musicPlayerView = (() => {
 							interval={{
 								get: progressInterval.get,
 								set: progressInterval.set,
+							}}
+							musicQueue={{
+								next: () => {
+									MusicQueue.next()
+									changeMusic(MusicQueue.getCurrentMusic())
+								},
+								previous: () => {
+									MusicQueue.previous()
+									changeMusic(MusicQueue.getCurrentMusic())
+								}
 							}}
 						/>
 						<MusicDuration/>
@@ -70,6 +76,18 @@ const musicPlayerView = (() => {
 						</section>
 					</div>
 					<div className="mPlayer__right">
+						<img src="/icons/playlist.png" alt="musicQueue button" 
+							className="icon icon--small"
+							onClick={() => {
+								MusicQueue.toggle();
+						}}/>
+						<img src="/icons/upArrow.png" alt="musicInfo button" 
+							className="icon icon--small"
+							id="musicInfoButton"
+							style={{height: "15px"}}
+							onClick={(e) => {
+								MusicInfoPage.toggle();
+						}}/>
 					</div>
 				</section>
 				<MusicMeter />
@@ -84,41 +102,39 @@ const musicPlayerView = (() => {
 export default (() => {
 	let model = musicPlayerModel;
 	let view = musicPlayerView;
-	let musicInfo, setMusicInfo;
 	let elemAudio = document.getElementById("audio");
 
-	const changeSong = (direction) => {
-		MusicInfoPage.update(musicInfo);
-		if(direction === "next") {
-		} else {
+	const changeMusic = async(nextSongID) => {
+		if(nextSongID != -1) {
+			// TODO: Call model.fetchSongInfo instead
+			if(elemAudio.getAttribute("src") == "/test-music1.mp3") {
+				elemAudio.src = "/test-music2.mp3";
+			} else {
+				elemAudio.src = "/test-music1.mp3";
+			}
+
+			// Only automatically play if change happened when audio player not paused
+			await elemAudio.load();
+			elemAudio.play();
+			musicMeter.reset();
 		}
-		alert("Changing song...")
-		// Consult musicQueue
-		
-		/* get that song
-		let nextSong = model.fetchSong();
-		model.fetchSongInfo(1, setMusicInfo);
-		*/
 	}
-
-	const watch = () => {
-	}
-
 
 	elemAudio.addEventListener("ended", () => {
-		changeSong("next")
+		MusicQueue.next()
+		changeMusic(MusicQueue.getCurrentMusic());
 	})
 
 	const render = () => {
-		let [progressInterval, setProgressInterval] = useState(null);
-		[musicInfo, setMusicInfo] = useState(
+		const [progressInterval, setProgressInterval] = useState(null);
+		const [musicInfo, setMusicInfo] = useState(
 			{
 				title: "...",
 				artist: "...",
 				coverPath: "",
 			}
 		);
-	
+
 		model.fetchSongInfo(1, setMusicInfo);
 		return view.render({
 			progressInterval: {
@@ -128,10 +144,11 @@ export default (() => {
 			musicInfo: {
 				get: musicInfo,
 				set: setMusicInfo,
-			}
+			},
+			changeMusic: changeMusic
 		});
 	}
 
-	return {render, changeSong}
+	return {render, changeSong: changeMusic}
 })()
 

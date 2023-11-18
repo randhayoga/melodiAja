@@ -10,6 +10,11 @@ const musicDurationView = (() => {
 			(Math.floor(seconds / 60)).toFixed(0)
 		).padStart(2, 0);
 		let secondsString = String((seconds % 60).toFixed(0)).padStart(2, 0)
+
+		if(minutesString == "NaN" || secondsString == "NaN") {
+			return "--:--";
+		}
+
 		return `${minutesString}:${secondsString}`
 	}
 

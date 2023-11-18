@@ -18,6 +18,7 @@ import userPage from "./components/userPage.jsx"
 import myPlaylistPage from "./components/myPlaylistPage.jsx"
 import myMusicPage from "./components/myMusicPage.jsx"
 import musicInfoPage from "./components/musicInfoPage.jsx"
+import musicQueue from "./components/musicQueue.jsx"
 
 import "./App.css";
 
@@ -30,6 +31,7 @@ let MusicPlayer = musicPlayer.render;
 let MyMusicPage = myMusicPage.render;
 let MusicInfoPage = musicInfoPage.render;
 let TestBox = modal("testing", "Welcome").render;
+let MusicQueue = musicQueue.render;
 
 const ROUTER = createBrowserRouter([
 	{
@@ -53,6 +55,7 @@ const ROUTER = createBrowserRouter([
 					</main>
 				</section>
 				<MusicInfoPage />
+				<MusicQueue />
 				<MusicPlayer />
 				<TestBox Component={
 					function() {

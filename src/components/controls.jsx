@@ -4,23 +4,38 @@ import MusicMeter from "./musicMeter.jsx"
 import MusicDuration from "./musicDuration.jsx"
 
 const controlsView = (() => {
-	const render = ({handlers, interval}) => {
-		let {changeMusic, toggleMusic} = handlers;
+	let elemAudio = document.getElementById("audio");
+	const render = ({handlers, interval, musicQueue}) => {
+		let {toggleMusic} = handlers;
 		return (
 			<>
 				<section id="mPlayer__controls">
-					<div className="mPlayer__iconWrapper" id="controls__previous" onClick={changeMusic}>
+					<div className="mPlayer__iconWrapper" id="controls__previous" onClick={
+						() => {
+							if(elemAudio.paused) {
+								toggleMusic(interval.get, interval.set);
+							}
+							musicQueue.previous()
+						}
+					}>
 						<img src="/icons/previous.png" alt="Previous Music" />
 					</div>
 					<div className="mPlayer__iconWrapper" id="controls__togglePlay" onClick={
-						(event) => {
-							toggleMusic(event, interval.get, interval.set);
+						() => {
+							toggleMusic(interval.get, interval.set);
 						}
 					}>
 						<img id="controls__play" src="/icons/play.png" alt="Play Music" />
 						<img id="controls__pause" className="icon--toggleOff" src="/icons/pause.png" alt="Pause Music" />
 					</div>
-					<div className="mPlayer__iconWrapper" id="controls__next" onClick={changeMusic}>
+					<div className="mPlayer__iconWrapper" id="controls__next" onClick={
+						() => {
+							if(elemAudio.paused) {
+								toggleMusic(interval.get, interval.set);
+							}
+							musicQueue.next()
+						}
+					}>
 						<img src="/icons/next.png" alt="Next Music" />
 					</div>
 				</section>
@@ -35,15 +50,7 @@ export default (() => {
 	let view = controlsView;
 	let elemAudio = document.getElementById("audio");
 
-	const buttonChangeMusic = (event) => {
-		if(event.currentTarget.id == "controls__previous") {
-			console.log("Previous music!")
-		} else {
-			console.log("Next music!")
-		}
-	}
-
-	const buttonToggleMusic = (event, prevInterval, callback) => {
+	const buttonToggleMusic = (prevInterval, callback) => {
 		if(elemAudio.paused) {
 			elemAudio.play();
 			callback(setInterval(() => {
@@ -56,15 +63,13 @@ export default (() => {
 			callback(null);
 		}
 		
-		let buttonElems = event.currentTarget.childNodes;
-		buttonElems[0].classList.toggle("icon--toggleOff");
-		buttonElems[1].classList.toggle("icon--toggleOff");
+		document.getElementById("controls__play").classList.toggle("icon--toggleOff");
+		document.getElementById("controls__pause").classList.toggle("icon--toggleOff");
 	}
 
 	const render = (props) => {
 		return view.render({
 			handlers: {
-				changeMusic: buttonChangeMusic,
 				toggleMusic: buttonToggleMusic,
 			},
 			...props

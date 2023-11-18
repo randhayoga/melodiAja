@@ -1,7 +1,7 @@
 import "./styles/contentList.css"
 import stats from "./stats.jsx"
 
-function FTListItem(item) {
+function FTListItem(item, elemIndex) {
 	let Stats = stats().render;
 
 	switch(item.type) {
@@ -10,6 +10,7 @@ function FTListItem(item) {
 			<div className="contentList__item contentList__music musicQueue__item" 
 				key={item.imgPath}
 				data-song-id={item.id}
+				data-queue-number={elemIndex}
 			>
 				<div className="item__image">
 					<img src={item.imgPath} alt="music's cover art" />
@@ -81,8 +82,8 @@ const contentListView = () => {
 		return (
 			<div className={`section__content section__content--list${" " + className}`} id={id}>
 				{
-					itemList.map((item) => {
-						return (FTListItem(item));
+					itemList.map((item, idx) => {
+						return (FTListItem(item, idx));
 					})
 				}
 			</div>
