@@ -28,17 +28,14 @@ const musicInfoView = (() => {
 	let Comments = comments.render;
 
 	const toggle = () => {
+		document.getElementById("musicInfoButton").classList.toggle("rotate--180")
 		document.getElementById("musicInfoPage")
 			.classList.toggle("musicInfoPage--hidden");
 	}
 
 	const render = () => {
 		return (
-			<section id="musicInfoPage" className="musicInfoPage musicInfoPage--hidden" onClick= {(e) => {
-				toggle()
-				e.stopPropagation();
-			}}
-			>
+			<section id="musicInfoPage" className="musicInfoPage musicInfoPage--hidden">
 				<div className="musicInfoPage__wrapper">
 					<div className="musicInfoPage__background">
 						<img src="/defaults/defaultCover1.jpg" alt="" />

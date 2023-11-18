@@ -1,0 +1,90 @@
+@use "./globals" as *;
+
+.musicQueue {
+	pointer-events: none;
+	transform: translateY(10px);
+	opacity: 0%;
+	transition: 0.33s opacity,
+				0.33s transform;
+	border-radius: 10px;
+	background: $bg--shallow;
+	color: $text;
+	position: fixed;
+	z-index: 100;
+	right: 50px; bottom: calc($musicPlayerHeight + 10px);
+	height: 400px;
+	width: 50vw;
+	max-height: 400px;
+	max-width: 500px;
+	min-width: 300px;
+	overflow: hidden;
+	border: 2px solid $text--dim;
+
+	> * {
+		opacity: inherit;
+		transition: inherit;
+	}
+}
+
+.musicQueue--showing {
+	height: 400px;
+	pointer-events: auto;
+	transition: 0.33s opacity, 
+			0.33s transform;
+	opacity: 100%;
+	transform: translateY(-10px);
+}
+
+.musicQueue__top {
+	background: $bg--normal;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	height: 5%;
+	border-bottom: 2px solid $text--dim;
+
+	> .musicQueue__name { flex: 1; }
+}
+
+.musicQueue__buttons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: 20px;
+
+	> button {
+		cursor: pointer;
+		color: white;
+		padding: 5px 15px;
+		background: rgb(78, 36, 204);
+		border: 0px solid black;
+		border-radius: 5px;
+
+		&:hover {
+			filter: brightness(120%);
+		}
+	}
+}
+
+.musicQueue__content {
+	background: inherit;
+	height: 80%;
+	overflow-Y: scroll;
+}
+
+.musicQueue__item {
+	background: inherit;
+	padding: 10px;
+
+	&:hover {
+		background: rgba($accent, 0.3);
+	}
+
+	> .item__image, .item__text {
+		pointer-events: none;
+	}
+}
+
+.musicQueue__item--dimmed {
+	filter: grayscale(100%) brightness(70%);
+}
