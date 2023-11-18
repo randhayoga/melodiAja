@@ -10,21 +10,21 @@ const myMusicPageModel = (() => {
 				id: "blal",
 				title: "Music1",
 				artist: "Artist1",
-				coverPath: "/defaults/defaultCover0.jpg",
+				imgPath: "/defaults/defaultCover0.jpg",
 			},
 			{
 				type: "music",
 				id: "blal2",
 				title: "Music2",
 				artist: "Artist2",
-				coverPath: "/defaults/defaultCover2.jpg",
+				imgPath: "/defaults/defaultCover2.jpg",
 			},
 			{
 				type: "music",
 				id: "blal3",
 				title: "Music3",
 				artist: "Artist3",
-				coverPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/defaults/defaultCover1.jpg",
 			}
 		]
 	}

@@ -11,7 +11,7 @@ const myPlaylistPageModel = (() => {
 				nSongs: 20,
 				nViews: 2000,
 				visibility: "Public",
-				coverPath: "/defaults/defaultCover0.jpg",
+				imgPath: "/defaults/defaultCover0.jpg",
 			},
 			{
 				type: "playlist",
@@ -19,7 +19,7 @@ const myPlaylistPageModel = (() => {
 				nSongs: 6,
 				nViews: 9420,
 				visibility: "Private",
-				coverPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/defaults/defaultCover1.jpg",
 			},
 			{
 				type: "playlist",
@@ -27,7 +27,7 @@ const myPlaylistPageModel = (() => {
 				nSongs: 10,
 				nViews: 2000,
 				visibility: "Public",
-				coverPath: "/defaults/defaultCover2.jpg",
+				imgPath: "/defaults/defaultCover2.jpg",
 			},
 		]
 	}

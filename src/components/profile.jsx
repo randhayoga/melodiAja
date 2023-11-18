@@ -5,7 +5,7 @@ const profileModel = (() => {
 	const getData = () => {
 		return {
 			name: "Heidi",
-			filePath: "#",
+			imgPath: "#",
 		}
 	}
 
@@ -14,7 +14,7 @@ const profileModel = (() => {
 
 
 const profileView = (() => {
-	const render = (name, pfpPath) => {
+	const render = (name, imgPath) => {
 		return (
 			<Link to="/user/me">
 				<div id="topbar__profile">
@@ -38,7 +38,7 @@ const Profile = (props) => {
 	const render = (props) => {
 		return view.render(
 			userDetails.name, 
-			userDetails.filePath
+			userDetails.imgPath
 		);
 	}
 	

@@ -5,7 +5,7 @@ const contentTiledView = () => {
 			return (
 				<div className="contentTiled__tile" key={item.subheading + item.heading}>
 					<div className="tile__background">
-						<img src={item.bgPath} alt="" />
+						<img src={item.imgPath} alt="" />
 					</div>
 					<div className="tile__text">
 						{(() => {

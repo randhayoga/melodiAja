@@ -1,7 +1,7 @@
 import "./styles/contentList.css"
 import stats from "./stats.jsx"
 
-function FTListItem(item, onClick, idx) {
+function FTListItem(item, handlers, idx) {
 	let Stats = stats().render;
 
 	const getAttributes = (attributes) => attributes;
@@ -27,11 +27,11 @@ function FTListItem(item, onClick, idx) {
 				key={idx}
 				onClick={(e) => {
 					e.stopPropagation()
-					onClick(getAttributes(item))
+					handlers.selectMusic(getAttributes(item))
 				}}
 			>
 				<div className="item__image">
-					<img src={item.coverPath} alt="music's cover art" />
+					<img src={item.imgPath} alt="music's cover art" />
 				</div>
 				<div className="item__text">
 					<p className="item__heading"> {item.title} </p>
@@ -43,7 +43,7 @@ function FTListItem(item, onClick, idx) {
 		return (
 			<div className="contentList__item contentList__comment" key={`${item.username}${item.commentTime}`}>
 				<div className="item__image">
-					<img src={item.coverPath} 
+					<img src={item.imgPath} 
 						alt={`${item.username} pfp`} />
 				</div>
 				<div className="item__text">
@@ -59,9 +59,9 @@ function FTListItem(item, onClick, idx) {
 		return <></>;
 	default: // Collection
 		return (
-			<div className="contentList__item contentList__collection" key={item.coverPath}>
+			<div className="contentList__item contentList__collection" key={item.imgPath}>
 				<div className="item__image">
-					<img src={item.coverPath} alt="music's cover art" />
+					<img src={item.imgPath} alt="music's cover art" />
 				</div>
 				<div className="item__text">
 					<p className="item__heading"> {item.name} </p>
@@ -84,14 +84,14 @@ function FTListItem(item, onClick, idx) {
 }
 
 const contentListView = () => {
-	const render = ({itemList, id, className, onClick}) => {
+	const render = ({itemList, id, className, handlers}) => {
 		return (
 			<div className={`section__content section__content--list${" " + className}`} 
 				id={id}
 			>
 				{
 					itemList.map((item, idx) => {
-						return (FTListItem(item, onClick, idx));
+						return (FTListItem(item, handlers, idx));
 					})
 				}
 			</div>

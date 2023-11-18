@@ -20,7 +20,7 @@ const musicPlayerModel = (() => {
 				setter({
 					title: "Elysium (Part 1)",
 					artist: "We are All Astronauts",
-					coverPath: "/defaults/defaultCover1.jpg",
+					imgPath: "/defaults/defaultCover1.jpg",
 				})
 			}, 1000)
 		}, [])
@@ -36,7 +36,7 @@ const musicPlayerView = (() => {
 	let MusicDuration = musicDuration.render;
 
 	const render = ({progressInterval, musicInfo, changeMusic}) => {
-		let {title, artist, coverPath} = musicInfo.get;
+		let {title, artist, imgPath} = musicInfo.get;
 		return (
 			<>
 				<section id="mPlayer">
@@ -65,7 +65,7 @@ const musicPlayerView = (() => {
 								MusicInfoPage.toggle();
 							}}
 						>
-							<img src={coverPath} 
+							<img src={imgPath} 
 								alt={`${title} album art`} 
 								className="mPlayer__albumArt"
 							/>
@@ -138,7 +138,7 @@ export default (() => {
 			{
 				title: "...",
 				artist: "...",
-				coverPath: "",
+				imgPath: "",
 			}
 		);
 

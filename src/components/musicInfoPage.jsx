@@ -16,7 +16,7 @@ const musicInfoModel = (() => {
 			id: "blal",
 			title: "Music1",
 			artist: "Artist1",
-			coverPath: "/defaults/defaultCover0.jpg",
+			imgPath: "/defaults/defaultCover0.jpg",
 		}
 	}
 
