@@ -21,6 +21,10 @@ const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 		res.redirect("/login");
 	});
 
+	ROUTER.post("/auth/changePass", (req, res) => {
+		res.redirect("/login");
+	});
+
 	/* ====================
 	GET Handlers
 	==================== */
@@ -32,13 +36,13 @@ const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 		}
 	);
 
-	ROUTER.get("/login", (_, res) => { 
-		return res.sendFile(PATH.join(__dirname, STATIC_PATH, "login.html")) 
-	});
-
-	ROUTER.get("/signup", (_, res) => { 
-		return res.sendFile(PATH.join(__dirname, STATIC_PATH, "signup.html")) 
-	});
+	["login", "signup", "changePassword"].forEach(
+		(path) => {
+			ROUTER.get(`/${path}`, (_, res) => {
+				return res.sendFile(PATH.join(__dirname, STATIC_PATH, `${path}.html`))
+			})
+		}
+	);
 
 	ROUTER.get("/", (req, res) => {
 		// If not logged in show index.html
