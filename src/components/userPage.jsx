@@ -9,17 +9,14 @@ const userPageModel = (() => {
 
 		useEffect(() => {
 			if(id == "me") {
-				setTimeout( () => {
-					setter( {
-						name: "Heidi Bournevilla",
-						username: "heidinOne",
-						pfpPath: "/defaults/defaultFemale.jpg",
-						nFollowers: 200,
-						nMusics: 10,
-						nCollections: 5000, // Album + playlist
-					})
-				}, 1000
-				)
+				setter( {
+					name: "Heidi Bournevilla",
+					username: "heidinOne",
+					pfpPath: "/defaults/defaultFemale.jpg",
+					nFollowers: 200,
+					nMusics: 10,
+					nCollections: 5000, // Album + playlist
+				})
 			} else {
 				fetch(`https://reqres.in/api/users/${id}`)
 					.then((response) => {
@@ -42,16 +39,16 @@ const userPageModel = (() => {
 					.catch((err) => {
 						console.log(err);
 						setter({
-							name: "User Fetching Error",
+							name: "UserFetchError",
 							username: "userFetchError",
-							pfpPath: "img/user.png",
+							pfpPath: "/img/user.png",
 							nFollowers: -1,
 							nMusics: -1,
-							nCollections: -1, // Album + playlist
+							nCollections: -1,
 						});
 					});
 			}
-		}, []);
+		}, [id]);
 	}
 
 	return {fetchInfo} 
@@ -61,6 +58,8 @@ const userPageView = (() => {
 	let Stats = stats().render;
 
 	function render({name, username, pfpPath, nFollowers, nMusics, nCollections}) {
+		const userID = useParams().id
+		const isOtherUser = nCollections > -1 && userID !== "me"
 		return (
 			<section id="userPage">
 				<section id="userPage__top">
@@ -73,18 +72,17 @@ const userPageView = (() => {
 								<p className="profile__name"> {name} </p>
 								<p className="profile__username"> {`@${username}`} </p>
 							</div>
-							{(() => {
-								let {id} = useParams();
-								if(id === "me") {
-									return (
-										<div className="profile__settings">
-											<div className="icon icon--small">
-												<img src="/icons/setting.png" alt="Settings Icon" />
-											</div>
+							{
+								(!isOtherUser)? (
+									<div className="profile__settings">
+										<div className="icon icon--small">
+											<img src="/icons/setting.png" alt="Settings Icon" />
 										</div>
-									)
-								}
-							})()}
+									</div>
+								): (
+									<></>
+								)
+							}
 						</div>
 						<Stats opts= {
 								{
@@ -99,10 +97,16 @@ const userPageView = (() => {
 								}
 							} 
 						/>
-						<section id="profileSect__actions">
-							<button type="button" id="button--follow" className="hover--bright"> Follow </button>
-							<button type="button" id="button--share" className="hover--bright"> Share </button>
-						</section>
+						{
+							(isOtherUser)? (
+								<section id="profileSect__actions">
+									<button type="button" id="button--follow" className="hover--bright"> Follow </button>
+									<button type="button" id="button--share" className="hover--bright"> Share </button>
+								</section>
+							):(
+								<></>
+							)
+						}
 					</div>
 				</section>
 			</section>
@@ -118,12 +122,12 @@ function UserPage() {
 
 	const render = () => {
 		const [currentUser, setCurrentUser] = useState({
-			name: "", 
-			username: "", 
+			name: "...", 
+			username: "...", 
 			pfpPath: "/img/Load_gif2.gif", 
-			nFollowers: 0, 
-			nMusics: 0, 
-			nCollections: 0
+			nFollowers: -1, 
+			nMusics: -1, 
+			nCollections: -1
 		});
 
 		model.fetchInfo(setCurrentUser);
