@@ -27,21 +27,19 @@ const musicQueueView = (() => {
 						/>
 					</div>
 				</div>
-				<div>
-					{
-						(musicList.get != undefined? (
-							<>
-								<ContentList 
-									itemList={musicList.get}
-									id="musicQueue__musicList"
-									className="musicQueue__content"
-								/>
-							</>
-						):
-							<></>
-						)
-					}
-				</div>
+				{
+					(musicList.get != undefined? (
+						<>
+							<ContentList 
+								itemList={musicList.get}
+								id="musicQueue__musicList"
+								className="musicQueue__content"
+							/>
+						</>
+					):
+						<></>
+					)
+				}
 			</section>
 		)
 	}
@@ -67,13 +65,13 @@ export default (() => {
 	let currentPlayIdx = 0;
 	let refQueue, refSetQueue;
 		
-	const add = (item) => {
+	const enqueue = ({id, title, artist, imgPath}) => {
 		refSetQueue([...refQueue, {
 				type: "queueMusic",
-				id: "blal",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: Date.now(),
+				id: id,
+				title: title,
+				artist: artist,
+				imgPath: imgPath,
 		}])
 	}
 
@@ -147,5 +145,5 @@ export default (() => {
 		});
 	}
 
-	return {render, toggle, next, previous, add, getCurrentMusic}
+	return {render, toggle, next, previous, enqueue, getCurrentMusic}
 })()

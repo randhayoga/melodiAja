@@ -1,16 +1,16 @@
 import "./styles/contentList.css"
 import stats from "./stats.jsx"
 
-function FTListItem(item, elemIndex) {
+function FTListItem(item, onClick, idx) {
 	let Stats = stats().render;
+
+	const getAttributes = (attributes) => attributes;
 
 	switch(item.type) {
 	case "queueMusic":
 		return (
 			<div className="contentList__item contentList__music musicQueue__item" 
-				key={item.imgPath}
-				data-song-id={item.id}
-				data-queue-number={elemIndex}
+				key={idx}
 			>
 				<div className="item__image">
 					<img src={item.imgPath} alt="music's cover art" />
@@ -23,7 +23,13 @@ function FTListItem(item, elemIndex) {
 		)
 	case "music":
 		return (
-			<div className="contentList__item contentList__music" key={item.coverPath}>
+			<div className="contentList__item contentList__music" 
+				key={idx}
+				onClick={(e) => {
+					e.stopPropagation()
+					onClick(getAttributes(item))
+				}}
+			>
 				<div className="item__image">
 					<img src={item.coverPath} alt="music's cover art" />
 				</div>
@@ -78,12 +84,14 @@ function FTListItem(item, elemIndex) {
 }
 
 const contentListView = () => {
-	const render = ({itemList, id, className}) => {
+	const render = ({itemList, id, className, onClick}) => {
 		return (
-			<div className={`section__content section__content--list${" " + className}`} id={id}>
+			<div className={`section__content section__content--list${" " + className}`} 
+				id={id}
+			>
 				{
 					itemList.map((item, idx) => {
-						return (FTListItem(item, idx));
+						return (FTListItem(item, onClick, idx));
 					})
 				}
 			</div>
@@ -102,4 +110,5 @@ export default function contentList() {
 
 	return {render};
 }
+
 

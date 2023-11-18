@@ -105,6 +105,7 @@ export default (() => {
 	let elemAudio = document.getElementById("audio");
 
 	const changeMusic = async(nextSongID) => {
+		elemAudio.currentTime = 0;
 		if(nextSongID != -1) {
 			// TODO: Call model.fetchSongInfo instead
 			if(elemAudio.getAttribute("src") == "/test-music1.mp3") {
@@ -122,7 +123,13 @@ export default (() => {
 
 	elemAudio.addEventListener("ended", () => {
 		MusicQueue.next()
-		changeMusic(MusicQueue.getCurrentMusic());
+		let nextMusic = MusicQueue.getCurrentMusic();
+		if(nextMusic != -1) {
+			changeMusic(nextMusic);
+		} else {
+			elemAudio.currentTime = 0;
+			controls.togglePlayButton();
+		}
 	})
 
 	const render = () => {
