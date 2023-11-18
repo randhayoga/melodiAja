@@ -1,23 +1,17 @@
 const EXPRESS = require("express");
 const APP = EXPRESS();
 const PATH = require("path");
-const ROUTES = require("./backend/router.js").ROUTES;
 const PORT = 8069;
-const BODY_PARSER = require("body-parser")
 
-
-function setOwnMiddlewares() {
-	APP.use(function log(req, _, next) {
-		console.log(`${req.method} received at ${Date.now()}\nWants: ${req.originalUrl}`)
-		next();
-	})
-}
+const ROUTES = require("./backend/router.js").ROUTES;
+const BODY_PARSER = require("body-parser");
+const MORGAN = require("morgan");
 
 (function main() {
 	const PUBLIC_PATH = PATH.join(__dirname, "public");
-	//
+	
 	// Middlewares
-	setOwnMiddlewares();
+	APP.use(MORGAN('combined'))
 	APP.use(BODY_PARSER.json());
 	APP.use(BODY_PARSER.urlencoded({extended: false}))
 
@@ -29,6 +23,7 @@ function setOwnMiddlewares() {
 	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "icons"), {maxAge: imgTTL}));
 	APP.use(EXPRESS.static(PATH.join(PUBLIC_PATH, "img"), {maxAge: imgTTL}));
 
+	APP.use(ROUTES);
 
 	/*
 	ROUTER.get("/:user/:password", async (req, res) => {
@@ -41,8 +36,8 @@ function setOwnMiddlewares() {
 		res.send();
 	})
 	*/
+	
 
-	APP.use(ROUTES);
 	APP.listen(PORT, () => {
 		console.log(`ready to serve at localhost:${PORT}`);
 	})
