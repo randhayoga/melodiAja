@@ -5,6 +5,12 @@ import MusicDuration from "./musicDuration.jsx"
 
 const controlsView = (() => {
 	let elemAudio = document.getElementById("audio");
+
+	const togglePlayButton = () => {
+		document.getElementById("controls__play").classList.toggle("icon--toggleOff");
+		document.getElementById("controls__pause").classList.toggle("icon--toggleOff");
+	}
+
 	const render = ({handlers, interval, musicQueue}) => {
 		let {toggleMusic} = handlers;
 		return (
@@ -14,6 +20,7 @@ const controlsView = (() => {
 						() => {
 							if(elemAudio.paused) {
 								toggleMusic(interval.get, interval.set);
+								togglePlayButton();
 							}
 							musicQueue.previous()
 						}
@@ -23,15 +30,24 @@ const controlsView = (() => {
 					<div className="mPlayer__iconWrapper" id="controls__togglePlay" onClick={
 						() => {
 							toggleMusic(interval.get, interval.set);
+							togglePlayButton();
 						}
 					}>
-						<img id="controls__play" src="/icons/play.png" alt="Play Music" />
-						<img id="controls__pause" className="icon--toggleOff" src="/icons/pause.png" alt="Pause Music" />
+						<img id="controls__play" 
+							src="/icons/play.png" 
+							alt="Play Music" 
+						/>
+						<img id="controls__pause" 
+							className="icon--toggleOff" 
+							src="/icons/pause.png" 
+							alt="Pause Music" 
+						/>
 					</div>
 					<div className="mPlayer__iconWrapper" id="controls__next" onClick={
 						() => {
 							if(elemAudio.paused) {
 								toggleMusic(interval.get, interval.set);
+								togglePlayButton();
 							}
 							musicQueue.next()
 						}
@@ -43,7 +59,7 @@ const controlsView = (() => {
 		)
 	}
 
-	return {render};
+	return {render, togglePlayButton};
 })()
 
 export default (() => {
@@ -62,11 +78,9 @@ export default (() => {
 			clearInterval(prevInterval);
 			callback(null);
 		}
-		
-		document.getElementById("controls__play").classList.toggle("icon--toggleOff");
-		document.getElementById("controls__pause").classList.toggle("icon--toggleOff");
 	}
 
+	const togglePlayButton = () => view.togglePlayButton();
 	const render = (props) => {
 		return view.render({
 			handlers: {
@@ -76,5 +90,5 @@ export default (() => {
 		});
 	}
 
-	return {render}
+	return {render, togglePlayButton}
 })()
