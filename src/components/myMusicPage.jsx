@@ -1,3 +1,4 @@
+import musicQueue from "./musicQueue.jsx"
 import contentList from "./contentList.jsx"
 import searchBar from "./searchBar.jsx"
 import "./styles/myMusicPage.css"
@@ -44,7 +45,14 @@ const myMusicPageView = (() => {
 				</div>
 				<div className="myMusicPage__section">
 					<h2 className="section__heading">My Musics</h2>
-					<ContentList itemList={items} />
+					<ContentList 
+						itemList={items} 
+						handlers = {{
+							selectMusic: (item) => {
+								musicQueue.enqueue(item); 
+							}
+						}}
+					/>
 				</div>
 			</section>
 		)

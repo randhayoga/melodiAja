@@ -1,3 +1,4 @@
+import musicQueue from "./musicQueue.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import searchBar from "./searchBar.jsx";
@@ -74,7 +75,12 @@ const searchPageView = (() => {
 				</section>
 				<section className="searchPage__section">
 					<h2 className="section__heading">Recent Search</h2>
-					<ContentList itemList={recentSearch} />
+					<ContentList 
+						itemList={recentSearch} 
+						handlers={{
+							selectMusic: (item) => musicQueue.enqueue(item),
+						}}
+					/>
 				</section>
 				<section className="searchPage__section">
 					<h2 className="section__heading">Find by Genre</h2>
