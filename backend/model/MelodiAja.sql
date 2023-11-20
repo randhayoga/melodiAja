@@ -10,17 +10,17 @@ create table pengguna (
 
 create table pengguna_like_lagu (
 	ID_pengguna_like_lagu int auto_increment primary key,
-    ID_pengguna int,
+    username varchar(255),
     ID_lagu int,
-    foreign key (ID_pengguna) references pengguna(ID_pengguna),
+    foreign key (username) references pengguna(username),
     foreign key (ID_lagu) references lagu(ID_lagu)
 );
 
 create table pengguna_dislike_lagu (
 	ID_pengguna_dislike_lagu int auto_increment primary key,
-    ID_pengguna int,
+    username varchar(255),
     ID_lagu int,
-    foreign key (ID_pengguna) references pengguna(ID_pengguna),
+    foreign key (username) references pengguna(username),
     foreign key (ID_lagu) references lagu(ID_lagu)
 );
 
