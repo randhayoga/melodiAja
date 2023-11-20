@@ -1,0 +1,35 @@
+@use "./globals" as *;
+
+.dropmenu {
+	background: $bg--normal;
+	z-index: 100;
+	position: absolute;
+	top: 25px; right: 0;
+	opacity: 100%;
+	transform: translateY(0px);
+	transition: 0.33s opacity,
+				0.33s transform;
+}
+
+.dropmenu--hidden {
+	pointer-events: none;
+	opacity: 0%;
+	transform: translateY(-10px);
+	transition: 0.33s opacity,
+				0.33s transform;
+}
+
+.dropmenu__item {
+	cursor: pointer;
+	background: inherit;
+	width: 200px;
+	padding: 8px 20px;
+
+	> p {
+		width: 100%;
+	}
+
+	&:hover {
+		filter: brightness(150%);
+	}
+}

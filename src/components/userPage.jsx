@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react';
+import dropmenu from "./dropmenu.jsx"
 import stats from "./stats.jsx";
 import "./styles/userPage.css"
 
@@ -56,6 +57,8 @@ const userPageModel = (() => {
 
 const userPageView = (() => {
 	let Stats = stats().render;
+	let dropmenuObj = dropmenu("userSetting");
+	let Dropmenu = dropmenuObj.render;
 
 	function render({name, username, pfpPath, nFollowers, nMusics, nCollections}) {
 		const userID = useParams().id
@@ -75,9 +78,23 @@ const userPageView = (() => {
 							{
 								(!isOtherUser)? (
 									<div className="profile__settings">
-										<div className="icon icon--small">
+										<div className="icon icon--small" 
+											onClick={() => dropmenuObj.toggle()}>
 											<img src="/icons/setting.png" alt="Settings Icon" />
 										</div>
+										<Dropmenu
+											menuList={[
+												{
+													name: "Change Password",
+													handler: () => window.location.replace("/changePassword")
+												},
+												{
+													name: "Account Settings",
+													handler: () => {
+													}
+												}
+											]}
+										/>
 									</div>
 								): (
 									<></>
