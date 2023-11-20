@@ -1,4 +1,5 @@
 import MusicQueue from "./musicQueue.jsx"
+import MusicPlayer from "./musicPlayer.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import "./styles/homePage.css"
@@ -104,6 +105,9 @@ function HomePage() {
 							selectMusic: (item) => {
 								MusicQueue.enqueue(item)
 							},
+							playNow: (item) => {
+								MusicPlayer.changeMusicImmediately(item)
+							}
 						}}
 					/> 
 				</div>

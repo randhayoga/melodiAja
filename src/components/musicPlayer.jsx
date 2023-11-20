@@ -10,8 +10,20 @@ import MusicQueue from "./musicQueue.jsx";
 import "./styles/musicPlayer.css";
 
 const musicPlayerModel = (() => {
-	const fetchSong = () => {
-		return {};
+	const fetchSong = async(id) => {
+		return await fetch(`/info/music/${id}`, {
+				method: "GET",
+			}).then((res) => {
+				if(res.ok) {
+					return res.json();
+				}
+				return new Error();
+			}).then((res) => {
+				return res.musicPath;
+			}).catch((err) => {
+				alert(`${err}\nAn error has occured`)
+				return "#";
+			})
 	}
 
 	const fetchSongInfo = async(id, setter) => {
@@ -103,22 +115,28 @@ export default (() => {
 	let model = musicPlayerModel;
 	let view = musicPlayerView;
 	let elemAudio = document.getElementById("audio");
+	let progressInterval = null;
+
+	const setProgressInterval = (newInterval) => {progressInterval = newInterval}
 
 	const changeMusic = async(nextSongID) => {
 		elemAudio.currentTime = 0;
-		if(nextSongID != -1) {
-			// TODO: Call model.fetchSongInfo instead
-			if(elemAudio.getAttribute("src") == "/test-music1.mp3") {
-				elemAudio.src = "/test-music2.mp3";
-			} else {
-				elemAudio.src = "/test-music1.mp3";
-			}
+		if(elemAudio.paused) {
+			controls.togglePlayButton();
+		}
 
-			// Only automatically play if change happened when audio player not paused
+		if(nextSongID != -1) {
+			elemAudio.src = await model.fetchSong(nextSongID)
 			await elemAudio.load();
-			elemAudio.play();
+			controls.buttonToggleMusic(progressInterval, setProgressInterval)
 			musicMeter.reset();
 		}
+	}
+
+	// Playing song outside the queue will play all music in queue afterwards
+	const changeMusicImmediately = async(nextSongID) => {
+		MusicQueue.replay();
+		await changeMusic(nextSongID);
 	}
 
 	elemAudio.addEventListener("ended", () => {
@@ -128,12 +146,11 @@ export default (() => {
 			changeMusic(nextMusic);
 		} else {
 			elemAudio.currentTime = 0;
-			controls.togglePlayButton();
 		}
 	})
 
+
 	const render = () => {
-		const [progressInterval, setProgressInterval] = useState(null);
 		const [musicInfo, setMusicInfo] = useState(
 			{
 				title: "...",
@@ -156,6 +173,6 @@ export default (() => {
 		});
 	}
 
-	return {render, changeSong: changeMusic}
+	return {render, changeMusic, changeMusicImmediately}
 })()
 
