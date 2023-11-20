@@ -1,4 +1,5 @@
 node_modules/
+datastore/
 config.js
 bundle.js
 *.css.map
