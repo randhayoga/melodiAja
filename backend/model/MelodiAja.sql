@@ -8,22 +8,6 @@ create table pengguna (
     file_img_profile varchar(255) not null
 );
 
-create table pengguna_like_lagu (
-	ID_pengguna_like_lagu int auto_increment primary key,
-    username varchar(255),
-    ID_lagu int,
-    foreign key (username) references pengguna(username),
-    foreign key (ID_lagu) references lagu(ID_lagu)
-);
-
-create table pengguna_dislike_lagu (
-	ID_pengguna_dislike_lagu int auto_increment primary key,
-    username varchar(255),
-    ID_lagu int,
-    foreign key (username) references pengguna(username),
-    foreign key (ID_lagu) references lagu(ID_lagu)
-);
-
 create table album (
 	ID_album int auto_increment primary key,
     judul_album varchar(255),
@@ -47,6 +31,22 @@ create table lagu (
     username_artist varchar(255),
     foreign key (ID_album) references album(ID_album),
     foreign key (username_artist) references pengguna(username)
+);
+
+create table pengguna_like_lagu (
+	ID_pengguna_like_lagu int auto_increment primary key,
+    username varchar(255),
+    ID_lagu int,
+    foreign key (username) references pengguna(username),
+    foreign key (ID_lagu) references lagu(ID_lagu)
+);
+
+create table pengguna_dislike_lagu (
+	ID_pengguna_dislike_lagu int auto_increment primary key,
+    username varchar(255),
+    ID_lagu int,
+    foreign key (username) references pengguna(username),
+    foreign key (ID_lagu) references lagu(ID_lagu)
 );
 
 create table playlist (
