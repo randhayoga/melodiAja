@@ -66,6 +66,14 @@
 	}
 }
 
+.profile__settings {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: fit-content;
+	position: relative;
+}
+
 .userPage__imgWrapper {
 	position: relative;
 	aspect-ratio: 1;

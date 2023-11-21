@@ -25,6 +25,36 @@ const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 		res.redirect("/login");
 	});
 
+	/*====================
+	 GET INFORMATIONS
+	====================*/
+	ROUTER.get("/info/music/:id", (req, res) => {
+		// Dummy
+		switch(req.params.id % 3) {
+			case 0:
+				res.send({musicPath: "/test-music2.mp3"});
+				break;
+			case 1:
+				res.send({musicPath: "/test-music1.mp3"});
+				break;
+			default:
+				res.send({musicPath: "/assets/music/secret.mp3"});
+				break;
+		}
+	});
+
+	/* ====================
+	GET RESOURCES (e.g. profile picture, music, etc)
+	==================== */
+	ROUTER.get("/assets/music/:file", (req, res) => {
+		const options =  {
+			root: PATH.join(__dirname, "..")
+		};
+
+		res.sendFile("datastore/GTA San Andreas K Rose Full Station.mp3",
+			options,);
+	});
+
 	/* ====================
 	GET Handlers
 	==================== */

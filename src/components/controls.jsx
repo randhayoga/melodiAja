@@ -66,6 +66,8 @@ export default (() => {
 	let view = controlsView;
 	let elemAudio = document.getElementById("audio");
 
+	const togglePlayButton = () => view.togglePlayButton();
+
 	const buttonToggleMusic = (prevInterval, callback) => {
 		if(elemAudio.paused) {
 			elemAudio.play();
@@ -80,7 +82,6 @@ export default (() => {
 		}
 	}
 
-	const togglePlayButton = () => view.togglePlayButton();
 	const render = (props) => {
 		return view.render({
 			handlers: {
@@ -90,5 +91,5 @@ export default (() => {
 		});
 	}
 
-	return {render, togglePlayButton}
+	return {render, buttonToggleMusic, togglePlayButton}
 })()

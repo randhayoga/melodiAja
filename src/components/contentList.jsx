@@ -25,10 +25,6 @@ function FTListItem(item, handlers, idx) {
 		return (
 			<div className="contentList__item contentList__music" 
 				key={idx}
-				onClick={(e) => {
-					e.stopPropagation()
-					handlers.selectMusic(getAttributes(item))
-				}}
 			>
 				<div className="item__image">
 					<img src={item.imgPath} alt="music's cover art" />
@@ -36,6 +32,24 @@ function FTListItem(item, handlers, idx) {
 				<div className="item__text">
 					<p className="item__heading"> {item.title} </p>
 					<p className=""> {item.artist} </p>
+				</div>
+				<div className="item__actions">
+					<img 
+						className="icon icon--tiny" 
+						src="/icons/play.png"
+						onClick={(e) => {
+							e.stopPropagation()
+							handlers.playNow(getAttributes(item).id)
+						}}
+					/>
+					<img 
+						className="icon icon--tiny" 
+						src="/icons/music.png"
+						onClick={(e) => {
+							e.stopPropagation()
+							handlers.selectMusic(getAttributes(item))
+						}}
+					/>
 				</div>
 			</div>
 		)
@@ -59,7 +73,11 @@ function FTListItem(item, handlers, idx) {
 		return <></>;
 	default: // Collection
 		return (
-			<div className="contentList__item contentList__collection" key={item.imgPath}>
+			<div 
+				to={`/playlist/${item.id}`}
+				className="contentList__item contentList__collection" 
+				key={item.imgPath}
+			>
 				<div className="item__image">
 					<img src={item.imgPath} alt="music's cover art" />
 				</div>

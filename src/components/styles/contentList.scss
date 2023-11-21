@@ -23,6 +23,22 @@
 	}
 }
 
+.contentList__music {
+	&:hover .item__actions {
+		opacity: 100%;
+	}
+}
+
+.item__actions {
+	flex: 1;
+	gap: 10px;
+	opacity: 0%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	
+}
+
 .contentList__collection {
 	display: grid;
 	grid-template: 1fr / 100px 1fr;
