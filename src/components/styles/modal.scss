@@ -1,6 +1,6 @@
 @use "./_globals" as *;
 
-.dialog__box {
+.modal__box {
 	min-width: 200px;
 	min-height: 80px; 
 	width: fit-content;
@@ -9,24 +9,34 @@
 	color: white;
 	border-radius: 20px;
 	position: fixed;
-	z-index: 101;
+	z-index: 100001;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
-.dialog__shade {
+.modal__box--hidden {
+	pointer-events: none;
+	display: none;
+}
+
+.modal__shade {
 	position: fixed;
-	z-index: 100;
+	z-index: 100000;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.40);
 }
 
-.dialog__top {
+.modal__top {
 	display: flex;
 	align-items: center;
+	margin-bottom: 20px;
 }
 
-.dialog__name {
+.modal__name {
 	flex: 1;
+}
+
+.modal__body {
+	width: 100%;
 }
