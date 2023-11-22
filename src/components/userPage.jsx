@@ -61,8 +61,10 @@ const userPageView = (() => {
 	let Dropmenu = dropmenuObj.render;
 
 	function render({name, username, pfpPath, nFollowers, nMusics, nCollections}) {
-		const userID = useParams().id
-		const isOtherUser = nCollections > -1 && userID !== "me"
+		const userID = useParams().id;
+		const isUserNotFound = nCollections == -1;
+		const isOtherUser = userID !== "me";
+
 		return (
 			<section id="userPage">
 				<section id="userPage__top">
@@ -76,7 +78,7 @@ const userPageView = (() => {
 								<p className="profile__username"> {`@${username}`} </p>
 							</div>
 							{
-								(!isOtherUser)? (
+								(!isOtherUser && !isUserNotFound)? (
 									<div className="profile__settings">
 										<div className="icon icon--small" 
 											onClick={() => dropmenuObj.toggle()}>
@@ -115,7 +117,7 @@ const userPageView = (() => {
 							} 
 						/>
 						{
-							(isOtherUser)? (
+							(isOtherUser && !isUserNotFound)? (
 								<section id="profileSect__actions">
 									<button type="button" id="button--follow" className="hover--bright"> Follow </button>
 									<button type="button" id="button--share" className="hover--bright"> Share </button>
