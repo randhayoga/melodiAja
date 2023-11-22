@@ -29,7 +29,6 @@ body {
 }
 
 main {
-	overflow: hidden;
 	position: relative;
 	flex: 5;
 }
