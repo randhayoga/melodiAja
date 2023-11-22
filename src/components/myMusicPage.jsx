@@ -1,6 +1,7 @@
 import musicQueue from "./musicQueue.jsx"
 import contentList from "./contentList.jsx"
 import searchBar from "./searchBar.jsx"
+import uploadMusicForm from "./uploadMusicForm.jsx"
 import "./styles/myMusicPage.css"
 
 const myMusicPageModel = (() => {
@@ -44,7 +45,24 @@ const myMusicPageView = (() => {
 					<SearchBar />
 				</div>
 				<div className="myMusicPage__section">
-					<h2 className="section__heading">My Musics</h2>
+					<div className="myMusicPage__header">
+						<h2 className="section__heading">My Musics</h2>
+						<div className="myMusicPage__headerUtils">
+							<button 
+								id="myMusicPage__addMusic"
+								onClick = {() => {
+									uploadMusicForm.toggle();
+								}}
+							> 
+								<img 
+									className="icon icon--small" 
+									src="/icons/plus.png" 
+									alt="" 
+								/>
+								<p> Upload music </p>
+							</button>
+						</div>
+					</div>
 					<ContentList 
 						itemList={items} 
 						handlers = {{
