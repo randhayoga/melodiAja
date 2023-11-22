@@ -10,7 +10,6 @@ import {
 import topbar from "./components/topbar.jsx";
 import sidebar from "./components/sidebar.jsx"
 import musicPlayer from "./components/musicPlayer.jsx"
-import modal from "./components/modal.jsx"
 
 import HomePage from "./components/homePage.jsx"
 import searchPage from "./components/searchPage.jsx"
@@ -19,6 +18,7 @@ import myPlaylistPage from "./components/myPlaylistPage.jsx"
 import myMusicPage from "./components/myMusicPage.jsx"
 import musicInfoPage from "./components/musicInfoPage.jsx"
 import musicQueue from "./components/musicQueue.jsx"
+import uploadMusicForm from "./components/uploadMusicForm.jsx"
 
 import "./App.css";
 
@@ -30,8 +30,8 @@ let MyPlaylistPage = myPlaylistPage.render;
 let MusicPlayer = musicPlayer.render;
 let MyMusicPage = myMusicPage.render;
 let MusicInfoPage = musicInfoPage.render;
-let TestBox = modal("testing", "Welcome").render;
 let MusicQueue = musicQueue.render;
+let UploadMusicForm = uploadMusicForm.render;
 
 const ROUTER = createBrowserRouter([
 	{
@@ -54,19 +54,10 @@ const ROUTER = createBrowserRouter([
 						</Routes>
 					</main>
 				</section>
+				<UploadMusicForm />
 				<MusicInfoPage />
 				<MusicQueue />
 				<MusicPlayer />
-				<TestBox Component={
-					function() {
-						return (
-							<>
-								<h2> Let me put it in the language you can understand </h2>
-								<p> Oh so sorry, no coming here! You deliver, wrong place!</p>
-							</>
-						)
-					}
-				}/>
 			</>
 		),
 	},

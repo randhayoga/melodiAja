@@ -1,0 +1,28 @@
+@use './globals' as *;
+
+.form__entry { 
+	margin-bottom: 15px; 
+
+	> input[type="text"] {
+		box-sizing: border-box;
+		border: 0px solid rgba(0, 0, 0, 0);
+		border-radius: 5px;
+		position: relative;
+		padding: 8px;
+		background: $bg--shallow;
+		color: white;
+		display: block;
+		width: 100%;
+	}
+
+	> label {
+		margin-bottom: 3px;
+		font-size: 14px;
+		display: block;
+	}
+}
+
+.entry__warning {
+	background: $warn;
+	height: 20px;
+}
