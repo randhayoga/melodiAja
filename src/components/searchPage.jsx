@@ -41,28 +41,28 @@ const searchPageView = (() => {
 	let SearchBar = searchBar().render;
 
 	const GENRES = [
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/jazzyRainyMorning.png",
 			heading: "Jazz",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/popMusic.png",
 			heading: "Pop Music",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/houseMusic.png",
 			heading: "House Music",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/rockMusic.png",
 			heading: "Rock Music",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/chillMix.png",
 			heading: "Chill Mix",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/classicalMusic.png",
 			heading: "Classical Music",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/punkMusic.png",
 			heading: "Punk Music",
 		},
-		{ imgPath: "/defaults/defaultCover1.jpg",
+		{ imgPath: "/img/romanticMusic.png",
 			heading: "Romantic Music",
 		},
 	]
@@ -93,7 +93,7 @@ const searchPageView = (() => {
 	return {render};
 })()
 
-function SearchPage() {
+export default (() => {
 	let model = searchPageModel;
 	let view = searchPageView;
 
@@ -102,9 +102,4 @@ function SearchPage() {
 	}
 
 	return {render};
-}
-
-let searchPage = SearchPage();
-export default {
-	render: searchPage.render,
-};
+})()

@@ -78,22 +78,22 @@ export default (() => {
 		id: "homePage__bestPicks",
 		content: [
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/chillStudyMusic.png",
 				heading: "Study Beats",
 				subheading: "Chill",
 			},
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/jazzyRainyMorning.png",
 				heading: "Morning",
 				subheading: "Jazzy",
 			},
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/alternativeRock.png",
 				heading: "Rock",
 				subheading: "Alternative",
 			},
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/traditionalFolkMusic.png",
 				heading: "Folk Music",
 				subheading: "Traditional",
 			},
@@ -103,19 +103,19 @@ export default (() => {
 		id: "homePage__forYou",
 		content: [
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/newYear2023.png",
 				heading: "2023",
 				subheading: "New Year",
 			},
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
+				imgPath: "/img/bestOfPopMusic.png",
 				heading: "Pop Music",
 				subheading: "Best Of",
 			},
 			{
-				imgPath: "/defaults/defaultCover1.jpg",
-				heading: "Serenity",
-				subheading: "Tranquil",
+				imgPath: "/img/fridayNight.png",
+				heading: "Night",
+				subheading: "Friday",
 			},
 		]
 	}
