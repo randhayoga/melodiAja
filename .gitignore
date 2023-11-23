@@ -1,6 +1,6 @@
 node_modules/
 datastore/
 config.js
-bundle.js
+*bundle.js
 *.css.map
 src/components/styles/*.css
