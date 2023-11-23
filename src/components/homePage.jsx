@@ -3,10 +3,9 @@ import MusicPlayer from "./musicPlayer.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import "./styles/homePage.css"
-import {useState} from 'react';
 
 const homePageModel = (() => {
-	const getMusicInfo__EX = () => {
+	const fetchMusic = () => {
 		return [
 			{
 				type: "music",
@@ -32,15 +31,49 @@ const homePageModel = (() => {
 		]
 	}
 
-	return {getMusicInfo__EX}
+	return {fetchMusic}
 })()
 
-function HomePage() {
-	let model = homePageModel;
-	let ContentList = contentList().render;
-	let ContentTiled = contentTiled().render;
+const homePageView = (() => {
+	const render = ({BEST_PICKS, FOR_YOU, musicList}) => {
+		let ContentList = contentList().render;
+		let ContentTiled = contentTiled().render;
 
-	const [musicList, setMusicList] = useState(model.getMusicInfo__EX());
+		return (
+			<section id="homePage">
+				<section className="homePage__section">
+					<h2 className="section__heading">Best Picks</h2>
+					<ContentTiled itemList={BEST_PICKS.content} id={BEST_PICKS.id} nRows={4} />
+				</section>
+				<section className="homePage__section">
+					<h2 className="section__heading">For You</h2>
+					<ContentTiled itemList={FOR_YOU.content} id={FOR_YOU.id} nRows={3} />
+				</section>
+				<section className="homePage__section">
+					<h2 className="section__heading">Popular</h2>
+					<div className="section__content section__content--list">
+						<ContentList itemList={musicList} 
+							handlers={{
+								selectMusic: (item) => {
+									MusicQueue.enqueue(item)
+								},
+								playNow: (item) => {
+									MusicPlayer.changeMusicImmediately(item)
+								}
+							}}
+						/> 
+					</div>
+				</section>
+			</section>
+		)
+	}
+
+	return {render} })()
+
+export default (() => {
+	let model = homePageModel;
+	let view = homePageView;
+
 	const BEST_PICKS = {
 		id: "homePage__bestPicks",
 		content: [
@@ -87,33 +120,13 @@ function HomePage() {
 		]
 	}
 
-	return (
-		<section id="homePage">
-			<section className="homePage__section">
-				<h2 className="section__heading">Best Picks</h2>
-				<ContentTiled itemList={BEST_PICKS.content} id={BEST_PICKS.id} nRows={4} />
-			</section>
-			<section className="homePage__section">
-				<h2 className="section__heading">For You</h2>
-				<ContentTiled itemList={FOR_YOU.content} id={FOR_YOU.id} nRows={3} />
-			</section>
-			<section className="homePage__section">
-				<h2 className="section__heading">Popular</h2>
-				<div className="section__content section__content--list">
-					<ContentList itemList={musicList} 
-						handlers={{
-							selectMusic: (item) => {
-								MusicQueue.enqueue(item)
-							},
-							playNow: (item) => {
-								MusicPlayer.changeMusicImmediately(item)
-							}
-						}}
-					/> 
-				</div>
-			</section>
-		</section>
-	)
-}
+	const render = () => {
+		return view.render({
+			BEST_PICKS: BEST_PICKS,
+			FOR_YOU: FOR_YOU,
+			musicList: model.fetchMusic()
+		});
+	}
 
-export default HomePage;
+	return {render}
+})()
