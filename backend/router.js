@@ -3,6 +3,7 @@ const ROUTER = EXPRESS.Router();
 const PATH = require("path");
 const PUBLIC_PATH = PATH.join("..", "public");
 const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
+const AUTH_CONTROLLER = require("./controllers/auth");
 
 (function main() {
 	/* ====================
@@ -13,13 +14,17 @@ const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 		res.status(200).send()
 	});
 	
-	ROUTER.post("/auth/login", (req, res) => {
+	/*ROUTER.post("/auth/login", (req, res) => {
 		res.redirect("/discover");
-	});
+	});*/
 
-	ROUTER.post("/auth/register", (req, res) => {
+	/*ROUTER.post("/auth/register", (req, res) => {
 		res.redirect("/login");
-	});
+	});*/
+
+	ROUTER.post("/auth/login",AUTH_CONTROLLER.login);
+
+	ROUTER.post("/auth/signup",AUTH_CONTROLLER.signup);
 
 	ROUTER.post("/auth/changePass", (req, res) => {
 		res.redirect("/login");
