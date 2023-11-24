@@ -19,7 +19,11 @@ const profileView = (() => {
 			<Link to="/user/me">
 				<div id="topbar__profile">
 						<div className="imgWrapper">
-							<img src="/defaults/defaultFemale.jpg" alt={`${name}'s PFP`}/>
+							<img 
+								id="currentUser__PFP"
+								src="/defaults/defaultFemale.jpg" 
+								alt={`${name}'s PFP`}
+							/>
 						</div>
 				</div>
 			</Link>
