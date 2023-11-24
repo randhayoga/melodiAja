@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react';
+import configProfileForm from './configProfileForm.jsx';
 import dropmenu from "./dropmenu.jsx"
 import stats from "./stats.jsx";
 import "./styles/userPage.css"
@@ -79,9 +80,10 @@ const userPageView = (() => {
 							</div>
 							{
 								(!isOtherUser && !isUserNotFound)? (
-									<div className="profile__settings">
-										<div className="icon icon--small" 
-											onClick={() => dropmenuObj.toggle()}>
+									<div className="profile__settings"
+										onClick={dropmenuObj.toggle}
+									>
+										<div className="icon icon--small">
 											<img src="/icons/setting.png" alt="Settings Icon" />
 										</div>
 										<Dropmenu
@@ -93,6 +95,8 @@ const userPageView = (() => {
 												{
 													name: "Account Settings",
 													handler: () => {
+														configProfileForm.loadCurrentlyUsedImage();
+														configProfileForm.toggle();
 													}
 												}
 											]}

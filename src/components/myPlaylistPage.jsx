@@ -1,4 +1,5 @@
 import contentList from "./contentList.jsx"
+import makePlaylistForm from "./makePlaylistForm.jsx"
 import searchBar from "./searchBar.jsx"
 import "./styles/myPlaylistPage.css"
 
@@ -46,7 +47,25 @@ const myPlaylistPageView = (() => {
 					<SearchBar />
 				</div>
 				<div className="myPlaylistPage__section">
-					<h2 className="section__heading">My Playlist</h2>
+					<div className="myPlaylistPage__header">
+						<h2 className="section__heading">My Playlist</h2>
+						<div className="myPlaylistPage__headerUtils">
+							<button 
+								id="myPlaylistPage__addPlaylist"
+								onClick = {() => {
+									makePlaylistForm.toggle();
+								}}
+							> 
+								<img 
+									className="icon icon--small" 
+									src="/icons/plus.png" 
+									alt="" 
+								/>
+								<p> Create Playlist </p>
+							</button>
+
+						</div>
+					</div>
 					<ContentList itemList={items} />
 				</div>
 			</section>

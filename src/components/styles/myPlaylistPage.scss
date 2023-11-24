@@ -18,3 +18,32 @@
 		font-size: 20px;
 	}
 }
+
+.myPlaylistPage__header {
+	display: flex;
+	align-items: center;
+	gap: 50px;
+
+	> .section__heading {
+		flex: 1;
+	}
+}
+
+.myPlaylistPage__headerUtils {
+	display: flex;
+	justify-content: flex-end;
+}
+
+#myPlaylistPage__addPlaylist {
+	display: flex;
+	color: $text;
+	padding: 5px 10px;
+	flex: 1;
+	gap: 10px;
+	background: rgb(0, 0, 0);
+	border: 2px solid $bg--normal;
+
+	&:hover {
+		cursor: pointer;
+	}
+}

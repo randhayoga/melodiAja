@@ -29,10 +29,11 @@ import "./App.css";
 	const MyMusicPage = await import("./components/myMusicPage.jsx").then(defaultGetRenderer);
 	const MusicInfoPage = await import("./components/musicInfoPage.jsx").then(defaultGetRenderer);
 	const MusicQueue = await import("./components/musicQueue.jsx").then(defaultGetRenderer);
+	const UploadMusicForm = await import("./components/uploadMusicForm.jsx").then(defaultGetRenderer);
+	const MakePlaylistForm = await import("./components/makePlaylistForm.jsx").then(defaultGetRenderer);
+	const ConfigProfileForm = await import("./components/configProfileForm.jsx").then(defaultGetRenderer)
 	/*
-	const UploadMusicForm = uploadMusicForm.render;
-	const ConfigProfileForm = configProfileForm.render;
-	const MakePlaylistForm = makePlaylistForm.render;
+	const  = makePlaylistForm.render;
 	*/
 
 	const ROUTER = createBrowserRouter([
@@ -56,6 +57,9 @@ import "./App.css";
 							</Routes>
 						</main>
 					</section>
+					<UploadMusicForm />
+					<MakePlaylistForm />
+					<ConfigProfileForm />
 					<MusicInfoPage />
 					<MusicQueue />
 					<MusicPlayer />
