@@ -1,0 +1,14 @@
+@use './globals' as *;
+
+#configProfile {
+	max-width: 600px;
+	width: 75vw;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+
+	> * {
+		display: flex;
+		flex-direction: column;
+	}
+}
