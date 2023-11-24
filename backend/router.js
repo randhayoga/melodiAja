@@ -13,14 +13,6 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 		console.log(req.body);
 		res.status(200).send()
 	});
-	
-	/*ROUTER.post("/auth/login", (req, res) => {
-		res.redirect("/discover");
-	});*/
-
-	/*ROUTER.post("/auth/register", (req, res) => {
-		res.redirect("/login");
-	});*/
 
 	ROUTER.post("/auth/login",AUTH_CONTROLLER.login);
 
@@ -30,9 +22,13 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 		res.redirect("/login");
 	});
 
-	/*====================
-	 GET INFORMATIONS
-	====================*/
+	/* ====================
+	GET: - INFORMATIONS (e.g comments, likes, etc), prefix: info
+		 - RESOURCES (e.g. profile picture, music, etc), prefix: assets
+	==================== */
+	ROUTER.get("/info/searchResult", (req, res) => {
+	});
+
 	ROUTER.get("/info/music/:id", (req, res) => {
 		// Dummy
 		switch(req.params.id % 3) {
@@ -48,10 +44,16 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 		}
 	});
 
-	/* ====================
-	GET RESOURCES (e.g. profile picture, music, etc)
-	==================== */
-	ROUTER.get("/assets/music/:file", (req, res) => {
+	ROUTER.get("/info/comments/:id", (req, res) => {
+	});
+
+	ROUTER.get("/info/user/:id", (req, res) => {
+	});
+
+	ROUTER.get("/info/musicStats/:id", (req, res) => {
+	});
+
+	ROUTER.get("/assets/music/:id", (req, res) => {
 		const options =  {
 			root: PATH.join(__dirname, "..")
 		};
@@ -60,8 +62,18 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 			options,);
 	});
 
+	ROUTER.get("/assets/profilePicture/:id", (req, res) => {
+	});
+
+	ROUTER.get("/assets/musicCOver/:id", (req, res) => {
+	});
+
+	ROUTER.get("/assets/playlistCover/:id", (req, res) => {
+	});
+
+
 	/* ====================
-	GET Handlers
+	GET Page handlers
 	==================== */
 	["/discover", "/search", "/myPlaylist", "/myMusic", "/user/:id"].forEach(
 		(path) => {
