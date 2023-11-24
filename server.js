@@ -7,13 +7,30 @@ const ROUTES = require("./backend/router.js").ROUTES;
 const BODY_PARSER = require("body-parser");
 const MORGAN = require("morgan");
 
+const MYSQL = require("mysql");
+
+const DATABASE = MYSQL.createConnection({
+	host: "localhost",
+	user: "root",
+	password: "root123",
+	database: "melodiaja"
+});
+
+DATABASE.connect( (error) => {
+	if (error){
+		console.log(error)
+	} else {
+		console.log("MySQL Connected...")
+	}
+});
+
 (function main() {
 	const PUBLIC_PATH = PATH.join(__dirname, "public");
 	
 	// Middlewares
-	APP.use(MORGAN('combined'))
+	APP.use(MORGAN('combined'));
 	APP.use(BODY_PARSER.json());
-	APP.use(BODY_PARSER.urlencoded({extended: false}))
+	APP.use(BODY_PARSER.urlencoded({extended: false}));
 
 	// Determine where static stuff is located
 	let imgTTL = 1000 * 1
