@@ -18,7 +18,7 @@ const uploadMusicView = (() => {
 
 	const clearCanvas = () => {
 		document.getElementById("uploadMusic__imgPreviewCaption")
-			.classList.remove("uploadMusic__imgPreviewCaption--hidden")
+			.classList.remove("form__imgPreviewCaption--hidden")
 		document.getElementById("uploadMusic__imgPreview")
 			.getContext("2d")
 			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
@@ -27,11 +27,12 @@ const uploadMusicView = (() => {
 	const Form = () => {
 		return (
 			<form action="" id="uploadMusic">
-				<div className="form__section uploadMusic__coverImg">
+				<div className="form__section form__imgInputSection">
 					<canvas 
 						height={CANVAS_HEIGHT} 
 						width={CANVAS_WIDTH} 
 						id="uploadMusic__imgPreview"
+						className="form__imgPreview"
 					>
 					</canvas>
 					<div 
@@ -39,7 +40,7 @@ const uploadMusicView = (() => {
 							height: CANVAS_HEIGHT,
 							width: CANVAS_WIDTH,
 						}} 
-						className="uploadMusic__imgPreviewCaption"
+						className="form__imgPreviewCaption"
 						id="uploadMusic__imgPreviewCaption"
 						onClick = {() => {
 							document.getElementById("uploadMusic__img").click()
@@ -49,11 +50,12 @@ const uploadMusicView = (() => {
 					</div>
 					<input 
 						id="uploadMusic__img"
+						className="form__imgInput"
 						type="file" 
 						accept="image/*"
 						onChange={() => {
 							document.getElementById("uploadMusic__imgPreviewCaption")
-								.classList.add("uploadMusic__imgPreviewCaption--hidden")
+								.classList.add("form__imgPreviewCaption--hidden")
 							let ctx = document.getElementById("uploadMusic__imgPreview")
 									.getContext("2d");
 							let data = document.getElementById("uploadMusic__img")
@@ -74,6 +76,7 @@ const uploadMusicView = (() => {
 							<input type="text"
 								required
 								id="uploadMusic__title"
+								className="formEntry__text"
 								placeholder="If this is real, I don't need to dream"
 							/>
 							<div className="entry__warning" id="warning__musicTitle"></div>
@@ -82,13 +85,17 @@ const uploadMusicView = (() => {
 							<label htmlFor="uploadMusic__composer"> Music composer </label>
 							<input type="text"
 								id="uploadMusic__composer"
+								className="formEntry__text"
 								placeholder="Timothy Prescott"
 							/>
 							<div className="entry__warning" id="warning__musicComposer"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="uploadMusic__genre"> Music genre </label>
-							<select id="uploadMusic__genre" name="musicGenre">
+							<select id="uploadMusic__genre" 
+								className="formEntry__selection" 
+								name="musicGenre"
+							>
 								<option value=""> Select genre </option>
 								<option value="chillout"> Chillout </option>
 								<option value="classic"> Classic </option>
@@ -114,7 +121,7 @@ const uploadMusicView = (() => {
 						</div>
 					</div>
 
-					<button id="uploadMusic__upload">Upload</button>
+					<button id="uploadMusic__upload" className="form__submitButton">Upload</button>
 				</div>
 			</form>
 		)
