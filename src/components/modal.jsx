@@ -3,12 +3,12 @@ import {useState} from "react";
 
 const modalView = () => {
 	const toggle = (id) => {
-		document.getElementById(id).classList.toggle("modal__box--hidden");
+		document.getElementById(id).classList.toggle("modal--hidden");
 	}
 
 	const render = ({id, heading}, Component) => {
 		return (
-			<section id={`${id}Modal`}>
+			<section id={`${id}Modal`} className="modal--hidden">
 				<div className="modal__box">
 					<div className="modal__top">
 						<h3 className="modal__name"> {heading} </h3>
