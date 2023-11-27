@@ -30,44 +30,89 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 	});
 
 	ROUTER.get("/info/musicList", (req, res) => {
+		const musicPath = "/assets/musicCover";
 		res.send({
 			musicList: [
 				{
 					type: "music",
-					id: "blal",
-					title: "Music1",
-					artist: "Artist1",
-					imgPath: "/defaults/defaultCover0.jpg",
+					id: "1",
+					title: "Bersamamu",
+					artist: "Jaz",
+					imgPath: `${musicPath}/1.png`,
 				},
 				{
 					type: "music",
-					id: "blal2",
-					title: "Music2",
-					artist: "Artist2",
-					imgPath: "/defaults/defaultCover2.jpg",
+					id: "2",
+					title: "The Weeknd",
+					artist: "Starboy Audio ft. Daft Punk",
+					imgPath: `${musicPath}/2.png`,
 				},
 				{
 					type: "music",
-					id: "blal3",
-					title: "Music3",
-					artist: "Artist3",
-					imgPath: "/defaults/defaultCover1.jpg",
+					id: "3",
+					title: "Penjaga Hati",
+					artist: "Nadhif Basalamah ",
+					imgPath: `${musicPath}/3.png`,
+				},
+				{
+					type: "music",
+					id: "4",
+					title: "Seven",
+					artist: "Jung Kook",
+					imgPath: `${musicPath}/4.png`,
+				},
+				{
+					type: "music",
+					id: "5",
+					title: "On My Way",
+					artist: "Alan Walker, Sabrina Carpenter, & Farruko",
+					imgPath: `${musicPath}/5.png`,
 				}
 			]
 		})
 	});
 
-	ROUTER.get("/info/music/:id", (req, res) => {
-		// Dummy
-		switch(req.params.id % 3) {
-			case 0:
-				res.send({musicPath: "/test-music2.mp3"});
-				break;
+	ROUTER.get("/info/musicPath/:id", (req, res) => {
+		res.send({musicPath: `/assets/music/${req.params.id}.mp3`});
+	});
+
+	ROUTER.get("/info/musicInfo/:id", (req, res) => {
+		const musicPath = "/assets/musicCover";
+		switch(req.params.id % 5) {
 			case 1:
-				res.send({musicPath: "/test-music1.mp3"});
+				res.send({
+					title: "Bersamamu",
+					artist: "Jaz",
+					imgPath: `${musicPath}/1.png`,
+				});
+				break;
+			case 2:
+				res.send({
+					title: "The Weeknd",
+					artist: "Starboy Audio ft. Daft Punk",
+					imgPath: `${musicPath}/2.png`,
+				});
+				break;
+			case 3:
+				res.send({
+					title: "Penjaga Hati",
+					artist: "Nadhif Basalamah ",
+					imgPath: `${musicPath}/3.png`,
+				});
+				break;
+			case 4:
+				res.send({
+					title: "Seven",
+					artist: "Jung Kook",
+					imgPath: `${musicPath}/4.png`,
+				});
 				break;
 			default:
-				res.send({musicPath: "/assets/music/secret.mp3"});
+				res.send({
+					title: "On My Way",
+					artist: "Alan Walker, Sabrina Carpenter, & Farruko",
+					imgPath: `${musicPath}/5.png`,
+				});
 				break;
 		}
 	});
@@ -86,14 +131,21 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 			root: PATH.join(__dirname, "..")
 		};
 
-		res.sendFile("datastore/GTA San Andreas K Rose Full Station.mp3",
+		res.sendFile(`datastore/music/${req.params.id}`,
 			options,);
 	});
 
 	ROUTER.get("/assets/profilePicture/:id", (req, res) => {
 	});
 
-	ROUTER.get("/assets/musicCOver/:id", (req, res) => {
+	ROUTER.get("/assets/musicCover/:id", (req, res) => {
+		const options =  {
+			root: PATH.join(__dirname, "..")
+		};
+
+		console.log(req.params.id);
+		res.sendFile(`datastore/musicCover/${req.params.id}`,
+			options,);
 	});
 
 	ROUTER.get("/assets/playlistCover/:id", (req, res) => {
