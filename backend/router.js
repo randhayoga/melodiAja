@@ -29,6 +29,34 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 	ROUTER.get("/info/searchResult", (req, res) => {
 	});
 
+	ROUTER.get("/info/musicList", (req, res) => {
+		res.send({
+			musicList: [
+				{
+					type: "music",
+					id: "blal",
+					title: "Music1",
+					artist: "Artist1",
+					imgPath: "/defaults/defaultCover0.jpg",
+				},
+				{
+					type: "music",
+					id: "blal2",
+					title: "Music2",
+					artist: "Artist2",
+					imgPath: "/defaults/defaultCover2.jpg",
+				},
+				{
+					type: "music",
+					id: "blal3",
+					title: "Music3",
+					artist: "Artist3",
+					imgPath: "/defaults/defaultCover1.jpg",
+				}
+			]
+		})
+	});
+
 	ROUTER.get("/info/music/:id", (req, res) => {
 		// Dummy
 		switch(req.params.id % 3) {

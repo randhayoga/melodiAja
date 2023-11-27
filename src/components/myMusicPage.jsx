@@ -3,35 +3,28 @@ import contentList from "./contentList.jsx"
 import searchBar from "./searchBar.jsx"
 import uploadMusicForm from "./uploadMusicForm.jsx"
 import "./styles/myMusicPage.css"
+import { useEffect, useState } from "react";
 
 const myMusicPageModel = (() => {
-	const fetchItems = () => {
-		return [
-			{
-				type: "music",
-				id: "blal",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: "/defaults/defaultCover0.jpg",
-			},
-			{
-				type: "music",
-				id: "blal2",
-				title: "Music2",
-				artist: "Artist2",
-				imgPath: "/defaults/defaultCover2.jpg",
-			},
-			{
-				type: "music",
-				id: "blal3",
-				title: "Music3",
-				artist: "Artist3",
-				imgPath: "/defaults/defaultCover1.jpg",
-			}
-		]
+	const fetchMusic = async(setter) => {
+		useEffect(() => {
+			fetch("/info/musicList")
+				.then((response) => {
+					if(response.ok) {
+						return response.json();
+					}
+					throw new Error("Failed to establish connection")
+				}).then((response) => {
+					setter(response.musicList);
+					return 0;
+				}).catch((err) => {
+					console.log(err.message);
+					return -1;
+				})
+		}, [])
 	}
 
-	return {fetchItems}
+	return {fetchMusic}
 })()
 
 const myMusicPageView = (() => {
@@ -84,7 +77,9 @@ let myMusicPage = (function() {
 	let model = myMusicPageModel;
 
 	const render = () => {
-		return view.render(model.fetchItems());
+		const [musicList, setMusicList] = useState([]);
+		model.fetchMusic(setMusicList);
+		return view.render(musicList);
 	}
 
 	return {render};
