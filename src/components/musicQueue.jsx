@@ -62,7 +62,7 @@ const musicQueueView = (() => {
 
 export default (() => {
 	let view = musicQueueView;
-	let currentPlayIdx = 0;
+	let currentPlayIdx = -1;
 	let refQueue, refSetQueue;
 
 	const enqueue = ({id, title, artist, imgPath}) => {
@@ -77,7 +77,7 @@ export default (() => {
 
 	const next = () => {
 		if(currentPlayIdx == -1) {
-			currentPlayIdx = 1
+			currentPlayIdx = 0
 		} else if(currentPlayIdx < refQueue.length){
 			currentPlayIdx++
 		}
@@ -87,14 +87,14 @@ export default (() => {
 	const previous = () => {
 		if(currentPlayIdx == refQueue.length) {
 			currentPlayIdx = refQueue.length - 2
-		} else if(currentPlayIdx > -1){
+		} else if(currentPlayIdx > 0){
 			currentPlayIdx--
 		}
 		view.sync(currentPlayIdx);
 	}
 
 	const replay = () => {
-		currentPlayIdx = 0;
+		currentPlayIdx = -1;
 		view.sync(currentPlayIdx);
 	}
 
@@ -112,34 +112,12 @@ export default (() => {
 	}
 
 	const render = () => {
-		const [queue, setQueue] = useState([
-			{
-				type: "queueMusic",
-				id: "1",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: "/defaults/defaultCover1.jpg",
-			},
-			{
-				type: "queueMusic",
-				id: "2",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: "/defaults/defaultCover2.jpg",
-			},
-			{
-				type: "queueMusic",
-				id: "3",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: "/defaults/defaultCover3.jpg",
-			},
-		]);
+		const [queue, setQueue] = useState([]);
 		refQueue = queue;
 		refSetQueue = setQueue;
 
 		const clear = () => {
-			currentPlayIdx = -1;
+			replay();
 			setQueue([]);
 		}
 

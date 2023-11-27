@@ -10,8 +10,8 @@ import MusicQueue from "./musicQueue.jsx";
 import "./styles/musicPlayer.css";
 
 const musicPlayerModel = (() => {
-	const fetchSong = async(id) => {
-		return await fetch(`/info/music/${id}`, {
+	const fetchSongPath = async(id) => {
+		return await fetch(`/info/musicPath/${id}`, {
 				method: "GET",
 			}).then((res) => {
 				if(res.ok) {
@@ -28,27 +28,63 @@ const musicPlayerModel = (() => {
 
 	const fetchSongInfo = async(id, setter) => {
 		useEffect(() => {
-			setInterval(() => {
+			fetch(`/info/musicInfo/${id}`)
+			.then((response) => {
+				if(response.ok) {
+					return response.json();
+				}
+				return new Error();
+			}).then((response) => {
+				const {title, artist, imgPath} = response;
 				setter({
-					title: "Elysium (Part 1)",
-					artist: "We are All Astronauts",
-					imgPath: "/defaults/defaultCover1.jpg",
+					title: title,
+					artist: artist,
+					imgPath: imgPath,
 				})
-			}, 1000)
+			}).catch((err) => {
+				console.log(err)
+				setter({
+					title: "Error has occured :(",
+					artist: "Error",
+					imgPath: "",
+				})
+			})
 		}, [])
 	}
 
-	return {fetchSong, fetchSongInfo};
+	return {fetchSongPath, fetchSongInfo};
 })()
 
 const musicPlayerView = (() => {
-	let Controls = controls.render;
-	let MusicMeter = musicMeter.render();
-	let MusicMeterPin = musicMeterPin.render();
-	let MusicDuration = musicDuration.render;
+	const Controls = controls.render;
+	const MusicMeter = musicMeter.render();
+	const MusicMeterPin = musicMeterPin.render();
+	const MusicDuration = musicDuration.render;
 
-	const render = ({progressInterval, musicInfo, changeMusic}) => {
-		let {title, artist, imgPath} = musicInfo.get;
+	const syncMusicInfo = async(id) => {
+		const elemAlbumArt = document.getElementById("mPlayer__albumArt")
+		const elemTitle = document.getElementById("mPlayer__title")
+		const elemArtist = document.getElementById("mPlayer__artist")
+
+		await fetch(`/info/musicInfo/${id}`)
+			.then((response) => {
+				if(response.ok) {
+					return response.json();
+				}
+				return new Error();
+			}).then((response) => {
+				const {title, artist, imgPath} = response;
+				elemAlbumArt.src = imgPath;
+				elemTitle.textContent = title;
+				elemArtist.textContent = artist;
+			}).catch((err) => {
+				console.log(err)
+				elemTitle.textContent = "MusicFetchError";
+				elemArtist.textContent = "Unknown";
+			})
+	}
+
+	const render = ({progressInterval, changeMusic}) => {
 		return (
 			<>
 				<section id="mPlayer">
@@ -59,13 +95,13 @@ const musicPlayerView = (() => {
 								set: progressInterval.set,
 							}}
 							musicQueue={{
-								next: () => {
+								next: async() => {
 									MusicQueue.next()
-									changeMusic(MusicQueue.getCurrentMusic())
+									await changeMusic(MusicQueue.getCurrentMusic())
 								},
-								previous: () => {
+								previous: async() => {
 									MusicQueue.previous()
-									changeMusic(MusicQueue.getCurrentMusic())
+									await changeMusic(MusicQueue.getCurrentMusic())
 								}
 							}}
 						/>
@@ -77,13 +113,18 @@ const musicPlayerView = (() => {
 								MusicInfoPage.toggle();
 							}}
 						>
-							<img src={imgPath} 
-								alt={`${title} album art`} 
+							<img src="" 
+								alt="Music album art"
 								className="mPlayer__albumArt"
+								id="mPlayer__albumArt"
 							/>
 							<div className="mPlayer__currentPlayInfo">
-								<p className="mPlayer__title"> {title} </p>
-								<p className="mPlayer__artist"> {artist} </p>
+								<p className="mPlayer__title" id="mPlayer__title"> 
+									No music is being played! 
+								</p>
+								<p className="mPlayer__artist" id="mPlayer__artist"> 
+									Unknown 
+								</p>
 							</div>
 						</section>
 					</div>
@@ -108,7 +149,7 @@ const musicPlayerView = (() => {
 		)
 	}
 
-	return {render};
+	return {render, syncMusicInfo};
 })()
 
 export default (() => {
@@ -120,15 +161,15 @@ export default (() => {
 	const setProgressInterval = (newInterval) => {progressInterval = newInterval}
 
 	const changeMusic = async(nextSongID) => {
+		const audioPreviouslyPaused = elemAudio.paused;
 		elemAudio.currentTime = 0;
-		if(elemAudio.paused) {
-			controls.togglePlayButton();
-		}
 
 		if(nextSongID != -1) {
-			elemAudio.src = await model.fetchSong(nextSongID)
-			await elemAudio.load();
-			controls.buttonToggleMusic(progressInterval, setProgressInterval)
+			elemAudio.src = await model.fetchSongPath(nextSongID)
+			elemAudio.load();
+			view.syncMusicInfo(MusicQueue.getCurrentMusic());
+			await controls.buttonToggleMusic(progressInterval, setProgressInterval)
+			if(audioPreviouslyPaused) controls.togglePlayButton(); 
 			musicMeter.reset();
 		}
 	}
@@ -137,6 +178,7 @@ export default (() => {
 	const changeMusicImmediately = async(nextSongID) => {
 		MusicQueue.replay();
 		await changeMusic(nextSongID);
+		view.syncMusicInfo(nextSongID);
 	}
 
 	elemAudio.addEventListener("ended", () => {
@@ -151,23 +193,10 @@ export default (() => {
 
 
 	const render = () => {
-		const [musicInfo, setMusicInfo] = useState(
-			{
-				title: "...",
-				artist: "...",
-				imgPath: "",
-			}
-		);
-
-		model.fetchSongInfo(1, setMusicInfo);
 		return view.render({
 			progressInterval: {
 				get: progressInterval,
 				set: setProgressInterval,
-			},
-			musicInfo: {
-				get: musicInfo,
-				set: setMusicInfo,
 			},
 			changeMusic: changeMusic
 		});
