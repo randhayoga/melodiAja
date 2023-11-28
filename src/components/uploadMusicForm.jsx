@@ -1,4 +1,5 @@
 import modal from "./modal.jsx"
+import form from "./form.jsx"
 import "./styles/uploadMusicForm.css"
 import "./styles/form.css"
 
@@ -57,43 +58,25 @@ const uploadMusicModel = (() => {
 })()
 
 const uploadMusicView = (() => {
-	let modalObj = modal("uploadMusicForm", "Upload Music");
-	let Modal = modalObj.render;
 	const CANVAS_WIDTH = 240;
 	const CANVAS_HEIGHT = 240;
+	const modalObj = modal("uploadMusicForm", "Upload Music");
+	const formObj = form(
+		"uploadMusic", 
+		["Title", "Genre", "File"],
+		{CANVAS_HEIGHT: CANVAS_HEIGHT, CANVAS_WIDTH: CANVAS_WIDTH}
+	)
+	const Modal = modalObj.render;
 
-	const cleanWarning = () => {
-		[
-			"Title",
-			"Genre",
-			"File"
-		].forEach((item) => {
-			document.getElementById(`warning__uploadMusic${item}`)
-				.classList.remove("entry__warning--showing")
-		})
-	}
-
-	const setWarning = (elemID, message) => {
-		let elem = document.getElementById(elemID);
-		elem.classList.add("entry__warning--showing");
-		elem.textContent = message;
-	}
-
-	const clearCanvas = () => {
-		document.getElementById("uploadMusic__imgPreviewCaption")
-			.classList.remove("form__imgPreviewCaption--hidden")
-		document.getElementById("uploadMusic__imgPreview")
-			.getContext("2d")
-			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-	}
-
+	const setWarning = (elemID, message) => formObj.setWarning(elemID, message)
+	const clearCanvas = () => formObj.clearCanvas()
 	const toggle = () => {
 		modalObj.toggle();
-		cleanWarning();
+		formObj.clearWarning();
 	}
 
-	const makeForm = (handlers) => {
-		return (
+	const render = (handlers) => {
+		const Form = () => (
 			<form action="" id="uploadMusic">
 				<div className="form__section form__imgInputSection">
 					<canvas 
@@ -122,20 +105,11 @@ const uploadMusicView = (() => {
 						className="form__imgInput"
 						type="file" 
 						accept="image/*"
-						onChange={() => {
-							document.getElementById("uploadMusic__imgPreviewCaption")
-								.classList.add("form__imgPreviewCaption--hidden")
-							let ctx = document.getElementById("uploadMusic__imgPreview")
-									.getContext("2d");
-							let data = document.getElementById("uploadMusic__img")
-									.files[0]
-
-							let img = new Image();
-							img.src = URL.createObjectURL(data)
-							img.onload = () => ctx.drawImage(
-								img, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT
-							);
-						}}
+						onChange={() => formObj.changePreviewImage(
+							URL.createObjectURL(
+								document.getElementById("uploadMusic__img").files[0]
+							)
+						)}
 					/>
 				</div>
 				<div className="form__detailsWrapper">
@@ -198,7 +172,7 @@ const uploadMusicView = (() => {
 						className="form__submitButton"
 						onClick={(e) => {
 							e.preventDefault();
-							cleanWarning();
+							formObj.clearWarning();
 							handlers.handleData(new FormData(
 								document.getElementById("uploadMusic"),
 								e.currentTarget
@@ -207,16 +181,9 @@ const uploadMusicView = (() => {
 					> Upload </button>
 				</div>
 			</form>
-		)
-	}
+		);
 
-	const render = (handlers) => {
-		const Form = () => makeForm(handlers);
-		return (
-			<>
-				<Modal component={Form}/>
-			</>
-		)
+		return <> <Modal component={Form}/> </>;
 	}
 
 	return {render, toggle, clearCanvas}

@@ -1,6 +1,7 @@
 import modal from "./modal.jsx"
-import "./styles/configProfileForm.css"
+import form from "./form.jsx"
 import "./styles/form.css"
+import "./styles/configProfileForm.css"
 
 const configProfileModel = (() => {
 	const gatherData = formData => ({
@@ -17,7 +18,7 @@ const configProfileModel = (() => {
 		const atleastOneFilled = pictureFilled || usernameFilled || displayNameFilled;
 		let isValid = atleastOneFilled;
 		
-		if(!atleastOneFilled) setWarning("warning__userConfigUsername", "Please change atleast 1 item");
+		if(!atleastOneFilled) setWarning("warning__configProfileUsername", "Please change atleast 1 item");
 		else {
 			let tempRegexMatch;
 			if(usernameFilled) {
@@ -26,7 +27,7 @@ const configProfileModel = (() => {
 					|| tempRegexMatch[0].length < displayName.length) 
 				{
 					setWarning(
-						"warning__userConfigUsername", 
+						"warning__configProfileUsername", 
 						"Username should be between is 7 to 16 characters long and only contain alphanumeric characters and underscore"
 					);
 					isValid = false;
@@ -39,7 +40,7 @@ const configProfileModel = (() => {
 					|| tempRegexMatch[0].length < username.length) 
 				{
 					setWarning(
-						"warning__userConfigDisplayName", 
+						"warning__configProfileDisplayName", 
 						"Display name should be between 3 to 32 characters long and only contains alphabets and space"
 					);
 					isValid = false;
@@ -65,55 +66,30 @@ const configProfileModel = (() => {
 })()
 
 const configProfileView = (() => {
-	let modalObj = modal("configProfileForm", "Profile Configuration");
-	let Modal = modalObj.render;
 	const CANVAS_WIDTH = 240;
 	const CANVAS_HEIGHT = 240;
+	const modalObj = modal("configProfileForm", "Profile Configuration");
+	const formObj = form(
+		"configProfile", 
+		["DisplayName", "Username"],
+		{CANVAS_HEIGHT: CANVAS_HEIGHT, CANVAS_WIDTH: CANVAS_WIDTH}
+	)
+	const Modal = modalObj.render;
 
-	const cleanWarning = () => {
-		[
-			"DisplayName",
-			"Username"
-		].forEach((item) => {
-			document.getElementById(`warning__userConfig${item}`)
-				.classList.remove("entry__warning--showing")
-		})
-	}
-
-	const setWarning = (elemID, message) => {
-		let elem = document.getElementById(elemID);
-		elem.classList.add("entry__warning--showing");
-		elem.textContent = message;
-	}
-
+	const setWarning = (elemID, message) => formObj.setWarning(elemID, message)
+	const clearCanvas = () => formObj.clearCanvas()
 	const toggle = () => {
 		modalObj.toggle();
-		cleanWarning();
+		formObj.clearWarning();
 	}
 
-	const clearCanvas = () => {
-		document.getElementById("configProfile__imgPreviewCaption")
-			.classList.remove("form__imgPreviewCaption--hidden")
-		document.getElementById("configProfile__imgPreview")
-			.getContext("2d")
-			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+	// Current user's profile image
+	const loadCurrentlyUsedImage = () => {
+		formObj.changePreviewImage(document.getElementById("currentUser__PFP").src);
 	}
 
-	const changePreviewImage = (data) => {
-		document.getElementById("configProfile__imgPreviewCaption")
-			.classList.add("form__imgPreviewCaption--hidden")
-		const ctx = document.getElementById("configProfile__imgPreview")
-				.getContext("2d");
-
-		const img = new Image();
-		img.src = data;
-		img.onload = () => ctx.drawImage(
-			img, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT
-		);
-	}
-
-	const makeForm = (handlers) => {
-		return (
+	const render = (handlers) => {
+		const Form = () => (
 			<form action="" id="configProfile">
 				<div className="form__section form__imgInputSection">
 					<canvas 
@@ -142,7 +118,7 @@ const configProfileView = (() => {
 						className="form__imgInput"
 						type="file" 
 						accept="image/*"
-						onChange={() => changePreviewImage(
+						onChange={() => formObj.changePreviewImage(
 							URL.createObjectURL(
 								document.getElementById("configProfile__img").files[0]
 							)
@@ -159,7 +135,7 @@ const configProfileView = (() => {
 								id="configProfile__displayName"
 								placeholder="If this is real, I don't need to dream"
 							/>
-							<div className="entry__warning" id="warning__userConfigDisplayName"></div>
+							<div className="entry__warning" id="warning__configProfileDisplayName"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="configProfile__username" > Username </label>
@@ -169,7 +145,7 @@ const configProfileView = (() => {
 								className="formEntry__text"
 								placeholder="Timothy Prescott"
 							/>
-							<div className="entry__warning" id="warning__userConfigUsername"></div>
+							<div className="entry__warning" id="warning__configProfileUsername"></div>
 						</div>
 					</div>
 
@@ -178,7 +154,7 @@ const configProfileView = (() => {
 						className="form__submitButton"
 						onClick={(e) => {
 							e.preventDefault();
-							cleanWarning();
+							formObj.clearWarning();
 							handlers.handleData(new FormData(
 								document.getElementById("configProfile"),
 								e.currentTarget
@@ -187,21 +163,9 @@ const configProfileView = (() => {
 					> Submit </button>
 				</div>
 			</form>
-		)
-	}
+		);
 
-	// Current user's profile image
-	const loadCurrentlyUsedImage = () => {
-		changePreviewImage(document.getElementById("currentUser__PFP").src);
-	}
-
-	const render = (handlers) => {
-		const Form = () => makeForm(handlers);
-		return (
-			<>
-				<Modal component={Form}/>
-			</>
-		)
+		return <> <Modal component={Form}/> </>;
 	}
 
 	return {render, toggle, clearCanvas, loadCurrentlyUsedImage}

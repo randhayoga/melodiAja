@@ -1,4 +1,5 @@
 import modal from "./modal.jsx"
+import form from "./form.jsx"
 import "./styles/makePlaylistForm.css"
 import "./styles/form.css"
 
@@ -40,37 +41,26 @@ const makePlaylistModel = (() => {
 })()
 
 const makePlaylistView = (() => {
-	let modalObj = modal("makePlaylistForm", "Create Playlist");
-	let Modal = modalObj.render;
 	const CANVAS_WIDTH = 240;
 	const CANVAS_HEIGHT = 240;
+	let modalObj = modal("makePlaylistForm", "Create Playlist");
+	const formObj = form(
+		"makePlaylist", 
+		["Name"],
+		{CANVAS_HEIGHT: CANVAS_HEIGHT, CANVAS_WIDTH: CANVAS_WIDTH}
+	)
+	let Modal = modalObj.render;
 
-	const clearCanvas = () => {
-		document.getElementById("makePlaylist__imgPreviewCaption")
-			.classList.remove("form__imgPreviewCaption--hidden")
-		document.getElementById("makePlaylist__imgPreview")
-			.getContext("2d")
-			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-	}
-
-	const cleanWarning = () => {
-		document.getElementById(`warning__makePlaylistName`)
-			.classList.remove("entry__warning--showing")
-	}
-
-	const setWarning = (elemID, message) => {
-		let elem = document.getElementById(elemID);
-		elem.classList.add("entry__warning--showing");
-		elem.textContent = message;
-	}
+	const setWarning = (elemID, message) => { formObj.setWarning(elemID, message) }
+	const clearCanvas = () => formObj.clearCanvas()
 
 	const toggle = () => {
 		modalObj.toggle();
-		cleanWarning();
+		formObj.clearWarning();
 	}
 
-	const makeForm = (handlers) => {
-		return (
+	const render = (handlers) => {
+		const Form = () => (
 			<form action="" id="makePlaylist">
 				<div className="form__section form__imgInputSection">
 					<canvas 
@@ -99,20 +89,11 @@ const makePlaylistView = (() => {
 						className="form__imgInput"
 						type="file" 
 						accept="image/*"
-						onChange={() => {
-							document.getElementById("makePlaylist__imgPreviewCaption")
-								.classList.add("form__imgPreviewCaption--hidden")
-							let ctx = document.getElementById("makePlaylist__imgPreview")
-									.getContext("2d");
-							let data = document.getElementById("makePlaylist__img")
-									.files[0]
-
-							let img = new Image();
-							img.src = URL.createObjectURL(data)
-							img.onload = () => ctx.drawImage(
-								img, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT
-							);
-						}}
+						onChange={() => formObj.changePreviewImage(
+							URL.createObjectURL(
+								document.getElementById("makePlaylist__img") .files[0]
+							)
+						)}
 					/>
 				</div>
 				<div className="form__detailsWrapper">
@@ -147,7 +128,7 @@ const makePlaylistView = (() => {
 						className="form__submitButton"
 						onClick = {(e) => {
 							e.preventDefault();
-							cleanWarning();
+							formObj.clearWarning();
 							handlers.handleData(new FormData(
 								document.getElementById("makePlaylist"),
 								e.currentTarget
@@ -156,16 +137,9 @@ const makePlaylistView = (() => {
 					> Confirm </button>
 				</div>
 			</form>
-		)
-	}
+		);
 
-	const render = (handlers) => {
-		const Form = () => makeForm(handlers);
-		return (
-			<>
-				<Modal component={Form}/>
-			</>
-		)
+		return <> <Modal component={Form}/> </>
 	}
 
 	return {render, toggle, clearCanvas}
