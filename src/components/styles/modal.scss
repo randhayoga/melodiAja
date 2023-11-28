@@ -3,6 +3,8 @@
 .modal__box {
 	min-width: 200px;
 	min-height: 80px; 
+	max-height: 500px; 
+	height: fit-content;
 	width: fit-content;
 	padding: 20px;
 	background: $bg--normal;
@@ -13,6 +15,7 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+
 }
 
 .modal--hidden {
@@ -38,5 +41,9 @@
 }
 
 .modal__body {
+	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
+	max-height: 400px; /* magic */
+	overflow-y: scroll;
 }
