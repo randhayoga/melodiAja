@@ -3,32 +3,47 @@ import "./styles/configProfileForm.css"
 import "./styles/form.css"
 
 const configProfileModel = (() => {
-	const gatherData = (formData) => {
-		return {
-			userPFP: formData.get("userPFP"),
-			displayName: formData.get("displayName"),
-			username: formData.get("username"),
-		}
-	}
+	const gatherData = formData => ({
+		userPFP: formData.get("userPFP"),
+		displayName: formData.get("displayName"),
+		username: formData.get("username"),
+	})
 
 	const validateData = ({userPFP, displayName, username}, setWarning) => {
 		// At least one should be changed
-		const atleastOneFilled = ( 
-			userPFP.size > 0
-			|| username != "" 
-			|| displayName != ""
-		);
-		
-		// Regex
-		console.log(!/[\W]/.test(username));
+		const usernameFilled = username != ""
+		const pictureFilled = userPFP.size > 0
+		const displayNameFilled = displayName != ""
+		const atleastOneFilled = pictureFilled || usernameFilled || displayNameFilled;
 		let isValid = atleastOneFilled;
+		
+		if(!atleastOneFilled) setWarning("warning__userConfigUsername", "Please change atleast 1 item");
+		else {
+			let tempRegexMatch;
+			if(usernameFilled) {
+				tempRegexMatch = username.match(/[a-zA-Z][a-zA-Z0-9_]{6,15}/)
+				if(tempRegexMatch == null 
+					|| tempRegexMatch[0].length < displayName.length) 
+				{
+					setWarning(
+						"warning__userConfigUsername", 
+						"Username should be between is 7 to 16 characters long and only contain alphanumeric characters and underscore"
+					);
+					isValid = false;
+				}
+			}
 
-		isValid = false;
-		if(!isValid) {
-			if(!atleastOneFilled) {
-				setWarning("warning__userConfigUsername", "Please change atleast 1 item");
-			} else {
-				setWarning("warning__userConfigUsername", "Something is wrong");
+			if(displayNameFilled) {
+				tempRegexMatch= displayName.match(/[a-zA-Z][a-zA-Z ]{2,31}/)
+				if(tempRegexMatch == null 
+					|| tempRegexMatch[0].length < username.length) 
+				{
+					setWarning(
+						"warning__userConfigDisplayName", 
+						"Display name should be between 3 to 32 characters long and only contains alphabets and space"
+					);
+					isValid = false;
+				}
 			}
 		}
 
@@ -97,7 +112,7 @@ const configProfileView = (() => {
 		);
 	}
 
-	const genForm = (handlers) => {
+	const makeForm = (handlers) => {
 		return (
 			<form action="" id="configProfile">
 				<div className="form__section form__imgInputSection">
@@ -181,7 +196,7 @@ const configProfileView = (() => {
 	}
 
 	const render = (handlers) => {
-		const Form = () => genForm(handlers);
+		const Form = () => makeForm(handlers);
 		return (
 			<>
 				<Modal component={Form}/>

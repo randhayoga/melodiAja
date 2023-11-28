@@ -3,7 +3,40 @@ import "./styles/makePlaylistForm.css"
 import "./styles/form.css"
 
 const makePlaylistModel = (() => {
+	const validateData = (playlistName, setWarning) => {
+		let isValid = true;
 
+		// Regex
+		let tempRegexMatch = playlistName.match(/[a-zA-Z][a-zA-Z0-9 ]{2,63}/)
+		if(tempRegexMatch == null || tempRegexMatch[0].length < playlistName.length) {
+			setWarning(
+				"warning__makePlaylistName", 
+				"Playlist name should be between 3 to 64 characters long and contains only alphanumeric characters and space"
+			);
+			isValid = false;
+		}
+
+		if(playlistName == "") {
+			isValid = false;
+			setWarning("warning__makePlaylistName", "Please enter the playlist name");
+		}
+
+		return isValid;
+	}
+
+
+	const handleData = async(formData, setWarning) => {
+		const data = formData.get("name");
+		const isValid = validateData(data, setWarning);
+
+		if(isValid) {
+			// fetch thingamajig
+			return 0;
+		}
+		return -1;
+	}
+
+	return {handleData}
 })()
 
 const makePlaylistView = (() => {
@@ -11,10 +44,6 @@ const makePlaylistView = (() => {
 	let Modal = modalObj.render;
 	const CANVAS_WIDTH = 240;
 	const CANVAS_HEIGHT = 240;
-
-	const toggle = () => {
-		modalObj.toggle();
-	}
 
 	const clearCanvas = () => {
 		document.getElementById("makePlaylist__imgPreviewCaption")
@@ -24,7 +53,23 @@ const makePlaylistView = (() => {
 			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 	}
 
-	const Form = () => {
+	const cleanWarning = () => {
+		document.getElementById(`warning__makePlaylistName`)
+			.classList.remove("entry__warning--showing")
+	}
+
+	const setWarning = (elemID, message) => {
+		let elem = document.getElementById(elemID);
+		elem.classList.add("entry__warning--showing");
+		elem.textContent = message;
+	}
+
+	const toggle = () => {
+		modalObj.toggle();
+		cleanWarning();
+	}
+
+	const makeForm = (handlers) => {
 		return (
 			<form action="" id="makePlaylist">
 				<div className="form__section form__imgInputSection">
@@ -49,6 +94,7 @@ const makePlaylistView = (() => {
 						<p > Click here to choose new playlist image </p>
 					</div>
 					<input 
+						name="cover"
 						id="makePlaylist__img"
 						className="form__imgInput"
 						type="file" 
@@ -74,34 +120,47 @@ const makePlaylistView = (() => {
 						<div className="form__entry">
 							<label htmlFor="makePlaylist__title"> Playlist name </label>
 							<input type="text"
+								name="name"
 								required
 								id="makePlaylist__title"
 								className="formEntry__text"
 								placeholder="If this is real, I don't need to dream"
 							/>
-							<div className="entry__warning" id="warning__playlistName"></div>
+							<div className="entry__warning" id="warning__makePlaylistName"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="makePlaylist__visibility"> Visibility </label>
 							<select 
+								name="visibility"
 								id="makePlaylist__visibility" 
 								className="formEntry__selection" 
-								name="visibility"
 							>
 								<option value="private"> Private </option>
 								<option value="public"> Public </option>
 							</select>
-							<div className="entry__warning" id="warning__playListVisibility"></div>
+							<div className="entry__warning" id="warning__makePlaylistVisibility"></div>
 						</div>
 					</div>
 
-					<button id="makePlaylist__upload" className="form__submitButton"> Confirm </button>
+					<button 
+						id="makePlaylist__upload" 
+						className="form__submitButton"
+						onClick = {(e) => {
+							e.preventDefault();
+							cleanWarning();
+							handlers.handleData(new FormData(
+								document.getElementById("makePlaylist"),
+								e.currentTarget
+							), setWarning);
+						}}
+					> Confirm </button>
 				</div>
 			</form>
 		)
 	}
 
-	const render = () => {
+	const render = (handlers) => {
+		const Form = () => makeForm(handlers);
 		return (
 			<>
 				<Modal component={Form}/>
@@ -117,7 +176,9 @@ export default (() => {
 	let model = makePlaylistModel;
 
 	const render = () => {
-		return view.render();
+		return view.render({
+			handleData: model.handleData
+		});
 	}
 
 	const toggle = () => {

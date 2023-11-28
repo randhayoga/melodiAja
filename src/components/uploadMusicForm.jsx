@@ -3,6 +3,56 @@ import "./styles/uploadMusicForm.css"
 import "./styles/form.css"
 
 const uploadMusicModel = (() => {
+	const gatherData = formData => ({
+		cover: formData.get("cover"),
+		title: formData.get("title"),
+		genre: formData.get("genre"),
+		file: formData.get("file"),
+	})
+
+	const validateData = (data, setWarning) => {
+		const {cover, title, genre, file} = data
+		let isValid = true;
+
+		let tempRegexMatch = title.match(/[a-zA-Z][a-zA-Z0-9 ]{2,63}/)
+		if(tempRegexMatch == null || tempRegexMatch[0].length < title.length) {
+			setWarning(
+				"warning__uploadMusicTitle", 
+				"Title should be between 3 to 64 characters long and contains only alphanumeric characters"
+			);
+			isValid = false;
+		}
+
+		if(title == "") {
+			isValid = false;
+			setWarning("warning__uploadMusicTitle", "Please enter the title");
+		}
+
+		if(genre == "") {
+			isValid = false;
+			setWarning("warning__uploadMusicGenre", "Please choose the genre of your music");
+		}
+
+		if(file.size == 0) {
+			isValid = false;
+			setWarning("warning__uploadMusicFile", "Please insert your music file");
+		}
+
+		return isValid;
+	}
+
+	const handleData = async(formData, setWarning) => {
+		const data = gatherData(formData);
+		const isValid = validateData(data, setWarning);
+
+		if(isValid) {
+			// fetch thingamajig
+			return 0;
+		}
+		return -1;
+	}
+
+	return {handleData}
 
 })()
 
@@ -12,8 +62,21 @@ const uploadMusicView = (() => {
 	const CANVAS_WIDTH = 240;
 	const CANVAS_HEIGHT = 240;
 
-	const toggle = () => {
-		modalObj.toggle();
+	const cleanWarning = () => {
+		[
+			"Title",
+			"Genre",
+			"File"
+		].forEach((item) => {
+			document.getElementById(`warning__uploadMusic${item}`)
+				.classList.remove("entry__warning--showing")
+		})
+	}
+
+	const setWarning = (elemID, message) => {
+		let elem = document.getElementById(elemID);
+		elem.classList.add("entry__warning--showing");
+		elem.textContent = message;
 	}
 
 	const clearCanvas = () => {
@@ -24,7 +87,12 @@ const uploadMusicView = (() => {
 			.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 	}
 
-	const Form = () => {
+	const toggle = () => {
+		modalObj.toggle();
+		cleanWarning();
+	}
+
+	const makeForm = (handlers) => {
 		return (
 			<form action="" id="uploadMusic">
 				<div className="form__section form__imgInputSection">
@@ -49,6 +117,7 @@ const uploadMusicView = (() => {
 						<p > Click here to add image </p>
 					</div>
 					<input 
+						name="cover"
 						id="uploadMusic__img"
 						className="form__imgInput"
 						type="file" 
@@ -74,27 +143,29 @@ const uploadMusicView = (() => {
 						<div className="form__entry">
 							<label htmlFor="uploadMusic__title"> Music title </label>
 							<input type="text"
+								name="title"
 								required
 								id="uploadMusic__title"
 								className="formEntry__text"
 								placeholder="If this is real, I don't need to dream"
 							/>
-							<div className="entry__warning" id="warning__musicTitle"></div>
+							<div className="entry__warning" id="warning__uploadMusicTitle"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="uploadMusic__composer"> Music composer </label>
 							<input type="text"
+								name="composer"
 								id="uploadMusic__composer"
 								className="formEntry__text"
 								placeholder="Timothy Prescott"
 							/>
-							<div className="entry__warning" id="warning__musicComposer"></div>
+							<div className="entry__warning" id="warning__uploadMusicComposer"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="uploadMusic__genre"> Music genre </label>
 							<select id="uploadMusic__genre" 
 								className="formEntry__selection" 
-								name="musicGenre"
+								name="genre"
 							>
 								<option value=""> Select genre </option>
 								<option value="chillout"> Chillout </option>
@@ -108,26 +179,39 @@ const uploadMusicView = (() => {
 								<option value="romantic"> Romantic </option>
 								<option value="other"> Other </option>
 							</select>
-							<div className="entry__warning" id="warning__musicGenre"></div>
+							<div className="entry__warning" id="warning__uploadMusicGenre"></div>
 						</div>
 						<div className="form__entry">
 							<label htmlFor="uploadMusic__musicFile"> Music file </label>
 							<input type="file"
+								name="file"
 								required
 								id="uploadMusic__musicFile"
 								accept=".mp3"
 							/>
-							<div className="entry__warning" id="warning__musicFile"></div>
+							<div className="entry__warning" id="warning__uploadMusicFile"></div>
 						</div>
 					</div>
 
-					<button id="uploadMusic__upload" className="form__submitButton">Upload</button>
+					<button 
+						id="uploadMusic__upload" 
+						className="form__submitButton"
+						onClick={(e) => {
+							e.preventDefault();
+							cleanWarning();
+							handlers.handleData(new FormData(
+								document.getElementById("uploadMusic"),
+								e.currentTarget
+							), setWarning);
+						}}
+					> Upload </button>
 				</div>
 			</form>
 		)
 	}
 
-	const render = () => {
+	const render = (handlers) => {
+		const Form = () => makeForm(handlers);
 		return (
 			<>
 				<Modal component={Form}/>
@@ -143,7 +227,9 @@ export default (() => {
 	let model = uploadMusicModel;
 
 	const render = () => {
-		return view.render();
+		return view.render({
+			handleData: model.handleData
+		});
 	}
 
 	const toggle = () => {
