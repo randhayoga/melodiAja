@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
 import MusicQueue from "./musicQueue.jsx"
 import MusicPlayer from "./musicPlayer.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import "./styles/homePage.css"
-import { useEffect, useState } from "react";
 
 const homePageModel = (() => {
 	const fetchMusic = async(setter) => {

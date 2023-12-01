@@ -3,7 +3,9 @@ const ROUTER = EXPRESS.Router();
 const PATH = require("path");
 const PUBLIC_PATH = PATH.join("..", "public");
 const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
-const AUTH_CONTROLLER = require("./controllers/auth");
+const AUTH_CONTROLLER = require("./controllers/auth.js");
+const INFO_CONTROLLER = require("./controllers/info.js");
+const ASSET_CONTROLLER = require("./controllers/assets.js");
 
 (function main() {
 	/* ====================
@@ -15,12 +17,8 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 	});
 
 	ROUTER.post("/auth/login",AUTH_CONTROLLER.login);
-
 	ROUTER.post("/auth/signup",AUTH_CONTROLLER.signup);
-
-	ROUTER.post("/auth/changePass", (req, res) => {
-		res.redirect("/login");
-	});
+	ROUTER.post("/auth/changePass", AUTH_CONTROLLER.changePassword);
 
 	/* ====================
 	GET: - INFORMATIONS (e.g comments, likes, etc), prefix: info
@@ -29,102 +27,16 @@ const AUTH_CONTROLLER = require("./controllers/auth");
 	ROUTER.get("/info/searchResult", (req, res) => {
 	});
 
-	ROUTER.get("/info/musicList", (req, res) => {
-		const musicPath = "/assets/musicCover";
-		res.send({
-			musicList: [
-				{
-					type: "music",
-					id: "1",
-					title: "Bersamamu",
-					artist: "Jaz",
-					imgPath: `${musicPath}/1.png`,
-				},
-				{
-					type: "music",
-					id: "2",
-					title: "The Weeknd",
-					artist: "Starboy Audio ft. Daft Punk",
-					imgPath: `${musicPath}/2.png`,
-				},
-				{
-					type: "music",
-					id: "3",
-					title: "Penjaga Hati",
-					artist: "Nadhif Basalamah ",
-					imgPath: `${musicPath}/3.png`,
-				},
-				{
-					type: "music",
-					id: "4",
-					title: "Seven",
-					artist: "Jung Kook",
-					imgPath: `${musicPath}/4.png`,
-				},
-				{
-					type: "music",
-					id: "5",
-					title: "On My Way",
-					artist: "Alan Walker, Sabrina Carpenter, & Farruko",
-					imgPath: `${musicPath}/5.png`,
-				}
-			]
-		})
-	});
+	/*
+	ROUTER.get("/info/artist/:id", (req, res) => {
+	*/
 
-	ROUTER.get("/info/musicPath/:id", (req, res) => {
-		res.send({musicPath: `/assets/music/${req.params.id}.mp3`});
-	});
-
-	ROUTER.get("/info/musicInfo/:id", (req, res) => {
-		const musicPath = "/assets/musicCover";
-		switch(req.params.id % 5) {
-			case 1:
-				res.send({
-					title: "Bersamamu",
-					artist: "Jaz",
-					imgPath: `${musicPath}/1.png`,
-				});
-				break;
-			case 2:
-				res.send({
-					title: "The Weeknd",
-					artist: "Starboy Audio ft. Daft Punk",
-					imgPath: `${musicPath}/2.png`,
-				});
-				break;
-			case 3:
-				res.send({
-					title: "Penjaga Hati",
-					artist: "Nadhif Basalamah ",
-					imgPath: `${musicPath}/3.png`,
-				});
-				break;
-			case 4:
-				res.send({
-					title: "Seven",
-					artist: "Jung Kook",
-					imgPath: `${musicPath}/4.png`,
-				});
-				break;
-			default:
-				res.send({
-					title: "On My Way",
-					artist: "Alan Walker, Sabrina Carpenter, & Farruko",
-					imgPath: `${musicPath}/5.png`,
-				});
-				break;
-		}
-	});
-
-	ROUTER.get("/info/comments/:id", (req, res) => {
-	});
-
-	ROUTER.get("/info/user/:id", (req, res) => {
-	});
-
-	ROUTER.get("/info/musicStats/:id", (req, res) => {
-	});
+	ROUTER.get("/info/musicList", INFO_CONTROLLER.getMusicList);
+	ROUTER.get("/info/musicPath/:id", INFO_CONTROLLER.getMusicPath);
+	ROUTER.get("/info/musicInfo/:id", INFO_CONTROLLER.getMusicInfo);
+	ROUTER.get("/info/musicStats/:id", INFO_CONTROLLER.getMusicStats);
+	ROUTER.get("/info/comments/:id", INFO_CONTROLLER.getMusicComments);
+	ROUTER.get("/info/user/:id", INFO_CONTROLLER.getUserInfo);
 
 	ROUTER.get("/assets/music/:id", (req, res) => {
 		const options =  {
