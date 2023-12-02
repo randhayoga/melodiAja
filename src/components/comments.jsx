@@ -3,108 +3,21 @@ import contentList from "./contentList.jsx"
 import "./styles/comments.css"
 
 const commentsModel = (() => {
-	const fetchComments = (setter) => {
+	const fetchComments = (id, setter) => {
 		useEffect(() => {
-			setter([
-				{
-					type: "comment",
-					username: "Setyo",
-					comment: "Musiknya bikin pargoy",
-					commentTime: 1031000,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Stefhan",
-					comment: "Musiknya bagus membuat saya fokus dalam belajar",
-					commentTime: 103,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Setyo",
-					comment: "Musiknya bikin pargoy",
-					commentTime: 105,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Stefhan",
-					comment: "Musiknya bagus membuat saya fokus dalam belajar",
-					commentTime: 105,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Setyo",
-					comment: "Musiknya bikin pargoy",
-					commentTime: 100,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Stefhan",
-					comment: "Musiknya bagus membuat saya fokus dalam belajar",
-					commentTime: 100,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Randha",
-					comment: "Absen yang dengar di tahun  2023!3!3!",
-					commentTime: 100,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Atha",
-					comment: "Yang datang dari channelnya Windah angkat tangan",
-					commentTime: 100,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "SikstiNein",
-					comment: "Boleh dipakai di channel saya?",
-					commentTime: 100,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Setyo",
-					comment: "Musiknya bikin pargoy",
-					commentTime: 101,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Stefhan",
-					comment: "Musiknya bagus membuat saya fokus dalam belajar",
-					commentTime: 101,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Randha",
-					comment: "Absen yang dengar di tahun  2023!3!3!",
-					commentTime: 101,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "Atha",
-					comment: "Yang datang dari channelnya Windah angkat tangan",
-					commentTime: 101,
-					imgPath: "",
-				},
-				{
-					type: "comment",
-					username: "SikstiNein",
-					comment: "Boleh dipakai di channel saya?",
-					commentTime: 101,
-					imgPath: "",
-				},
-			]);
+			fetch(`/info/comments/${id}`).
+				then((response) => {
+					if(response.ok) {
+						return response.json();
+					}
+					throw new Error;
+				})
+				.then((response) => {
+					setter(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				})
 		}, []);
 	}
 	
@@ -204,7 +117,7 @@ export default (() => {
 	const render = ({id}) => {
 		let [comments, setComments] = useState([]);
 		
-		model.fetchComments(setComments);
+		model.fetchComments(1, setComments);
 		return view.render({
 			commentList: comments,
 			onSubmit: model.postComment
