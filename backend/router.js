@@ -34,31 +34,13 @@ const ASSET_CONTROLLER = require("./controllers/assets.js");
 	ROUTER.get("/info/musicList", INFO_CONTROLLER.getMusicList);
 	ROUTER.get("/info/musicPath/:id", INFO_CONTROLLER.getMusicPath);
 	ROUTER.get("/info/musicInfo/:id", INFO_CONTROLLER.getMusicInfo);
-	ROUTER.get("/info/musicStats/:id", INFO_CONTROLLER.getMusicStats);
+	ROUTER.get("/info/musicArtist/:id", INFO_CONTROLLER.getMusicArtist);
 	ROUTER.get("/info/comments/:id", INFO_CONTROLLER.getMusicComments);
 	ROUTER.get("/info/user/:id", INFO_CONTROLLER.getUserInfo);
 
-	ROUTER.get("/assets/music/:id", (req, res) => {
-		const options =  {
-			root: PATH.join(__dirname, "..")
-		};
-
-		res.sendFile(`datastore/music/${req.params.id}`,
-			options,);
-	});
-
-	ROUTER.get("/assets/profilePicture/:id", (req, res) => {
-	});
-
-	ROUTER.get("/assets/musicCover/:id", (req, res) => {
-		const options =  {
-			root: PATH.join(__dirname, "..")
-		};
-
-		console.log(req.params.id);
-		res.sendFile(`datastore/musicCover/${req.params.id}`,
-			options,);
-	});
+	ROUTER.get("/assets/music/:id", ASSET_CONTROLLER.getMusic);
+	ROUTER.get("/assets/profilePicture/:id", ASSET_CONTROLLER.getUserPicture);
+	ROUTER.get("/assets/musicCover/:id", ASSET_CONTROLLER.getMusicCover);
 
 	ROUTER.get("/assets/playlistCover/:id", (req, res) => {
 	});
