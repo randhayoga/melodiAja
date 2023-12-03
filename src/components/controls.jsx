@@ -1,6 +1,5 @@
 import "./styles/controls.css";
 
-import MusicQueue from "./musicQueue.jsx"
 import MusicMeter from "./musicMeter.jsx"
 import MusicDuration from "./musicDuration.jsx"
 
@@ -35,14 +34,7 @@ const controlsView = (() => {
 								toggleMusic(interval.get, interval.set);
 								togglePlayButton();
 							} else {
-								await musicQueue.next().finally(() => {
-									const queueNotDone = MusicQueue.getCurrentMusic() != -1;
-									if(queueNotDone) {
-										toggleMusic(interval.get, interval.set);
-										console.log("bjor")
-										togglePlayButton();
-									}
-								})
+								await musicQueue.next()
 							}
 						}
 					}>

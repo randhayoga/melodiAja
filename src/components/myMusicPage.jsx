@@ -1,9 +1,10 @@
-import musicQueue from "./musicQueue.jsx"
+import { useEffect, useState } from "react";
+import MusicQueue from "./musicQueue.jsx"
+import MusicPlayer from "./musicPlayer.jsx"
 import contentList from "./contentList.jsx"
 import searchBar from "./searchBar.jsx"
 import uploadMusicForm from "./uploadMusicForm.jsx"
 import "./styles/myMusicPage.css"
-import { useEffect, useState } from "react";
 
 const myMusicPageModel = (() => {
 	const fetchMusic = async(setter) => {
@@ -58,9 +59,12 @@ const myMusicPageView = (() => {
 					</div>
 					<ContentList 
 						itemList={items} 
-						handlers = {{
+						handlers={{
 							selectMusic: (item) => {
-								musicQueue.enqueue(item); 
+								MusicQueue.enqueue(item)
+							},
+							playNow: (item) => {
+								MusicPlayer.changeMusicImmediately(item)
 							}
 						}}
 					/>

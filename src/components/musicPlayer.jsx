@@ -26,30 +26,23 @@ const musicPlayerModel = (() => {
 			})
 	}
 
-	const fetchSongInfo = async(id, setter) => {
-		useEffect(() => {
-			fetch(`/info/musicInfo/${id}`)
+	const fetchSongInfo = async(id) => {
+		return await fetch(`/info/musicInfo/${id}`)
 			.then((response) => {
 				if(response.ok) {
 					return response.json();
 				}
 				return new Error();
 			}).then((response) => {
-				const {title, artist, imgPath} = response;
-				setter({
-					title: title,
-					artist: artist,
-					imgPath: imgPath,
-				})
+				return response;
 			}).catch((err) => {
 				console.log(err)
-				setter({
-					title: "Error has occured :(",
-					artist: "Error",
+				return {
+					title: "MusicFetchError",
+					artist: "Unknown",
 					imgPath: "",
-				})
+				}
 			})
-		}, [])
 	}
 
 	return {fetchSongPath, fetchSongInfo};
@@ -61,30 +54,18 @@ const musicPlayerView = (() => {
 	const MusicMeterPin = musicMeterPin.render();
 	const MusicDuration = musicDuration.render;
 
-	const syncMusicInfo = async(id) => {
+	/* Don't know the React-way to do this :( */
+	const syncMusicInfo = ({title, artist, imgPath}) => {
 		const elemAlbumArt = document.getElementById("mPlayer__albumArt")
 		const elemTitle = document.getElementById("mPlayer__title")
 		const elemArtist = document.getElementById("mPlayer__artist")
-
-		await fetch(`/info/musicInfo/${id}`)
-			.then((response) => {
-				if(response.ok) {
-					return response.json();
-				}
-				return new Error();
-			}).then((response) => {
-				const {title, artist, imgPath} = response;
-				elemAlbumArt.src = imgPath;
-				elemTitle.textContent = title;
-				elemArtist.textContent = artist;
-			}).catch((err) => {
-				console.log(err)
-				elemTitle.textContent = "MusicFetchError";
-				elemArtist.textContent = "Unknown";
-			})
+		
+		elemArtist.textContent = artist;
+		elemTitle.textContent = title;
+		elemAlbumArt.src = imgPath;
 	}
 
-	const render = ({progressInterval, changeMusic}) => {
+	const render = ({progressInterval, changeMusic, currentMusic}) => {
 		return (
 			<>
 				<section id="mPlayer">
@@ -97,10 +78,12 @@ const musicPlayerView = (() => {
 							musicQueue={{
 								next: async() => {
 									MusicQueue.next()
+									currentMusic.set(MusicQueue.getCurrentMusic())
 									await changeMusic(MusicQueue.getCurrentMusic())
 								},
 								previous: async() => {
 									MusicQueue.previous()
+									currentMusic.set(MusicQueue.getCurrentMusic())
 									await changeMusic(MusicQueue.getCurrentMusic())
 								}
 							}}
@@ -110,6 +93,8 @@ const musicPlayerView = (() => {
 					<div className="mPlayer__middle">
 						<section className="mPlayer__currentPlay"
 							onClick = {(e) => {
+								currentMusic.set(currentMusic.get + 1)
+								console.log(currentMusic.get)
 								MusicInfoPage.toggle();
 							}}
 						>
@@ -120,7 +105,7 @@ const musicPlayerView = (() => {
 							/>
 							<div className="mPlayer__currentPlayInfo">
 								<p className="mPlayer__title" id="mPlayer__title"> 
-									No music is being played! 
+									No music is being played!
 								</p>
 								<p className="mPlayer__artist" id="mPlayer__artist"> 
 									Unknown 
@@ -157,6 +142,9 @@ export default (() => {
 	let view = musicPlayerView;
 	let elemAudio = document.getElementById("audio");
 	let progressInterval = null;
+	let currentMusicSetter = null;
+
+	const setMusicSetter =  (setter) => currentMusicSetter = setter;
 
 	const setProgressInterval = (newInterval) => {progressInterval = newInterval}
 
@@ -165,20 +153,25 @@ export default (() => {
 		elemAudio.currentTime = 0;
 
 		if(nextSongID != -1) {
-			elemAudio.src = await model.fetchSongPath(nextSongID)
+			currentMusicSetter(nextSongID)
+			const songInfo = await model.fetchSongInfo(nextSongID)
+			const songPath = await model.fetchSongPath(nextSongID)
+
+			elemAudio.src = songPath
 			elemAudio.load();
-			view.syncMusicInfo(MusicQueue.getCurrentMusic());
+
+			view.syncMusicInfo(songInfo);
 			await controls.buttonToggleMusic(progressInterval, setProgressInterval)
 			if(audioPreviouslyPaused) controls.togglePlayButton(); 
 			musicMeter.reset();
 		}
+		MusicQueue.sync();
 	}
 
 	// Playing song outside the queue will play all music in queue afterwards
 	const changeMusicImmediately = async(nextSongID) => {
 		MusicQueue.replay();
 		await changeMusic(nextSongID);
-		view.syncMusicInfo(nextSongID);
 	}
 
 	elemAudio.addEventListener("ended", () => {
@@ -192,16 +185,17 @@ export default (() => {
 	})
 
 
-	const render = () => {
+	const render = ({currentMusic}) => {
 		return view.render({
 			progressInterval: {
 				get: progressInterval,
 				set: setProgressInterval,
 			},
-			changeMusic: changeMusic
+			changeMusic: changeMusic,
+			currentMusic: currentMusic,
 		});
 	}
 
-	return {render, changeMusic, changeMusicImmediately}
+	return {render, changeMusic, changeMusicImmediately, setMusicSetter}
 })()
 

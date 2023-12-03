@@ -1,25 +1,62 @@
 import {useState, useEffect} from 'react';
 import "./styles/musicInfoPage.css"
 import stats from "./stats.jsx"
-import comments from './comments.jsx';
+import comments from "./comments.jsx";
 
 const musicInfoModel = (() => {
-	const fetchMusicInfo = async(id, setter) => {
+	const fetchMusicArtist = async(musicID, setter, getter) => {
 		useEffect(() => {
-			setter()
-		}, [])
+			if(musicID != -1) {
+				fetch(`/info/musicArtist/${musicID}`)
+					.then((response) => {
+						if(response.ok) {
+							return response.json();
+						}
+						throw new Error;
+					}).then(response => {
+						setter({
+							name: response.artistName,
+							imgPath: response.imgPath,
+							nFollower: response.nFollower,
+							nMusic: response.nMusic,
+						})
+					}).catch((err) => {
+						console.log(err)
+						setter({
+							...getter,
+							name: "ArtistFetchingError",
+						})
+					})
+			}
+		}, [musicID])
 	}
 
-	const fetchComments = () => {
-		return {
-			type: "comment",
-			id: "blal",
-			title: "Music1",
-			artist: "Artist1",
-			imgPath: "/defaults/defaultCover0.jpg",
-		}
+	const fetchMusicInfo = async(id, setter, getter) => {
+		useEffect(() => {
+			if(id != -1) {
+				fetch(`/info/musicInfo/${id}`)
+					.then((response) => {
+						if(response.ok) {
+							return response.json();
+						}
+						throw new Error;
+					}).then(response => {
+						setter({
+							...response
+						})
+					}).catch((err) => {
+						console.log(err)
+						setter({
+							...getter,
+							name: "MusicInfoFetchingError",
+						})
+					})
+				return
+			}
+		}, [id])
 	}
-
+	
+	return {fetchMusicArtist, fetchMusicInfo}
 })()
 
 const musicInfoView = (() => {
@@ -33,21 +70,23 @@ const musicInfoView = (() => {
 			.classList.toggle("musicInfoPage--hidden");
 	}
 
-	const render = () => {
+	const render = (currentMusicID, musicInfo, artistInfo) => {
+		const {title, nPlay, nLike, nDislike, nComment} = musicInfo;
+		const {name, nFollower, nMusic} = artistInfo;
 		return (
 			<section id="musicInfoPage" className="musicInfoPage musicInfoPage--hidden">
 				<div className="musicInfoPage__wrapper">
 					<div className="musicInfoPage__background">
-						<img src="/defaults/defaultCover1.jpg" alt="" />
+						<img src={musicInfo.imgPath} alt="" />
 					</div>
 					<div className="musicInfoPage__content">
 						<div className="musicInfoPage__musicInfo">
 							<div className="musicInfo__wrapper">
 								<img className="musicInfo__musicImg" 
-									src="/defaults/defaultCover1.jpg" 
+									src={musicInfo.imgPath} 
 								alt="" />
 								<div className="musicInfo__info">
-									<p className="musicInfo__songTitle"> And Thus, We Cast Asunder </p>
+									<p className="musicInfo__songTitle"> {title} </p>
 									<p className="musicInfo__albumName"> (No Album) </p>
 								</div>
 								<MusicStats opts= {
@@ -57,18 +96,16 @@ const musicInfoView = (() => {
 									} 
 									statsItems={
 									{
-										"Play": ["/icons/play.png", 1000000], 
-										"Like": ["/icons/filledLike.png", 111221], 
-										"Dislike": ["/icons/filledDislike.png", 100], 
-										"Comments": ["/icons/comment.png", 3421], 
+										"Play": ["/icons/play.png", nPlay], 
+										"Like": ["/icons/filledLike.png", nLike], 
+										"Dislike": ["/icons/filledDislike.png", nDislike], 
+										"Comments": ["/icons/comment.png", nComment], 
 									}
 								}/>
 								<div className="musicInfo__artist">
-									<img className="musicInfo__artistImg" src="" alt="" />
+									<img className="musicInfo__artistImg" src={artistInfo.imgPath} alt="" />
 									<div className="musicInfo__artistInfo">
-										<p className="musicInfo__artistName"> 
-											Eliran Ben Ishai
-										</p>
+										<p className="musicInfo__artistName"> {name} </p>
 										<ArtistStats opts= {
 												{
 													"border": true,
@@ -76,8 +113,8 @@ const musicInfoView = (() => {
 											} 
 											statsItems={
 											{
-												"Followers": 121221, 
-												"Musics": 324131, 
+												"Followers": nFollower, 
+												"Musics": nMusic, 
 											}
 										}/>
 									</div>
@@ -86,7 +123,7 @@ const musicInfoView = (() => {
 						</div>
 						<div className="musicInfo__comments">
 							<h3> Comments </h3>
-							<Comments id={1} />
+							<Comments id={currentMusicID} />
 						</div>
 					</div>
 				</div>
@@ -101,19 +138,31 @@ export default (() => {
 	let model = musicInfoModel;
 	let view = musicInfoView;
 
-	const render = () => {
-		const [musicInfo, setMusicInfo] = useState(
-			{
-
+	const render = ({currentMusic}) => {
+		const [musicInfo, setMusicInfo] = useState({
+			title: "No music being played",
+			imgPath: "",
+			nPlay: 0,
+			nLike: 0,
+			nDislike: 0,
+			nComment: 0,
 		})
-		return view.render();
-	}
+		
+		const [artistInfo, setArtistInfo] = useState({
+			name: "...",
+			imgPath: "",
+			nFollower: 0,
+			nMusic: 0,
+		})
 
-	const update = (musicInfo) => {
+		model.fetchMusicInfo(currentMusic, setMusicInfo, musicInfo)
+		model.fetchMusicArtist(currentMusic, setArtistInfo, artistInfo)
+		return view.render(currentMusic, musicInfo, artistInfo);
 	}
 
 	const toggle = () => {
 		view.toggle();
 	}
-	return {render, update, toggle}
+
+	return {render, toggle}
 })()
