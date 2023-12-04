@@ -1,9 +1,28 @@
+import { useState } from "react"
 import contentList from "./contentList.jsx"
 import makePlaylistForm from "./makePlaylistForm.jsx"
 import searchBar from "./searchBar.jsx"
 import "./styles/myPlaylistPage.css"
 
 const myPlaylistPageModel = (() => {
+	const fetchPlaylist = async(setter) => {
+		useEffect(() => {
+			fetch("/info/musicList")
+				.then((response) => {
+					if(response.ok) {
+						return response.json();
+					}
+					throw new Error("Failed to establish connection")
+				}).then((response) => {
+					setter(response.musicList);
+					return 0;
+				}).catch((err) => {
+					console.log(err.message);
+					return -1;
+				})
+		}, [])
+	}
+
 	const fetchItems = () => {
 		return [
 			{
@@ -38,13 +57,15 @@ const myPlaylistPageModel = (() => {
 
 const myPlaylistPageView = (() => {
 	let ContentList = contentList().render;
-	let SearchBar = searchBar().render;
+	let SearchBar = searchBar("myPlaylist", "playlist").render;
 
-	const render = (items) => {
+	const render = (itemList, setItemList) => {
 		return (
 			<section id="myPlaylistPage">
 				<div className="myPlaylistPage__section">
-					<SearchBar />
+					<SearchBar handlers={(newItemList) => {
+						setItemList(newItemList);
+					}}/>
 				</div>
 				<div className="myPlaylistPage__section">
 					<div className="myPlaylistPage__header">
@@ -66,7 +87,7 @@ const myPlaylistPageView = (() => {
 
 						</div>
 					</div>
-					<ContentList itemList={items} />
+					<ContentList itemList={itemList} />
 				</div>
 			</section>
 		)
@@ -80,7 +101,8 @@ let myPlaylistPage = (function() {
 	let model = myPlaylistPageModel;
 
 	const render = () => {
-		return view.render(model.fetchItems());
+		const [playlistList, setPlaylistList] = useState(model.fetchItems());
+		return view.render(playlistList, setPlaylistList);
 	}
 
 	return {render};

@@ -30,13 +30,13 @@ const myMusicPageModel = (() => {
 
 const myMusicPageView = (() => {
 	let ContentList = contentList().render;
-	let SearchBar = searchBar().render;
+	let SearchBar = searchBar("myMusic").render;
 
 	const render = (items) => {
 		return (
 			<section id="myMusicPage">
 				<div className="myMusicPage__section">
-					<SearchBar />
+					<SearchBar handlers={() => {}}/>
 				</div>
 				<div className="myMusicPage__section">
 					<div className="myMusicPage__header">

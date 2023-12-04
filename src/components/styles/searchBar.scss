@@ -1,5 +1,14 @@
 @use "./globals" as *;
 
+.searchBar__warn {
+	background: $warn;
+	display: none;
+}
+
+.searchBar__warn--active {
+	display: block;
+}
+
 .searchBar {
 	position: relative;
 	display: flex;
@@ -13,9 +22,10 @@
 	}
 
 	> img {
+		top: 15px;
 		position: absolute;
 		right: 30px;
-		z-index: 20;
+		z-index: 1;
 	}
 
 

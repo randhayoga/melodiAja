@@ -1,4 +1,6 @@
-import musicQueue from "./musicQueue.jsx"
+import {useState, useEffect} from 'react'
+import MusicQueue from "./musicQueue.jsx"
+import Loading from "./loadScreen.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import searchBar from "./searchBar.jsx";
@@ -6,39 +8,31 @@ import searchBar from "./searchBar.jsx";
 import "./styles/searchPage.css"
 
 const searchPageModel = (() => {
-	const getRecentSearch = () => {
-		return [
-			{
-				type: "music",
-				id: "blal",
-				title: "Music1",
-				artist: "Artist1",
-				imgPath: "/defaults/defaultCover0.jpg",
-			},
-			{
-				type: "music",
-				id: "blal2",
-				title: "Music2",
-				artist: "Artist2",
-				imgPath: "/defaults/defaultCover2.jpg",
-			},
-			{
-				type: "music",
-				id: "blal3",
-				title: "Music3",
-				artist: "Artist3",
-				imgPath: "/defaults/defaultCover1.jpg",
-			}
-		]
+	const fetchSearchResult = async(setter) => {
+		useEffect(() => {
+			fetch("/info/musicList")
+				.then((response) => {
+					if(response.ok) {
+						return response.json();
+					}
+					throw new Error("Failed to establish connection")
+				}).then((response) => {
+					setter(response.musicList);
+					return 0;
+				}).catch((err) => {
+					console.log(err.message);
+					return -1;
+				})
+		}, [])
 	}
 
-	return {getRecentSearch};
+	return {fetchSearchResult}
 })()
 
 const searchPageView = (() => {
 	let ContentList = contentList().render;
 	let ContentTiled = contentTiled().render;
-	let SearchBar = searchBar().render;
+	let SearchBar = searchBar("search").render;
 
 	const GENRES = [
 		{ imgPath: "/img/jazzyRainyMorning.png",
@@ -67,25 +61,44 @@ const searchPageView = (() => {
 		},
 	]
 
-	function render(recentSearch) {
+	function render(itemList, setItemList) {
+		const [searchDone, setSearchDone] = useState(false);
 		return (
 			<section id="searchPage">
 				<section className="searchPage__section">
-					<SearchBar />
+					<SearchBar handlers={(newItemList) => {
+						// Only refreshes once upon searching
+						if(!searchDone) { setSearchDone(true); }
+						setItemList(newItemList);
+					}}/>
 				</section>
 				<section className="searchPage__section">
-					<h2 className="section__heading">Recent Search</h2>
-					<ContentList 
-						itemList={recentSearch} 
-						handlers={{
-							selectMusic: (item) => musicQueue.enqueue(item),
-						}}
-					/>
+					<h2 className="section__heading"> {
+						!searchDone? "Recent Search": "Search Result"
+					}</h2>
+					{
+						itemList.length != 0? (
+							<ContentList itemList={itemList} 
+								handlers={{
+									selectMusic: (item) => {
+										MusicQueue.enqueue(item)
+									},
+									playNow: (item) => {
+										MusicPlayer.changeMusicImmediately(item)
+									}
+								}}
+							/>
+						): <Loading />
+					}
 				</section>
-				<section className="searchPage__section">
-					<h2 className="section__heading">Find by Genre</h2>
-					<ContentTiled itemList={GENRES} id="searchPage__byGenre" nRows={4}/>
-				</section>
+				{
+					!searchDone? (
+						<section className="searchPage__section">
+							<h2 className="section__heading">Find by Genre</h2>
+							<ContentTiled itemList={GENRES} id="searchPage__byGenre" nRows={4}/>
+						</section>
+					):<></>
+				}
 			</section>
 		);
 	}
@@ -98,7 +111,10 @@ export default (() => {
 	let view = searchPageView;
 
 	const render = () => {
-		return view.render(model.getRecentSearch());
+		const [musicList, setMusicList] = useState([]);
+
+		// model.fetchSearchResult(setMusicList);
+		return view.render(musicList, setMusicList);
 	}
 
 	return {render};

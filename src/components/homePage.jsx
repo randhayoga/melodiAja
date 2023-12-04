@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MusicQueue from "./musicQueue.jsx"
 import MusicPlayer from "./musicPlayer.jsx"
+import Loading from "./loadScreen.jsx"
 import contentList from "./contentList.jsx";
 import contentTiled from "./contentTiled.jsx";
 import "./styles/homePage.css"
@@ -15,7 +16,9 @@ const homePageModel = (() => {
 					}
 					throw new Error("Failed to establish connection")
 				}).then((response) => {
-					setter(response.musicList);
+					setTimeout(
+						() => setter(response.musicList)
+					, 1000);
 					return 0;
 				}).catch((err) => {
 					console.log(err.message);
@@ -103,7 +106,7 @@ const homePageView = (() => {
 										}
 									}}
 								/>
-							): <p> Fetching info... </p>
+							): <Loading />
 						}
 					</div>
 				</section>
