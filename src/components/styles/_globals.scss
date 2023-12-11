@@ -50,3 +50,14 @@ a {
 	transform: rotate(0.5turn);
 	transition: 0.5s transform;
 }
+
+.anim--shake {
+	animation: 0.666s shake alternate;
+}
+
+@keyframes shake {
+	20% { transform: rotate(30deg); }
+	40% { transform: rotate(-30deg); }
+	60% { transform: rotate(15deg); }
+	80% { transform: rotate(-15deg); }
+}
