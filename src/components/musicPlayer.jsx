@@ -94,7 +94,6 @@ const musicPlayerView = (() => {
 						<section className="mPlayer__currentPlay"
 							onClick = {(e) => {
 								currentMusic.set(currentMusic.get + 1)
-								console.log(currentMusic.get)
 								MusicInfoPage.toggle();
 							}}
 						>
@@ -115,6 +114,7 @@ const musicPlayerView = (() => {
 					</div>
 					<div className="mPlayer__right">
 						<img src="/icons/playlist.png" alt="musicQueue button" 
+							id="musicPlaylistButton"
 							className="icon icon--small"
 							onClick={() => {
 								MusicQueue.toggle();

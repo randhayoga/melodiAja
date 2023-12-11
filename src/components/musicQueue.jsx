@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import MusicPlayer from "./musicPlayer.jsx"
 import contentList from "./contentList.jsx"
 import "./styles/musicQueue.css"
 
 const musicQueueView = (() => {
+	const playlistIcon = document.getElementById("musicPlaylistButton");
+
 	const toggle = () => {
 		let elem = document.getElementsByClassName("musicQueue")[0];
 		elem.classList.toggle("musicQueue--showing")
@@ -56,7 +57,16 @@ const musicQueueView = (() => {
 		)
 	}
 
-	return {render, toggle, sync};
+	const shakePlaylist = () => {
+		if(!musicPlaylistButton.classList.contains("anim--shake")) {
+			musicPlaylistButton.classList.toggle("anim--shake")
+			setTimeout(() => {
+				musicPlaylistButton.classList.toggle("anim--shake")
+			}, 666);
+		}
+	}
+
+	return {render, toggle, sync, shakePlaylist};
 
 })()
 
@@ -70,6 +80,12 @@ export default (() => {
 	const replay = () => currentPlayIdx = -1;
 
 	const enqueue = ({id, title, artist, imgPath}) => {
+		// Adjust pointer when music added to queue and pointer has surpassed previous queue
+		if(currentPlayIdx == refQueue.length) {
+			currentPlayIdx--;
+		}
+
+		view.shakePlaylist();
 		refSetQueue([...refQueue, {
 				type: "queueMusic",
 				id: id,
@@ -80,9 +96,10 @@ export default (() => {
 	}
 
 	const next = () => {
-		if(currentPlayIdx == -1) {
+		const queueNotEmpty = refQueue.length > 0
+		if(currentPlayIdx == -1 && queueNotEmpty) {
 			currentPlayIdx = 0
-		} else if(currentPlayIdx < refQueue.length){
+		} else if(currentPlayIdx < refQueue.length && queueNotEmpty){
 			currentPlayIdx++
 		}
 	}

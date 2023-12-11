@@ -19,7 +19,9 @@ const controlsView = (() => {
 					<div className="mPlayer__iconWrapper" id="controls__previous" onClick={
 						async() => {
 							await musicQueue.previous()
-							if(elemAudio.paused) {
+							const audioSet = elemAudio.getAttribute("src") != "";
+
+							if(elemAudio.paused && audioSet) {
 								toggleMusic(interval.get, interval.set);
 								togglePlayButton();
 							}
@@ -30,12 +32,10 @@ const controlsView = (() => {
 					<div className="mPlayer__iconWrapper" id="controls__togglePlay" onClick={
 						async() => {
 							const audioSet = elemAudio.getAttribute("src") != "";
-							if(audioSet) {
-								toggleMusic(interval.get, interval.set);
-								togglePlayButton();
-							} else {
-								await musicQueue.next()
+							if(audioSet) { togglePlayButton();
+							} else { await musicQueue.next() // Upon first time playing
 							}
+							toggleMusic(interval.get, interval.set);
 						}
 					}>
 						<img id="controls__play" 
@@ -51,7 +51,9 @@ const controlsView = (() => {
 					<div className="mPlayer__iconWrapper" id="controls__next" onClick={
 						async() => {
 							await musicQueue.next()
-							if(elemAudio.paused) {
+							const audioSet = elemAudio.getAttribute("src") != "";
+
+							if(elemAudio.paused && audioSet) {
 								toggleMusic(interval.get, interval.set);
 								togglePlayButton();
 							}
@@ -74,10 +76,10 @@ export default (() => {
 	const togglePlayButton = () => view.togglePlayButton();
 
 	const buttonToggleMusic = async(prevInterval, callback) => {
-		if(elemAudio.paused) {
-			await elemAudio.play().catch(() => {
+		const audioElemReady = elemAudio.paused && elemAudio.getAttribute("src") != ""
+		if(audioElemReady) {
+			elemAudio.play().catch(() => {
 				elemAudio.play();
-				console.log("whatdehell")
 			}).finally(() => {
 				callback(setInterval(() => {
 					MusicMeter.update();
