@@ -4,6 +4,11 @@ import "./styles/makePlaylistForm.css"
 import "./styles/form.css"
 
 const makePlaylistModel = (() => {
+	const gatherData = formData => ({
+		name: formData.get("name"),
+		visibility: formData.get("visibility"),
+	})
+
 	const validateData = (playlistName, setWarning) => {
 		let isValid = true;
 
@@ -27,11 +32,23 @@ const makePlaylistModel = (() => {
 
 
 	const handleData = async(formData, setWarning) => {
-		const data = formData.get("name");
-		const isValid = validateData(data, setWarning);
+		const data = gatherData(formData)
+		const isValid = validateData(data.name, setWarning);
 
 		if(isValid) {
-			// fetch thingamajig
+			fetch("/forms/playlistUpload", {
+				method: "POST",
+				body: JSON.stringify({
+					name: data.name,
+					visibility: data.visibility,
+					img: document.getElementById("makePlaylist__imgPreview").toDataURL()
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				}
+			}).catch(() => {
+				console.log("Something's wrong")
+			})
 			return 0;
 		}
 		return -1;
@@ -84,14 +101,13 @@ const makePlaylistView = (() => {
 						<p > Click here to choose new playlist image </p>
 					</div>
 					<input 
-						name="cover"
 						id="makePlaylist__img"
 						className="form__imgInput"
 						type="file" 
 						accept="image/*"
 						onChange={() => formObj.changePreviewImage(
 							URL.createObjectURL(
-								document.getElementById("makePlaylist__img") .files[0]
+								document.getElementById("makePlaylist__img").files[0]
 							)
 						)}
 					/>
@@ -126,13 +142,17 @@ const makePlaylistView = (() => {
 					<button 
 						id="makePlaylist__upload" 
 						className="form__submitButton"
-						onClick = {(e) => {
+						onClick = {async(e) => {
 							e.preventDefault();
 							formObj.clearWarning();
-							handlers.handleData(new FormData(
-								document.getElementById("makePlaylist"),
-								e.currentTarget
-							), setWarning);
+
+							const status = await handlers.handleData(
+								new FormData(
+									document.getElementById("makePlaylist"),
+									e.currentTarget
+								), 
+							setWarning);
+							if(status == 0) toggle();
 						}}
 					> Confirm </button>
 				</div>

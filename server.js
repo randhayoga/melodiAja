@@ -9,6 +9,7 @@ const MORGAN = require("morgan");
 
 const MYSQL = require("mysql");
 
+const LIMIT = "30mb";
 const DATABASE = MYSQL.createConnection({
 	host: "localhost",
 	user: "root",
@@ -29,8 +30,8 @@ DATABASE.connect( (error) => {
 	
 	// Middlewares
 	APP.use(MORGAN('combined'));
-	APP.use(BODY_PARSER.json());
-	APP.use(BODY_PARSER.urlencoded({extended: false}));
+	APP.use(BODY_PARSER.json({limit: LIMIT}));
+	APP.use(BODY_PARSER.urlencoded({limit: LIMIT, extended: false}));
 
 	// Determine where static stuff is located
 	let imgTTL = 1000 * 1

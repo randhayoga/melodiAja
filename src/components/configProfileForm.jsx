@@ -24,7 +24,7 @@ const configProfileModel = (() => {
 			if(usernameFilled) {
 				tempRegexMatch = username.match(/[a-zA-Z][a-zA-Z0-9_]{6,15}/)
 				if(tempRegexMatch == null 
-					|| tempRegexMatch[0].length < displayName.length) 
+					|| tempRegexMatch[0].length < username.length) 
 				{
 					setWarning(
 						"warning__configProfileUsername", 
@@ -37,7 +37,7 @@ const configProfileModel = (() => {
 			if(displayNameFilled) {
 				tempRegexMatch= displayName.match(/[a-zA-Z][a-zA-Z ]{2,31}/)
 				if(tempRegexMatch == null 
-					|| tempRegexMatch[0].length < username.length) 
+					|| tempRegexMatch[0].length < displayName.length) 
 				{
 					setWarning(
 						"warning__configProfileDisplayName", 
@@ -56,7 +56,19 @@ const configProfileModel = (() => {
 		const isValid = validateData(data, setWarning);
 
 		if(isValid) {
-			// fetch thingamajig
+			fetch("/forms/userConfig", {
+				method: "POST",
+				body: JSON.stringify({
+					name: data.username,
+					displayName: data.displayName,
+					img: document.getElementById("configProfile__imgPreview").toDataURL()
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				}
+			}).catch(() => {
+				console.log("Something's wrong")
+			})
 			return 0;
 		}
 		return -1;
@@ -152,13 +164,17 @@ const configProfileView = (() => {
 					<button 
 						id="configProfile__upload" 
 						className="form__submitButton"
-						onClick={(e) => {
+						onClick={async(e) => {
 							e.preventDefault();
 							formObj.clearWarning();
-							handlers.handleData(new FormData(
-								document.getElementById("configProfile"),
-								e.currentTarget
-							), setWarning);
+
+							const status = await handlers.handleData(
+								new FormData(
+									document.getElementById("configProfile"),
+									e.currentTarget
+								), 
+							setWarning);
+							if(status == 0) toggle();
 						}}
 					> Submit </button>
 				</div>

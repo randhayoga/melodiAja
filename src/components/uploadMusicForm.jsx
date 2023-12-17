@@ -47,7 +47,24 @@ const uploadMusicModel = (() => {
 		const isValid = validateData(data, setWarning);
 
 		if(isValid) {
-			// fetch thingamajig
+			const reader = new FileReader();
+			reader.readAsDataURL(document.getElementById("uploadMusic__musicFile").files[0]);
+			reader.onload = async() => {
+				fetch("/forms/musicUpload", {
+					method: "POST",
+					body: JSON.stringify({
+						title: data.title,
+						genre: data.genre,
+						img: document.getElementById("uploadMusic__imgPreview").toDataURL(),
+						file: reader.result,
+					}),
+					headers: {
+						'Content-type': 'application/json; charset=UTF-8',
+					}
+				}).catch(() => {
+					console.log("Something's wrong")
+				})
+			}
 			return 0;
 		}
 		return -1;
@@ -170,13 +187,17 @@ const uploadMusicView = (() => {
 					<button 
 						id="uploadMusic__upload" 
 						className="form__submitButton"
-						onClick={(e) => {
+						onClick={async(e) => {
 							e.preventDefault();
 							formObj.clearWarning();
-							handlers.handleData(new FormData(
-								document.getElementById("uploadMusic"),
-								e.currentTarget
-							), setWarning);
+
+							const status = await handlers.handleData(
+								new FormData(
+									document.getElementById("uploadMusic"),
+									e.currentTarget
+								),
+							setWarning);
+							if(status == 0) toggle();
 						}}
 					> Upload </button>
 				</div>

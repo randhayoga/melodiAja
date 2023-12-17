@@ -6,6 +6,7 @@ const STATIC_PATH = PATH.join(PUBLIC_PATH, "static");
 const AUTH_CONTROLLER = require("./controllers/auth.js");
 const INFO_CONTROLLER = require("./controllers/info.js");
 const ASSET_CONTROLLER = require("./controllers/assets.js");
+const FORM_CONTROLLER = require("./controllers/forms.js");
 
 (function main() {
 	/* ====================
@@ -45,6 +46,9 @@ const ASSET_CONTROLLER = require("./controllers/assets.js");
 	ROUTER.get("/assets/playlistCover/:id", (req, res) => {
 	});
 
+	ROUTER.post("/forms/musicUpload", FORM_CONTROLLER.uploadMusicForm);
+	ROUTER.post("/forms/userConfig", FORM_CONTROLLER.userConfigForm);
+	ROUTER.post("/forms/playlistUpload", FORM_CONTROLLER.makePlaylistForm);
 
 	/* ====================
 	GET Page handlers
