@@ -83,5 +83,35 @@ exports.signup = async (req,res) => {
 }
 
 exports.changePassword = async(req, res) => {
-	res.redirect("/login"); 
+	const { username, oldPassword, newPassword, reNewPassword } = req.body;
+	// check username existence
+	DATABASE.query('SELECT * FROM pengguna WHERE username = ?', [username], async (error, result) =>{
+		console.log(result);
+		if(error){
+			console.log(error);
+			return res.send({message : "Something went wrong in query", step : "username", url : "/changePassword.html"});
+		}
+		if(result.length === 0){
+			console.log("username ga ada");
+			return res.send({message : "Username is not yet registered", step : "username", url : "/changePassword.html"});
+		} else {
+			if(!await BCRYPT.compare(oldPassword, result[0].kata_sandi)){
+				console.log("Password salah");
+				return res.send({message : "Password is incorrect", step : "password", url : "/changePassword.html"});
+			} else {
+				let newHashedPassword = await BCRYPT.hash(newPassword, 8)
+				// changePass
+				DATABASE.query('UPDATE pengguna SET kata_sandi = ? WHERE username = ?', [newHashedPassword, username], (error, updateResult) => {
+					console.log(updateResult);
+					if (error){
+						console.log(error)
+						return res.send({message : "Something went wrong in changing password", step : "change", url : "/changePassword.html"});
+					} else {
+						console.log("ganti password berhasil");
+						return res.send({message : "Password successfully changed!", step : "change", url : "/login.html"});
+					}
+				});
+			}
+		}
+	})
 }
