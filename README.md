@@ -7,20 +7,24 @@
 <h3 align="center">MelodiAja</h3>
   <p align="center">
     <strong>Listen and share what you love :heart:</strong>
-    <br><br>
-    <a href="#">Lihat demo</a>
   </p>
 </div>
 
+## Dokumen Pengembangan Aplikasi
+<p align="center">
+  <a href="#">SKPL</a><br>
+  <a href="#">DDPL</a><br>
+  <a href="#">DUPL</a><br>
+  <a href="#">User manual</a>
+</p>
+
 ## Tentang MelodiAja
 ![homePage](https://github.com/randhayoga/melodiAja/assets/92174528/cce8c3a2-dacf-401d-a164-000358459683)
-
-
-<strong>MelodiAja</strong> adalah sebuah aplikasi pemutar musik berbasis web.<br><br>
+<strong>MelodiAja</strong> adalah sebuah perangkat lunak yang dapat digunakan untuk mendengarkan musik secara streaming.
+Aplikasi MelodiAja adalah aplikasi berbasis website dan dapat diakses secara online dengan menggunakan browser.<br><br>
 Selain memutar musik, pengguna juga dapat:
 * :bust_in_silhouette: Membuat akun.
 * :notes: Membuat _playlist_ musik.
-* :thumbsup: Memberikan _like_ atau _dislike_.
 * :speech_balloon: Menyampaikan opini melalui kolom komentar.
 * :guitar: Mengunggah musik untuk didengarkan oleh pengguna lain.
 
@@ -40,10 +44,13 @@ Back-End:<br>
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)<br>
 IDE:<br>
-![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)<br>
+![Neovim](https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white)
+![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)<br>
 
 <!-- GETTING STARTED -->
-## Cara Menjalankan Secara Lokal
+## Cara Mengakses MelodiAja
+Untuk saat ini, aplikasi MelodiAja belum di-deploy dan dapat diakses menggunakan tautan tertentu.
+ Oleh karena itu, MelodiAja hanya bisa digunakan dengan cara mem-build aplikasi di perangkat masing-masing.
 
 ### Prasyarat
 
@@ -53,7 +60,7 @@ IDE:<br>
 * [Node.js](https://nodejs.org/en)
 * [NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-### Download
+### Download Source Code
 #### Melaui Browser dan File Explorer
 1. Buka https://github.com/solsteace/melodiAja
 2. Klik ikon "<> Code" berwarna hijau
@@ -78,24 +85,27 @@ IDE:<br>
    cd /melodiAja/
    ```
 
+### Download Aset
+1. Buka https://drive.google.com/drive/folders/12wyFlBzj67VqKJirUUafh32RI7fwme3z?usp=sharing
+2. Extract datastore.zip
+3. Letakkan folder datastore di folder/direktori yang sama dengan file server.js di melodiAja-main
+
 ### Menjalankan MelodiAja
 #### Proses di bawah berlaku untuk sistem operasi Windows, macOS, maupun Linux
 1. Buka terminal atau powershell pada folder melodiAja
 2. Install packages dan dependencies yang diperlukan oleh melodiAja:
    ```sh
-   npm install
+   npm i
    ```
-4. Buka satu lagi terminal atau powershell pada folder melodiAja
-5. Buat *build directory*:
+3. Buat *build directory*:
    ```sh
    npm run build
    ```
-6. Jalankan server.js:
+4. Jalankan server.js:
    ```sh
    node server.js
    ```
-7. Ketik localhost:8069 pada kotak pencarian browser Anda.
+5. Ketik localhost:8069 pada kotak pencarian browser Anda.
    ```sh
    localhost:8069
    ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
