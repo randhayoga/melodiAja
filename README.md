@@ -10,14 +10,6 @@
   </p>
 </div>
 
-## Dokumen Pengembangan Aplikasi
-<p align="center">
-  <a href="#">SKPL</a><br>
-  <a href="#">DDPL</a><br>
-  <a href="#">DUPL</a><br>
-  <a href="#">User manual</a>
-</p>
-
 ## Tentang MelodiAja
 ![homePage](https://github.com/randhayoga/melodiAja/assets/92174528/cce8c3a2-dacf-401d-a164-000358459683)
 <strong>MelodiAja</strong> adalah sebuah perangkat lunak yang dapat digunakan untuk mendengarkan musik secara streaming.
