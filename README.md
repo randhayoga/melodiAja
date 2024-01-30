@@ -1,4 +1,4 @@
-> \[NOTICE\] This project is unfinished and discontinued. The project wasn't meant to be a production-ready application to begin with. As the code writer I would say that the code (especially the frontend) is a jumbled mess so... that's also one of the reason the project won't be continued. Anyway, thanks for your visit!
+> \[NOTICE\] This project is unfinished and discontinued. The project wasn't meant to be a production-ready application to begin with. As the code writer I would say that the code (especially the frontend) is a jumbled mess (I was clueless on how I should write the code and ended up sorta like combining functional-component and class-component approach into one weird thingamajig) so... that's also one of the reason the project won't be continued. Anyway, thanks for your visit!
 
 <br />
 <div align="center">
